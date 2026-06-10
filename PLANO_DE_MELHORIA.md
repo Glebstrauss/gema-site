@@ -58,6 +58,14 @@ Auditoria e plano executados em **junho/2026** sobre o site original (`site_gema
 | ✅ Fontes auto-hospedadas | 3 woff2 variáveis (~90 KB) substituem Google Fonts; `preload` + `font-display: swap` |
 | ✅ `theme-color` dinâmico | Barra do navegador acompanha o botão de tema |
 
+## Terceira rodada — notícias (jun/2026)
+
+- ✅ Modal convertido para `<dialog>` nativo (focus trap de verdade, Esc, backdrop, foco retorna ao card)
+- ✅ Deep links: cada notícia tem `#slug` próprio; abrir a URL abre o modal direto; botão **Copiar link** no modal (com fallback `execCommand`)
+- ✅ Corrigido bug latente do `| limit: 3` (não é filtro Liquid — virou `limit` no `for`); destaque tem fallback para a primeira notícia
+- ✅ Contraste do tema escuro nos elementos da página (hint, data do modal, focus rings)
+- ✅ Link "Assinar via RSS" na hero; estados vazios para quando não houver notícias
+
 ## Próximos passos sugeridos
 
 - Definir preços reais dos pôsteres em `_data/posteres.yml` (campo `preco`) — editável pelo painel
