@@ -1,6 +1,6 @@
 # GEMA Site — Constituição do Projeto
 
-**Stack:** Jekyll 4 + Decap CMS v3 + GitHub Pages  
+**Stack:** Jekyll 4 + Sveltia CMS (config compatível com Decap; login por token) + GitHub Pages  
 **URL:** https://glebstrauss.github.io/gema-site/  
 **Repo:** https://github.com/Glebstrauss/gema-site  
 **Branch de deploy:** `master` (GitHub Pages faz build direto do Jekyll)
@@ -29,7 +29,10 @@ publicacoes.html             # Filtros JS + navegação por ano + scrollspy
 professores.html             # Grid de membros + seção "faça parte"
 premios.html                 # Stats bar + cards por ano
 noticias.html                # Destaque + lista
-posteres.html                # Catálogo de pôsteres (CSS próprio no <style> da página)
+posteres.html                # Catálogo de pôsteres (CSS próprio no <style> da página; lightbox <dialog>)
+manual-edicao.html           # Guia de edição para a equipe (painel + token)
+feed.xml                     # RSS das notícias (gerado de _data/noticias.yml)
+assets/fonts/                # 3 woff2 variáveis auto-hospedadas (DM Sans, Playfair)
 404.html                     # Página de erro personalizada
 README.md                    # Documentação do projeto
 PLANO_DE_MELHORIA.md         # Auditoria e plano que originaram este repositório

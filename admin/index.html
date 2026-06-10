@@ -1,13 +1,15 @@
 ---
 layout: null
+sitemap: false
 ---
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
   <title>Painel GEMA · Admin</title>
-  <link href="/gemaufba/admin/config.yml" type="text/yaml" rel="cms-config-url">
+  <link href="{{ '/admin/config.yml' | relative_url }}" type="text/yaml" rel="cms-config-url">
 </head>
 <body>
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>

@@ -2,7 +2,7 @@
 nome: Gleb Strauss Borges Junqueira
 cargo: Mestrando · PPGZ/UFBA
 tipo: estudante
-foto: /assets/img/professores/IMG_6212.jpeg
+foto: /assets/img/professores/gleb-strauss-junqueira.jpg
 avatar: GS
 descricao: Mestrando sob orientação do Prof. Dr. Raphael Bermal Costa.
 tags:

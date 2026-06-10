@@ -7,7 +7,7 @@ Site institucional do **GEMA** (Grupo de Estudos em Melhoramento Animal, Genéti
 ## Stack
 
 - [Jekyll 4](https://jekyllrb.com/) — gerador de site estático
-- [Decap CMS v3](https://decapcms.org/) — painel de edição em `/admin/`
+- [Sveltia CMS](https://github.com/sveltia/sveltia-cms) — painel de edição em `/admin/` (login por token, sem servidor OAuth; otimiza imagens automaticamente)
 - [GitHub Pages](https://pages.github.com/) — build automático do Jekyll a cada push em `master`
 
 ## Páginas
@@ -19,7 +19,8 @@ Site institucional do **GEMA** (Grupo de Estudos em Melhoramento Animal, Genéti
 | `publicacoes.html` | Artigos com busca, filtro Qualis e navegação por ano |
 | `premios.html` | Prêmios e distinções por ano |
 | `noticias.html` | Notícias do grupo |
-| `posteres.html` | Catálogo de pôsteres de raças nativas brasileiras |
+| `posteres.html` | Catálogo de pôsteres de raças nativas brasileiras (com lightbox) |
+| `manual-edicao.html` | Guia para a equipe editar o site pelo painel |
 
 ## Desenvolvimento local
 
@@ -31,7 +32,9 @@ bundle exec jekyll serve --baseurl "" --livereload
 
 ## Edição de conteúdo
 
-Conteúdo fica em arquivos YAML/Markdown — editável direto no GitHub ou pelo Decap CMS:
+**Para a equipe (sem GitHub):** acesse `/admin/`, entre com token e edite pelo painel — passo a passo em `/manual-edicao.html`. Fotos enviadas pelo painel são convertidas para WebP e redimensionadas automaticamente.
+
+Para quem prefere editar os arquivos YAML/Markdown diretamente:
 
 - `_data/publicacoes.yml` — publicações científicas
 - `_data/premios.yml` — prêmios
@@ -43,5 +46,7 @@ Conteúdo fica em arquivos YAML/Markdown — editável direto no GitHub ou pelo 
 
 - Tema claro/escuro com persistência e respeito a `prefers-color-scheme`
 - Acessibilidade: skip link, focus trap no menu mobile, `prefers-reduced-motion`, `prefers-contrast`
-- SEO: sitemap, JSON-LD, Open Graph, canonical
+- SEO: sitemap, JSON-LD, Open Graph (imagem por página), canonical
+- Feed RSS de notícias em `/feed.xml`
+- Fontes auto-hospedadas (sem requisições a terceiros)
 - Layout responsivo (breakpoints 900px / 600px / 380px) e estilos de impressão

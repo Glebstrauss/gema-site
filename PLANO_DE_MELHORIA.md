@@ -43,9 +43,26 @@ Auditoria e plano executados em **junho/2026** sobre o site original (`site_gema
 - [x] Build Jekyll verificado localmente
 - [x] Deploy via GitHub Pages (build nativo do Jekyll a cada push em `master`)
 
+## Segunda rodada — executada em jun/2026
+
+| Melhoria | Detalhe |
+|---|---|
+| ✅ Painel para não-técnicos | Sveltia CMS no `/admin/` com login por **token** (sem servidor OAuth); config do Decap reaproveitada; bug do `cms-config-url` com baseurl antigo corrigido |
+| ✅ Manual de edição | `/manual-edicao.html` — passo a passo em português para os professores (link no rodapé) |
+| ✅ Otimização de uploads futuros | Sveltia converte fotos enviadas para WebP ≤1200px automaticamente |
+| ✅ Fotos da equipe | 6,5 MB → 460 KB (480px JPEG, nomes por slug); 2 imagens órfãs removidas |
+| ✅ `/admin/` fora dos buscadores | `Disallow` no robots.txt, `noindex` e exclusão do sitemap |
+| ✅ Lightbox nos pôsteres | `<dialog>` nativo: Esc fecha, foco retorna, backdrop com blur |
+| ✅ og:image por página | Pôsteres compartilham com imagem de pôster; demais usam o card padrão |
+| ✅ Feed RSS | `/feed.xml` com as notícias + `rel=alternate` no head |
+| ✅ Fontes auto-hospedadas | 3 woff2 variáveis (~90 KB) substituem Google Fonts; `preload` + `font-display: swap` |
+| ✅ `theme-color` dinâmico | Barra do navegador acompanha o botão de tema |
+
 ## Próximos passos sugeridos
 
-- Definir preços reais dos pôsteres em `_data/posteres.yml` (campo `preco`)
+- Definir preços reais dos pôsteres em `_data/posteres.yml` (campo `preco`) — editável pelo painel
 - Adicionar chave PIX real na página de pôsteres quando o processo de venda for definido
-- Fotos individuais para os membros que ainda usam avatar de iniciais
+- Convidar os professores como colaboradores do repositório (Settings → Collaborators) para o painel funcionar para eles
+- Opcional: gateway OAuth (Cloudflare Worker do Sveltia) para login em 1 clique, sem token
 - Domínio próprio (ex.: `gema.ufba.br`) via CNAME
+- Formulário de contato (Formspree/Web3Forms) e analytics leve (GoatCounter/Plausible) — ambos exigem criar conta

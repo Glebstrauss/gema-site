@@ -8,7 +8,20 @@ media_folder: "assets/img/professores"
 # URL pública das fotos (sem o baseurl — o relative_url do Jekyll adiciona)
 public_folder: "/assets/img/professores"
 
-locale: pt
+# Sveltia CMS: otimiza automaticamente toda imagem enviada
+# (converte para WebP e limita a 1200px — fotos de celular ficam leves)
+media_libraries:
+  default:
+    config:
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 84
+          width: 1200
+          height: 1200
+        svg:
+          optimize: true
 
 collections:
 

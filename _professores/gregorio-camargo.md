@@ -2,7 +2,7 @@
 nome: Prof. Dr. Gregório M. F. Camargo
 cargo: Professor · EMEVZ/UFBA
 tipo: docente
-foto: /assets/img/professores/3.png
+foto: /assets/img/professores/gregorio-camargo.jpg
 avatar: GC
 descricao: Genética molecular aplicada ao melhoramento animal.
 tags:

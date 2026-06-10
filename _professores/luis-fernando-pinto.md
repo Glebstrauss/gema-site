@@ -2,7 +2,7 @@
 nome: Prof. Dr. Luís Fernando B. Pinto
 cargo: Professor · EMEVZ/UFBA
 tipo: docente
-foto: /assets/img/professores/4.png
+foto: /assets/img/professores/luis-fernando-pinto.jpg
 avatar: LP
 descricao: Bioestatística aplicada à genômica e ao melhoramento animal.
 tags:

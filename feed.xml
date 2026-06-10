@@ -1,0 +1,27 @@
+---
+layout: null
+sitemap: false
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.full_title }} — Notícias</title>
+    <link>{{ site.url }}{{ site.baseurl }}/noticias.html</link>
+    <atom:link href="{{ site.url }}{{ site.baseurl }}/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>{{ site.description | xml_escape }}</description>
+    <language>pt-br</language>
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+    {%- for noticia in site.data.noticias.items %}
+    <item>
+      <title>{{ noticia.titulo | xml_escape }}</title>
+      <description>{{ noticia.texto | xml_escape }} ({{ noticia.data | xml_escape }})</description>
+      {%- if noticia.link != "" %}
+      <link>{{ noticia.link }}</link>
+      {%- else %}
+      <link>{{ site.url }}{{ site.baseurl }}/noticias.html</link>
+      {%- endif %}
+      <guid isPermaLink="false">gema-{{ noticia.titulo | slugify }}</guid>
+    </item>
+    {%- endfor %}
+  </channel>
+</rss>

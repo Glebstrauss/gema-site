@@ -1,0 +1,118 @@
+---
+layout: default
+title: "Manual de Edição"
+description: "Guia para a equipe do GEMA atualizar o site pelo painel, sem precisar saber programação."
+sitemap: false
+---
+
+<header class="page-hero">
+  <div class="container">
+    <div class="section-label">Para a equipe</div>
+    <div class="divider"></div>
+    <h1 class="page-hero-title">Manual de <em>Edição</em></h1>
+    <p class="page-hero-sub">Como adicionar publicações, notícias, prêmios e fotos pelo painel — sem precisar saber programação nem usar o GitHub diretamente.</p>
+  </div>
+</header>
+
+<section aria-label="O que dá para editar" style="background:var(--branco)">
+  <div class="container">
+    <div class="section-label">Visão geral</div>
+    <div class="divider"></div>
+    <h2 class="section-title">O que você pode editar</h2>
+    <p class="section-desc">Tudo é feito no painel <a class="manual-link" href="{{ '/admin/' | relative_url }}">{{ site.url }}{{ site.baseurl }}/admin/</a>. Nele aparecem as seções:</p>
+    <ul class="manual-lista">
+      <li>👨‍🏫 <strong>Professores</strong> — membros da equipe, com foto, Lattes e áreas de pesquisa</li>
+      <li>📄 <strong>Publicações</strong> — artigos científicos, com Qualis e DOI</li>
+      <li>🏆 <strong>Prêmios</strong> — reconhecimentos e distinções</li>
+      <li>📰 <strong>Notícias</strong> — novidades do grupo (uma pode ser destaque)</li>
+      <li>🗺️ <strong>Pôsteres</strong> — catálogo, preços e links de venda</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-label="Primeiro acesso" style="background:var(--cinza-claro)">
+  <div class="container">
+    <div class="section-label">Uma única vez</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Primeiro acesso</h2>
+    <p class="section-desc">O painel usa uma conta GitHub apenas como "chave de entrada". Você não vai precisar usar o GitHub para nada além destes passos iniciais.</p>
+
+    <div class="manual-passos">
+      <div class="manual-passo">
+        <div class="manual-passo-num">1</div>
+        <div>
+          <h3 class="manual-passo-titulo">Crie uma conta GitHub (grátis)</h3>
+          <p class="manual-passo-desc">Acesse <a class="manual-link" href="https://github.com/signup" target="_blank" rel="noopener noreferrer">github.com/signup</a> e cadastre-se com seu e-mail institucional. Depois, avise o coordenador qual é o seu nome de usuário.</p>
+        </div>
+      </div>
+      <div class="manual-passo">
+        <div class="manual-passo-num">2</div>
+        <div>
+          <h3 class="manual-passo-titulo">Aceite o convite</h3>
+          <p class="manual-passo-desc">O coordenador vai te adicionar como colaborador do site. Você receberá um e-mail com o assunto <em>"invitation to collaborate"</em> — clique em <strong>Accept invitation</strong>.</p>
+        </div>
+      </div>
+      <div class="manual-passo">
+        <div class="manual-passo-num">3</div>
+        <div>
+          <h3 class="manual-passo-titulo">Entre no painel com um token</h3>
+          <p class="manual-passo-desc">Abra o <a class="manual-link" href="{{ '/admin/' | relative_url }}">painel</a> e escolha a opção de entrar com <strong>token</strong>. O próprio painel mostra um link que abre a página do GitHub com tudo pré-selecionado — basta clicar em <strong>Generate token</strong>, copiar o código gerado e colar no painel. Pronto: o acesso fica salvo no seu navegador e você não precisa repetir isso.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Uso no dia a dia" style="background:var(--branco)">
+  <div class="container">
+    <div class="section-label">Dia a dia</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Editando o site</h2>
+    <div class="manual-passos">
+      <div class="manual-passo">
+        <div class="manual-passo-num">1</div>
+        <div><p class="manual-passo-desc">Abra o <a class="manual-link" href="{{ '/admin/' | relative_url }}">painel</a> e clique na seção desejada (ex.: Publicações).</p></div>
+      </div>
+      <div class="manual-passo">
+        <div class="manual-passo-num">2</div>
+        <div><p class="manual-passo-desc">Edite um item existente ou clique para adicionar um novo. Preencha os campos — cada um tem uma dica explicando o formato.</p></div>
+      </div>
+      <div class="manual-passo">
+        <div class="manual-passo-num">3</div>
+        <div><p class="manual-passo-desc"><strong>Salve/Publique.</strong> O site atualiza sozinho em 1 a 2 minutos. Se não aparecer, recarregue a página com <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> (ou <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> no Mac).</p></div>
+      </div>
+    </div>
+
+    <div class="manual-dicas">
+      <h3 class="manual-dicas-titulo">Dicas rápidas</h3>
+      <ul class="manual-lista">
+        <li><strong>Fotos:</strong> pode enviar direto do celular — o painel comprime e converte automaticamente, sem precisar redimensionar antes.</li>
+        <li><strong>Notícias:</strong> deixe no máximo <em>uma</em> marcada como destaque.</li>
+        <li><strong>Publicações:</strong> informe o DOI como endereço completo (ex.: <code>https://doi.org/10.1234/abcd</code>) e o Qualis como Q1, Q2, Q3 ou Q4.</li>
+        <li><strong>Pôsteres:</strong> o campo de preço aceita só o número (ex.: <code>25,00</code>); vazio mostra "Consultar preço".</li>
+        <li><strong>Token parou de funcionar?</strong> Gere um novo (passo 3 do primeiro acesso) — leva menos de um minuto.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+.manual-link{color:var(--azul);font-weight:500;text-decoration:none}
+.manual-link:hover{text-decoration:underline}
+html.dark .manual-link{color:var(--azul-mid)}
+.manual-lista{list-style:none;display:flex;flex-direction:column;gap:.7rem;font-size:.95rem;color:var(--cinza);line-height:1.7;max-width:640px}
+.manual-lista strong{color:var(--preto)}
+.manual-lista code,.manual-passo-desc code{font-size:.85em;background:var(--azul-claro);padding:.1rem .4rem;border-radius:6px;color:var(--azul-escuro)}
+html.dark .manual-lista code,html.dark .manual-passo-desc code{color:#9db1f5}
+.manual-passos{display:flex;flex-direction:column;gap:1.25rem;max-width:640px}
+.manual-passo{display:flex;gap:1.25rem;align-items:flex-start;background:var(--branco);border:1px solid var(--borda);border-radius:16px;padding:1.5rem}
+section[style*="--branco"] .manual-passo{background:var(--cinza-claro)}
+.manual-passo-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--azul);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:600;font-size:1.05rem}
+.manual-passo-titulo{font-family:'Playfair Display',serif;font-size:1.02rem;font-weight:600;color:var(--preto);margin-bottom:.35rem}
+.manual-passo-desc{font-size:.9rem;color:var(--cinza);line-height:1.7}
+.manual-passo-desc kbd{font-size:.8em;border:1px solid var(--borda);border-radius:4px;padding:.08rem .35rem;background:var(--branco)}
+.manual-dicas{margin-top:2.5rem;max-width:640px;background:var(--azul-claro);border:1px solid var(--borda);border-radius:16px;padding:1.75rem}
+html.dark .manual-dicas{background:rgba(85,120,232,.08)}
+.manual-dicas-titulo{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:var(--preto);margin-bottom:.9rem}
+@media(max-width:600px){.manual-passo{padding:1.1rem;gap:.9rem}}
+</style>
