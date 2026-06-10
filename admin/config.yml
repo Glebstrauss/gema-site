@@ -1,0 +1,163 @@
+backend:
+  name: github
+  repo: Glebstrauss/gema-site
+  branch: master
+
+# Onde as fotos são salvas no repositório
+media_folder: "assets/img/professores"
+# URL pública das fotos (sem o baseurl — o relative_url do Jekyll adiciona)
+public_folder: "/assets/img/professores"
+
+locale: pt
+
+collections:
+
+  # ─── PROFESSORES ───────────────────────────────────────────────────────
+  - name: "professores"
+    label: "👨‍🏫 Professores"
+    label_singular: "Professor"
+    folder: "_professores"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: nome
+    summary: "{{nome}} — {{cargo}}"
+    sortable_fields: ["ordem", "nome"]
+    fields:
+      - label: "Nome completo"
+        name: "nome"
+        widget: "string"
+        hint: "Ex: Prof. Dr. João da Silva"
+
+      - label: "Cargo"
+        name: "cargo"
+        widget: "string"
+        hint: "Ex: Coordenador · EMEVZ/UFBA"
+
+      - label: "Tipo"
+        name: "tipo"
+        widget: "select"
+        options:
+          - { label: "Docente / Orientador", value: "docente" }
+          - { label: "Estudante de pós-graduação", value: "estudante" }
+        default: "docente"
+
+      - label: "Foto"
+        name: "foto"
+        widget: "image"
+        required: false
+        multiple: false
+        hint: "Foto quadrada (ex: 400×400 px). Comprima em squoosh.app antes de subir. Máx: 300 KB."
+
+      - label: "Iniciais (aparecem se não houver foto)"
+        name: "avatar"
+        widget: "string"
+        hint: "Ex: JS para João Silva"
+        pattern: ['.{2,3}', "Use 2 ou 3 letras"]
+
+      - label: "Descrição"
+        name: "descricao"
+        widget: "text"
+        hint: "1 a 2 frases sobre a área de pesquisa"
+
+      - label: "Áreas de pesquisa"
+        name: "tags"
+        widget: "list"
+        hint: "Clique em + para adicionar cada área. Ex: Genômica, BLUP, Equídeos"
+
+      - label: "Link Lattes"
+        name: "lattes"
+        widget: "string"
+        required: false
+        hint: "URL completa do currículo Lattes"
+
+      - label: "E-mail institucional"
+        name: "email"
+        widget: "string"
+        required: false
+
+      - label: "Ordem de exibição"
+        name: "ordem"
+        widget: "number"
+        default: 99
+        value_type: int
+        hint: "1 = aparece primeiro na lista"
+
+  # ─── PUBLICAÇÕES ───────────────────────────────────────────────────────
+  - name: "publicacoes"
+    label: "📄 Publicações"
+    files:
+      - label: "Lista de Publicações"
+        name: "publicacoes"
+        file: "_data/publicacoes.yml"
+        fields:
+          - label: "Publicações"
+            name: items
+            widget: "list"
+            summary: "{{fields.ano}} — {{fields.titulo}}"
+            fields:
+              - { label: "Ano", name: "ano", widget: "number", value_type: int }
+              - { label: "Título", name: "titulo", widget: "string" }
+              - { label: "Autores", name: "autores", widget: "string", hint: "Ex: Silva, M.; Strauss, G. et al." }
+              - { label: "Periódico", name: "periodico", widget: "string" }
+              - { label: "Qualis (ex: Q1)", name: "qualis", widget: "string", required: false }
+              - { label: "Link DOI (URL completa)", name: "doi", widget: "string", required: false }
+
+  # ─── PRÊMIOS ───────────────────────────────────────────────────────────
+  - name: "premios"
+    label: "🏆 Prêmios"
+    files:
+      - label: "Lista de Prêmios"
+        name: "premios"
+        file: "_data/premios.yml"
+        fields:
+          - label: "Prêmios"
+            name: items
+            widget: "list"
+            summary: "{{fields.ano}} — {{fields.nome}}"
+            fields:
+              - { label: "Nome do prêmio", name: "nome", widget: "string" }
+              - { label: "Entidade / Evento", name: "entidade", widget: "string" }
+              - { label: "Ano", name: "ano", widget: "number", value_type: int }
+              - { label: "Ícone (emoji)", name: "icone", widget: "string", default: "🏆", hint: "Cole um emoji. Ex: 🏆 🥇 🎖️ 📌" }
+              - { label: "Descrição", name: "descricao", widget: "text" }
+
+  # ─── NOTÍCIAS ──────────────────────────────────────────────────────────
+  - name: "noticias"
+    label: "📰 Notícias"
+    files:
+      - label: "Lista de Notícias"
+        name: "noticias"
+        file: "_data/noticias.yml"
+        fields:
+          - label: "Notícias"
+            name: items
+            widget: "list"
+            summary: "{{fields.data}} — {{fields.titulo}}"
+            fields:
+              - { label: "Data", name: "data", widget: "string", hint: "Ex: Maio · 2025" }
+              - { label: "Título", name: "titulo", widget: "string" }
+              - { label: "Texto", name: "texto", widget: "text" }
+              - { label: "Link (opcional)", name: "link", widget: "string", required: false }
+              - { label: "Destaque na home?", name: "destaque", widget: "boolean", default: false, hint: "Apenas uma notícia deve ser destaque por vez" }
+
+  # ─── PÔSTERES ──────────────────────────────────────────────────────────
+  - name: "posteres"
+    label: "🗺️ Pôsteres"
+    files:
+      - label: "Catálogo de Pôsteres"
+        name: "posteres"
+        file: "_data/posteres.yml"
+        fields:
+          - label: "Pôsteres"
+            name: items
+            widget: "list"
+            summary: "{{fields.titulo}}"
+            fields:
+              - { label: "ID (nome do arquivo da imagem, sem .jpg)", name: "id", widget: "string", hint: "A imagem deve existir em assets/img/posteres/<id>.jpg" }
+              - { label: "Título", name: "titulo", widget: "string" }
+              - { label: "Grupo animal", name: "grupo", widget: "string", hint: "Ex: Equinos, Ovinos, Caprinos" }
+              - { label: "Ícone (emoji)", name: "icone", widget: "string", default: "🐴" }
+              - { label: "Total de raças", name: "total_racas", widget: "number", value_type: int }
+              - { label: "Raças (separadas por ·)", name: "racas", widget: "text" }
+              - { label: "Preço (ex: 25,00 — vazio mostra 'Consultar preço')", name: "preco", widget: "string", required: false, default: "" }
+              - { label: "Link de venda (opcional — vazio usa e-mail)", name: "link", widget: "string", required: false, default: "" }

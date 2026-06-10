@@ -1,0 +1,40 @@
+title: GEMA
+full_title: "GEMA — Grupo de Estudos em Melhoramento Animal"
+description: "Grupo de pesquisa em genética quantitativa, genômica e melhoramento de equídeos brasileiros. EMEVZ · UFBA · Salvador, BA"
+url: "https://glebstrauss.github.io"
+baseurl: "/gema-site"
+author: "GEMA/UFBA"
+lang: pt-BR
+timezone: "America/Bahia"
+
+# Coleções
+collections:
+  professores:
+    output: false
+    sort_by: ordem
+
+# Padrão de front matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "professores"
+    values:
+      layout: null
+
+# Plugins (permitidos pelo GitHub Pages)
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Excluir do build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - IMPLEMENTACAO.md
+  - "*.sh"
+  - .bundle/
+  - vendor/

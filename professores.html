@@ -1,0 +1,91 @@
+---
+layout: default
+title: "Professores"
+description: "Conheça os professores e pesquisadores do GEMA, grupo de melhoramento animal da EMEVZ/UFBA"
+---
+
+<header class="page-hero">
+  <div class="container">
+    <div class="section-label">Equipe</div>
+    <div class="divider"></div>
+    <h1 class="page-hero-title">Professores e <em>Pesquisadores</em></h1>
+    <p class="page-hero-sub">Pesquisadores dedicados à bioestatística aplicada à genômica, genética molecular e quantitativa, e conservação de animais domésticos.</p>
+    {% assign n_doc = site.professores | where: "tipo", "docente" | size %}
+    {% assign n_est = site.professores | where: "tipo", "estudante" | size %}
+    <p class="page-hero-count">{{ n_doc }} docente{% if n_doc != 1 %}s{% endif %} · {{ n_est }} estudante{% if n_est != 1 %}s{% endif %} de pós-graduação</p>
+  </div>
+</header>
+
+<section aria-label="Corpo Docente" style="background:var(--cinza-claro)">
+  <div class="container">
+    <div class="section-label">Docentes e Orientadores</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Corpo Docente</h2>
+    <div class="prof-grid">
+      {% assign docentes = site.professores | where: "tipo", "docente" | sort: "ordem" %}
+      {% for prof in docentes %}
+        {% include prof-card.html prof=prof %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% assign estudantes = site.professores | where: "tipo", "estudante" | sort: "ordem" %}
+{% if estudantes.size > 0 %}
+<section aria-label="Estudantes de pós-graduação" style="background:var(--branco)">
+  <div class="container">
+    <div class="section-label">Pós-Graduação</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Estudantes</h2>
+    <div class="prof-grid">
+      {% for prof in estudantes %}
+        {% include prof-card.html prof=prof %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section id="pesquisa" aria-label="Linhas de pesquisa" style="background:var(--cinza-claro)">
+  <div class="container">
+    <div class="section-label">Pesquisa</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Linhas de Pesquisa</h2>
+    <p class="section-desc">Quatro linhas de pesquisa orientam as investigações do GEMA, articulando métodos quantitativos, moleculares e de conservação aplicados a animais domésticos.</p>
+    <div class="linhas-grid">
+      <div class="linha-card">
+        <div class="linha-num" aria-hidden="true">01</div>
+        <div class="linha-titulo">Bioestatística Aplicada à Genômica</div>
+        <p class="linha-desc">Desenvolvimento e aplicação de métodos bioestatísticos para análise de dados genômicos e avaliação de animais, incluindo modelos mistos e seleção genômica.</p>
+      </div>
+      <div class="linha-card">
+        <div class="linha-num" aria-hidden="true">02</div>
+        <div class="linha-titulo">Genética Molecular Aplicada ao Melhoramento</div>
+        <p class="linha-desc">Uso de marcadores moleculares, análise de SNP e ferramentas de genômica para subsidiar programas de melhoramento animal em raças de interesse zootécnico.</p>
+      </div>
+      <div class="linha-card">
+        <div class="linha-num" aria-hidden="true">03</div>
+        <div class="linha-titulo">Genética Quantitativa e Genômica</div>
+        <p class="linha-desc">Estimação de parâmetros genéticos, predição de valores genéticos (BLUP/BLUPF90+) e avaliação de progresso genético em populações de animais domésticos.</p>
+      </div>
+      <div class="linha-card">
+        <div class="linha-num" aria-hidden="true">04</div>
+        <div class="linha-titulo">Genética da Conservação</div>
+        <p class="linha-desc">Análise de diversidade genética, estrutura populacional, endogamia e estratégias de conservação de raças localmente adaptadas de animais domésticos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-join" aria-label="Oportunidades no grupo" style="background:var(--azul)">
+  <div class="container join-section">
+    <div class="section-label">Oportunidades</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Faça parte do <em>GEMA</em></h2>
+    <p>O grupo recebe estudantes de graduação, mestrado e doutorado interessados em genética quantitativa, genômica e melhoramento animal. Saiba mais sobre o Programa de Pós-Graduação em Zootecnia da UFBA.</p>
+    <div class="hero-actions" style="justify-content:center">
+      <a href="https://ppgz.ufba.br" target="_blank" rel="noopener noreferrer" class="btn-join">Ver PPGZ/UFBA →</a>
+      <a href="mailto:gerencia.gemaufba@gmail.com" class="btn-join btn-join--outline">Entrar em contato</a>
+    </div>
+  </div>
+</section>

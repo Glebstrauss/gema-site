@@ -1,0 +1,24 @@
+---
+layout: default
+title: "Página não encontrada"
+description: "A página que você procura não foi encontrada. Navegue pelo site do GEMA."
+permalink: /404.html
+---
+
+<section style="background:var(--cinza-claro);min-height:70vh;display:flex;align-items:center">
+  <div class="container" style="text-align:center;padding:6rem 2rem">
+    <div class="notfound-num" aria-hidden="true">404</div>
+    <div class="section-label" style="justify-content:center;display:flex">Página não encontrada</div>
+    <div class="divider" style="margin:1rem auto 1.25rem"></div>
+    <h1 class="page-hero-title" style="margin-bottom:1rem">Essa página <em>não existe</em></h1>
+    <p style="color:var(--cinza);max-width:480px;margin:0 auto 2.5rem;line-height:1.8">
+      O link pode estar desatualizado ou a página foi movida.<br>
+      Use o menu acima para encontrar o que você procura.
+    </p>
+    <div class="hero-actions" style="justify-content:center">
+      <a href="{{ '/' | relative_url }}" class="btn-primary">← Início</a>
+      <a href="{{ '/publicacoes.html' | relative_url }}" class="btn-outline">Publicações</a>
+      <a href="{{ '/professores.html' | relative_url }}" class="btn-outline">Professores</a>
+    </div>
+  </div>
+</section>

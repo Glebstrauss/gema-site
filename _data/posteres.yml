@@ -1,0 +1,81 @@
+items:
+  - id: equinos
+    titulo: "Raças e Ecótipos de Equinos do Brasil"
+    grupo: "Equinos"
+    icone: "🐴"
+    total_racas: 16
+    racas: "Baixadeiro · Brasileiro de Hipismo · Campeiro · Campolina · Crioulo · Lavradeiro · Mangalarga · Mangalarga Marchador · Marajoara · Mini Cavalo Puruca · Nordestino · Pantaneiro · Persa Marchador Brasileiro · Piquira · Pônei Brasileiro · Pônei Patuá"
+    preco: ""
+    link: ""
+
+  - id: ovinos
+    titulo: "Raças e Ecótipos de Ovinos do Brasil"
+    grupo: "Ovinos"
+    icone: "🐑"
+    total_racas: 15
+    racas: "Barriga Negra · Berganês · Bergamácia Brasileira · Cabugi · Cariri · Cocorobó · Crioula · Jaguaribe · Morada Nova · Pantaneira · Rabo Largo · Santa Inês · Somalis Brasileira · Soinga · Trindade"
+    preco: ""
+    link: ""
+
+  - id: caprinos
+    titulo: "Raças e Ecótipos de Caprinos do Brasil"
+    grupo: "Caprinos"
+    icone: "🐐"
+    total_racas: 10
+    racas: "Azul · Biritinga · Canindé · Graúna · Gurguéia · Marota · Moxotó · Nambi · Parda Sertaneja · Repartida"
+    preco: ""
+    link: ""
+
+  - id: zebuinas
+    titulo: "Raças Bovinas Zebuínas Criadas no Brasil"
+    grupo: "Bovinos Zebuínos"
+    icone: "🐂"
+    total_racas: 9
+    racas: "Brahman · Cangaian · Gir · Guzerá · Indubrasil · Nelore · Punganur · Sindi · Tabapuã"
+    preco: ""
+    link: ""
+
+  - id: suinos
+    titulo: "Raças e Ecótipos de Suínos do Brasil"
+    grupo: "Suínos"
+    icone: "🐖"
+    total_racas: 11
+    racas: "Baé · Canastra · Canastrão · Casco de Burro · Caruncho · Monteiro · Moura · Nilo · Piau · Piratininga · Sorocaba"
+    preco: ""
+    link: ""
+
+  - id: aves
+    titulo: "Raças e Ecótipos de Aves do Brasil"
+    grupo: "Aves"
+    icone: "🐓"
+    total_racas: 12
+    racas: "Barbuda do Catolé · Canela Preta · Caneludo do Catolé · Carne Negra · Índio Gigante · Meia Perna · Pato do Catolé · Peloco · Peru Preto Caipira · Rabo de Leque · Sertaneja Balão · Sura"
+    preco: ""
+    link: ""
+
+  - id: taurinas
+    titulo: "Raças Bovinas Taurinas do Brasil"
+    grupo: "Bovinos Taurinos"
+    icone: "🐄"
+    total_racas: 5
+    racas: "Caracu · Crioulo Lageano · Curraleiro Pé-Duro · Franqueiro · Pantaneiro"
+    preco: ""
+    link: ""
+
+  - id: bubalinos
+    titulo: "Raças Bubalinas Criadas no Brasil"
+    grupo: "Bubalinos"
+    icone: "🦬"
+    total_racas: 4
+    racas: "Carabao · Jafarabadi · Mediterrâneo · Murrah"
+    preco: ""
+    link: ""
+
+  - id: asininos
+    titulo: "Raças e Ecótipos de Asininos do Brasil"
+    grupo: "Asininos"
+    icone: "🫏"
+    total_racas: 3
+    racas: "Brasileiro · Nordestino · Pêga"
+    preco: ""
+    link: ""

@@ -1,0 +1,88 @@
+---
+layout: default
+title: "Prêmios"
+description: "Prêmios e distinções conquistados pelo GEMA em eventos científicos nacionais e internacionais"
+---
+
+<header class="page-hero">
+  <div class="container">
+    <div class="section-label">Reconhecimento</div>
+    <div class="divider"></div>
+    <h1 class="page-hero-title"><em>Prêmios</em></h1>
+    <p class="page-hero-sub">Reconhecimentos obtidos em eventos científicos nacionais, congressos de zootecnia e instituições de fomento à pesquisa.</p>
+    <p class="page-hero-count">{{ site.data.premios.items | size }} prêmios</p>
+  </div>
+</header>
+
+{% assign anos_premios = site.data.premios.items | map: "ano" | uniq | sort | reverse %}
+{% assign anos_asc    = site.data.premios.items | map: "ano" | uniq | sort %}
+{% assign ano_min     = anos_asc | first %}
+{% assign ano_max     = anos_asc | last %}
+
+<div class="premios-statsbar">
+  <div class="container">
+    <div class="premios-stats">
+      <div class="psi">
+        <span class="psi-num">{{ site.data.premios.items | size }}</span>
+        <span class="psi-label">Total de prêmios</span>
+      </div>
+      <div class="psi-div" aria-hidden="true"></div>
+      <div class="psi">
+        <span class="psi-num">{{ anos_premios | size }}</span>
+        <span class="psi-label">Anos premiados</span>
+      </div>
+      <div class="psi-div" aria-hidden="true"></div>
+      <div class="psi">
+        <span class="psi-num">{{ ano_min }}–{{ ano_max }}</span>
+        <span class="psi-label">Período</span>
+      </div>
+    </div>
+  </div>
+</div>
+<nav class="premio-year-nav" aria-label="Navegar por ano de prêmio" id="premio-year-nav">
+  {% for ano in anos_premios %}
+  {% assign n_ano = site.data.premios.items | where: "ano", ano | size %}
+  <a href="#premio-{{ ano }}" class="pub-year-btn">{{ ano }}<span class="pub-year-count"> ({{ n_ano }})</span></a>
+  {% endfor %}
+</nav>
+
+{% for ano in anos_premios %}
+  {% assign premios_ano = site.data.premios.items | where: "ano", ano %}
+<section id="premio-{{ ano }}" aria-labelledby="heading-premio-{{ ano }}">
+  <div class="container">
+    <h2 id="heading-premio-{{ ano }}" class="section-label"><time datetime="{{ ano }}">{{ ano }}</time></h2>
+    <div class="divider"></div>
+    <div class="premio-grid">
+      {% for premio in premios_ano %}
+      <div class="premio-card">
+        <div class="premio-topo"><div class="premio-icon" aria-hidden="true">{{ premio.icone }}</div><time class="premio-ano" datetime="{{ premio.ano }}">{{ premio.ano }}</time></div>
+        <h3 class="premio-nome">{{ premio.nome }}</h3>
+        <div class="premio-entidade">{{ premio.entidade }}</div>
+        <p class="premio-desc">{{ premio.descricao }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+<script>
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  var sections = Array.from(document.querySelectorAll('[id^="premio-"]'));
+  var btns     = Array.from(document.querySelectorAll('#premio-year-nav .pub-year-btn'));
+  if (!sections.length || !btns.length) return;
+
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        btns.forEach(function (b) {
+          b.classList.toggle('is-active', b.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-8% 0px -82% 0px', threshold: 0 });
+
+  sections.forEach(function (s) { obs.observe(s); });
+})();
+</script>

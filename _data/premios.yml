@@ -1,0 +1,31 @@
+items:
+  - nome: Melhor Trabalho — 1º Lugar (Artigo Original)
+    entidade: IV Workshop Internacional Jumentos do Brasil
+    ano: 2026
+    icone: 🥇
+    descricao: 'Premiado: Gleb Strauss Borges Junqueira (Mestrando). 1º lugar na categoria Artigo Original.'
+  - nome: Scherago International Student Travel Grant
+    entidade: Scherago International
+    ano: 2024
+    icone: 🌍
+    descricao: 'Premiada: Milena Aparecida Ferreira Campos (Doutoranda). Trabalho: Genome-wide association study for skin depigmentation in Nellore cattle.'
+  - nome: Menção Honrosa — Prêmio UFBA de Teses e Dissertações 2023
+    entidade: Universidade Federal da Bahia
+    ano: 2023
+    icone: 🎖️
+    descricao: 'Premiado: Dr. Henrique Alberto Mulim. Trabalho: Caracterização de corridas de homozigose, heterozigose e análise da diversidade genômica em populações de bovinos.'
+  - nome: Menção Honrosa — Prêmio Capes de Tese (Edição 2024)
+    entidade: CAPES
+    ano: 2024
+    icone: 🎖️
+    descricao: 'Premiado: Dr. Henrique Alberto Mulim. Trabalho: Caracterização de corridas de homozigose, heterozigose e análise da diversidade genômica em populações de bovinos.'
+  - nome: Menção Honrosa — Prêmio UFBA 2024 (Dissertação)
+    entidade: Universidade Federal da Bahia
+    ano: 2024
+    icone: 🎖️
+    descricao: 'Premiado: Silel Vinícius Simões Andrade Maciel (Mestrando). Categoria Dissertação.'
+  - nome: Bolsa CNPq — Produtividade em Pesquisa
+    entidade: CNPq · Brasil
+    ano: 2021
+    icone: 📜
+    descricao: Concessão de bolsa de produtividade em pesquisa para desenvolvimento de metodologias de avaliação genômica aplicada a equídeos localmente adaptados.

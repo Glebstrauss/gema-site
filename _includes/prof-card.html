@@ -1,0 +1,30 @@
+<div class="prof-card" role="article" aria-label="{{ include.prof.nome }}{% if include.prof.cargo != '' %}, {{ include.prof.cargo }}{% endif %}">
+  {% if include.prof.foto != "" %}
+    <img src="{{ include.prof.foto | relative_url }}"
+         alt="Foto de {{ include.prof.nome }}"
+         loading="lazy"
+         decoding="async"
+         width="52"
+         height="52"
+         class="prof-foto">
+  {% else %}
+    {% assign av_idx = include.prof.ordem | modulo: 5 %}
+    <div class="prof-avatar prof-avatar--{{ av_idx }}" aria-hidden="true">{{ include.prof.avatar }}</div>
+  {% endif %}
+  <div class="prof-nome">{{ include.prof.nome }}</div>
+  <div class="prof-cargo">{{ include.prof.cargo }}</div>
+  <p class="prof-desc">{{ include.prof.descricao }}</p>
+  <div class="prof-tags">
+    {% for tag in include.prof.tags %}
+      <span class="tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+  <div class="prof-links">
+    {% if include.prof.lattes != "" %}
+      <a href="{{ include.prof.lattes }}" target="_blank" rel="noopener noreferrer" class="pub-doi">↗ Lattes</a>
+    {% endif %}
+    {% if include.prof.email != "" %}
+      <a href="mailto:{{ include.prof.email }}" class="pub-doi">✉ E-mail</a>
+    {% endif %}
+  </div>
+</div>

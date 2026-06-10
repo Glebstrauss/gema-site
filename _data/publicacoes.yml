@@ -1,0 +1,35 @@
+items:
+  - ano: 2026
+    titulo: "Influence of MC1R Gene Variants on Coat Color of Indicine Cattle Breeds"
+    autores: "Maciel SVS, Oliveira IPP, Senes BB, Santana CJS, Alves JS, Silva EA, Franco FO, Silva BCF, Cairo FC, Vercesi-Filho AE, Costa RB, Camargo GMF"
+    periodico: "Animal Genetics"
+    qualis: ""
+    doi: "https://doi.org/10.1002/age.70113"
+
+  - ano: 2026
+    titulo: "Lack of association between the coding region of the ASIP gene and coat color in donkeys"
+    autores: "Rocha VCP, Santana CJS, Lima-Júnior JWR, Senes BB, Maciel SVSA, Oliveira IPP, Costa RB, Alves JS, Camargo GMF"
+    periodico: "Frontiers in Animal Science"
+    qualis: ""
+    doi: "https://doi.org/10.3389/fanim.2026.1794789"
+
+  - ano: 2025
+    titulo: "Genome-Wide Association Study of Morphological Defects in Nellore Cattle Using a Binary Trait Framework"
+    autores: "Campos MAF, Rojas de Oliveira H, Mulim HA, Oliveira EdS, Fonseca PAdS, Camargo GMF, Costa RB"
+    periodico: "Genes"
+    qualis: ""
+    doi: "https://doi.org/10.3390/genes16101204"
+
+  - ano: 2025
+    titulo: "Variability of PRDM9 in buffaloes"
+    autores: "Santana LGR, Alves JS, Feitosa FLB, Rocha VCP, Tonhati H, Costa RB, Camargo GMF"
+    periodico: "Frontiers in Genetics"
+    qualis: ""
+    doi: "https://doi.org/10.3389/fgene.2024.1479287"
+
+  - ano: 2021
+    titulo: "Influence of coat color on genetic parameter estimates in horses"
+    autores: "Junqueira GSB, Solar Diaz IDP, Cruz VAR, Oliveira CAA, Godoi FN, Camargo GMF, Costa RB"
+    periodico: "Journal of Applied Genetics"
+    qualis: ""
+    doi: "https://doi.org/10.1007/s13353-021-00616-5"

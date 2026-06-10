@@ -1,0 +1,207 @@
+---
+layout: default
+title: "Pôsteres"
+description: "Pôsteres científicos do GEMA — Raças e Ecótipos de Animais Domésticos do Brasil. Material didático de alta resolução para impressão e uso digital."
+---
+
+<header class="page-hero">
+  <div class="container">
+    <div class="section-label">Material Didático</div>
+    <div class="divider"></div>
+    <h1 class="page-hero-title">Pôsteres de <em>Raças Nativas</em></h1>
+    <p class="page-hero-sub">Pôsteres científicos de alta resolução com as raças e ecótipos de animais domésticos do Brasil, produzidos pelo GEMA·UFBA.</p>
+    <p class="page-hero-count">{{ site.data.posteres.items | size }} pôsteres disponíveis</p>
+  </div>
+</header>
+
+<!-- ── Destaque informativo ─────────────────────────────────────────────── -->
+<div class="poster-infobar">
+  <div class="container">
+    <div class="poster-infobar-inner">
+      <div class="poster-info-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>PDF de alta resolução</span>
+      </div>
+      <div class="poster-info-sep" aria-hidden="true"></div>
+      <div class="poster-info-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+        <span>Formato A2 · ideal para impressão</span>
+      </div>
+      <div class="poster-info-sep" aria-hidden="true"></div>
+      <div class="poster-info-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Produzido pelo GEMA · UFBA</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Grade de pôsteres ───────────────────────────────────────────────── -->
+<section aria-label="Catálogo de pôsteres" style="background:var(--cinza-claro)">
+  <div class="container">
+    <div class="section-label">Catálogo</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Escolha o seu pôster</h2>
+    <p class="section-desc">Cada pôster apresenta fotografias das raças com identificação dos animais dispostos sobre o mapa do Brasil.</p>
+
+    <div class="poster-grid">
+      {% for poster in site.data.posteres.items %}
+      <div class="poster-card">
+        <div class="poster-card-img-wrap">
+          <img
+            src="{{ '/assets/img/posteres/' | append: poster.id | append: '.jpg' | relative_url }}"
+            alt="Pôster: {{ poster.titulo }}"
+            class="poster-card-img"
+            loading="lazy"
+            decoding="async">
+          <div class="poster-card-badge">{{ poster.total_racas }} raças</div>
+        </div>
+        <div class="poster-card-body">
+          <div class="poster-card-grupo">
+            <span aria-hidden="true">{{ poster.icone }}</span>
+            {{ poster.grupo }}
+          </div>
+          <h3 class="poster-card-titulo">{{ poster.titulo }}</h3>
+          <p class="poster-card-racas">{{ poster.racas }}</p>
+          <div class="poster-card-footer">
+            <div class="poster-card-preco">
+              {% if poster.preco != "" %}
+                <span class="poster-preco-valor">R$ {{ poster.preco }}</span>
+              {% else %}
+                <span class="poster-preco-placeholder">Consultar preço</span>
+              {% endif %}
+            </div>
+            <a
+              href="{% if poster.link != '' %}{{ poster.link }}{% else %}mailto:gleb.strauss@ufba.br?subject={{ 'Pedido de pôster: ' | append: poster.titulo | uri_escape }}{% endif %}"
+              class="poster-btn"
+              {% if poster.link != "" %}target="_blank" rel="noopener noreferrer"{% endif %}>
+              Solicitar →
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ── Como adquirir ───────────────────────────────────────────────────── -->
+<section aria-label="Como adquirir" style="background:var(--branco)">
+  <div class="container">
+    <div class="section-label">Aquisição</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Como adquirir</h2>
+    <div class="poster-como-grid">
+
+      <div class="poster-como-card">
+        <div class="poster-como-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3 class="poster-como-titulo">1. Solicite</h3>
+        <p class="poster-como-desc">Clique em "Solicitar" no pôster desejado ou envie um e-mail para <strong>gleb.strauss@ufba.br</strong> informando o título e a quantidade.</p>
+      </div>
+
+      <div class="poster-como-card">
+        <div class="poster-como-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/></svg>
+        </div>
+        <h3 class="poster-como-titulo">2. Pagamento</h3>
+        <p class="poster-como-desc">Aceitamos <strong>PIX</strong>. Após a confirmação do pagamento, o arquivo é enviado por e-mail.</p>
+      </div>
+
+      <div class="poster-como-card">
+        <div class="poster-como-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        </div>
+        <h3 class="poster-como-titulo">3. Download</h3>
+        <p class="poster-como-desc">Receba o PDF de alta resolução por e-mail, pronto para impressão em A2 ou uso em apresentações e materiais didáticos.</p>
+      </div>
+
+    </div>
+
+    <!-- Bloco de contato / PIX -->
+    <div class="poster-contato-box">
+      <div class="poster-contato-info">
+        <div class="poster-contato-label">Dúvidas ou pedidos</div>
+        <a href="mailto:gleb.strauss@ufba.br" class="poster-contato-email">gleb.strauss@ufba.br</a>
+      </div>
+      <div class="poster-contato-pix">
+        <div class="poster-contato-label">Pagamento</div>
+        <span class="poster-pix-chave">Chave PIX informada na confirmação do pedido</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ── Infobar ──────────────────────────────────────────────────────────── */
+.poster-infobar{background:var(--azul-claro);border-top:1px solid var(--borda);border-bottom:1px solid var(--borda);padding:.9rem 3rem}
+.poster-infobar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.poster-info-item{display:flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:500;color:var(--azul-escuro);padding:.3rem 2rem .3rem 0}
+.poster-info-item svg{flex-shrink:0;opacity:.7}
+.poster-info-sep{width:1px;height:1.25rem;background:var(--borda);margin-right:2rem;flex-shrink:0}
+
+/* ── Grade de pôsteres ─────────────────────────────────────────────────── */
+.poster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;margin-top:2rem}
+.poster-card{background:var(--branco);border:1px solid var(--borda);border-radius:20px;overflow:hidden;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
+.poster-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(28,78,221,.1)}
+
+/* imagem */
+.poster-card-img-wrap{position:relative;overflow:hidden;background:#f8f8f6;aspect-ratio:3/4}
+.poster-card-img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .35s ease;display:block}
+.poster-card:hover .poster-card-img{transform:scale(1.03)}
+.poster-card-badge{position:absolute;bottom:.75rem;right:.75rem;background:var(--azul);color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.04em;padding:.25rem .7rem;border-radius:100px}
+
+/* corpo do card */
+.poster-card-body{padding:1.25rem 1.25rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.poster-card-grupo{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);display:flex;align-items:center;gap:.35rem}
+.poster-card-titulo{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:600;color:var(--preto);line-height:1.35}
+.poster-card-racas{font-size:.72rem;color:var(--cinza);line-height:1.6;flex:1}
+.poster-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--borda);gap:.5rem}
+.poster-preco-valor{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:var(--preto)}
+.poster-preco-placeholder{font-size:.78rem;color:var(--cinza);font-style:italic}
+.poster-btn{display:inline-flex;align-items:center;background:var(--azul);color:#fff;text-decoration:none;padding:.45rem 1rem;border-radius:100px;font-size:.78rem;font-weight:500;white-space:nowrap;transition:background .2s;border:none;cursor:pointer;font-family:inherit}
+.poster-btn:hover{background:var(--azul-escuro)}
+
+/* ── Como adquirir ──────────────────────────────────────────────────────── */
+.poster-como-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.poster-como-card{background:var(--cinza-claro);border-radius:16px;padding:2rem;border:1px solid var(--borda)}
+.poster-como-icon{width:48px;height:48px;background:var(--azul-claro);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--azul);margin-bottom:1rem}
+.poster-como-titulo{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:var(--preto);margin-bottom:.5rem}
+.poster-como-desc{font-size:.875rem;color:var(--cinza);line-height:1.65}
+
+/* ── Bloco de contato ───────────────────────────────────────────────────── */
+.poster-contato-box{margin-top:2.5rem;background:var(--azul-claro);border:1px solid var(--borda);border-radius:16px;padding:1.75rem 2rem;display:flex;flex-wrap:wrap;gap:2rem;align-items:center}
+.poster-contato-label{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);margin-bottom:.3rem}
+.poster-contato-email{font-size:.95rem;font-weight:500;color:var(--preto);text-decoration:none}
+.poster-contato-email:hover{color:var(--azul);text-decoration:underline}
+.poster-pix-chave{font-size:.95rem;font-weight:500;color:var(--preto);font-family:monospace}
+
+/* ── Responsivo ─────────────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .poster-como-grid{grid-template-columns:1fr}
+  .poster-infobar{padding:.75rem 1.5rem}
+  .poster-info-sep{display:none}
+  .poster-info-item{padding:.25rem 1rem .25rem 0}
+}
+@media(max-width:600px){
+  .poster-infobar{padding:.6rem 1.25rem}
+  .poster-grid{grid-template-columns:repeat(2,1fr);gap:1rem}
+  .poster-card-body{padding:1rem}
+  .poster-card-titulo{font-size:.85rem}
+  .poster-card-racas{display:none}
+  .poster-contato-box{flex-direction:column;gap:1.25rem;padding:1.25rem}
+}
+@media(max-width:380px){
+  .poster-grid{grid-template-columns:1fr}
+}
+
+/* ── Tema escuro ────────────────────────────────────────────────────────── */
+html.dark .poster-card-img-wrap{background:#1a1a26}
+html.dark .poster-info-item{color:var(--azul-mid)}
+html.dark .poster-infobar,
+html.dark .poster-contato-box{background:rgba(85,120,232,.08)}
+html.dark .poster-contato-label,
+html.dark .poster-card-grupo{color:var(--azul-mid)}
+</style>

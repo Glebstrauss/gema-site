@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+// Tema escuro — aplicado antes do CSS para evitar FOUC
+(function(){try{var t=localStorage.getItem('gema-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})();
+</script>
+<title>{% if page.title %}{{ page.title }} — GEMA-UFBA{% else %}GEMA-UFBA{% endif %}</title>
+<meta name="description" content="{{ page.description | default: site.description }}">
+<link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+
+<!-- Open Graph -->
+<meta property="og:title" content="{% if page.title %}{{ page.title }} — {% endif %}{{ site.full_title }}">
+<meta property="og:description" content="{{ page.description | default: site.description }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+<meta property="og:image" content="{{ site.url }}{{ site.baseurl }}/logo/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="GEMA · UFBA">
+<meta property="og:locale" content="pt_BR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{% if page.title %}{{ page.title }} — {% endif %}{{ site.full_title }}">
+<meta name="twitter:description" content="{{ page.description | default: site.description }}">
+<meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/logo/og-image.jpg">
+<meta name="twitter:image:alt" content="Logotipo do GEMA — Grupo de Estudos em Melhoramento Animal, UFBA">
+
+<!-- Favicon + browser theme -->
+<link rel="shortcut icon" href="{{ '/favicon.ico' | relative_url }}?v=3" type="image/x-icon">
+<link rel="icon" href="{{ '/logo/favicon-16.png' | relative_url }}?v=3" type="image/png" sizes="16x16">
+<link rel="icon" href="{{ '/logo/favicon-32.png' | relative_url }}?v=3" type="image/png" sizes="32x32">
+<link rel="icon" href="{{ '/logo/favicon-48.png' | relative_url }}?v=3" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="{{ '/logo/favicon-192.png' | relative_url }}?v=3" sizes="192x192">
+<link rel="sitemap" type="application/xml" href="{{ '/sitemap.xml' | relative_url }}">
+<meta name="theme-color" content="#1C4EDD" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0d18" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta name="author" content="{{ site.author }}">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ResearchProject",
+  "name": "GEMA — Grupo de Estudos em Melhoramento Animal",
+  "url": "{{ site.url }}{{ site.baseurl }}/",
+  "description": "{{ site.description }}",
+  "image": "{{ site.url }}{{ site.baseurl }}/logo/og-image.jpg",
+  "sameAs": ["https://github.com/Glebstrauss/gema-site"],
+  "keywords": ["Genética Quantitativa","Melhoramento Animal","Genômica Aplicada","Equídeos Brasileiros","Jumento Pêga","BLUP","BLUPF90+"],
+  "parentOrganization": {
+    "@type": "CollegeOrUniversity",
+    "name": "Universidade Federal da Bahia",
+    "url": "https://www.ufba.br"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+
+<a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
+<nav aria-label="Navegação principal">
+  <a href="{{ '/' | relative_url }}" class="nav-logo" aria-label="GEMA — página inicial">
+    <img src="{{ '/logo/logo-gema.svg' | relative_url }}" alt="GEMA — Grupo de Estudos em Melhoramento Animal" width="75" height="54" loading="eager" decoding="async">
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links" id="nav-menu" role="list">
+      <li><a href="{{ '/professores.html' | relative_url }}"{% if page.url contains 'professores' %} class="ativa" aria-current="page"{% endif %}>Professores</a></li>
+      <li><a href="{{ '/publicacoes.html' | relative_url }}"{% if page.url contains 'publicacoes' %} class="ativa" aria-current="page"{% endif %}>Publicações</a></li>
+      <li><a href="{{ '/premios.html' | relative_url }}"{% if page.url contains 'premios' %} class="ativa" aria-current="page"{% endif %}>Prêmios</a></li>
+      <li><a href="{{ '/noticias.html' | relative_url }}"{% if page.url contains 'noticias' %} class="ativa" aria-current="page"{% endif %}>Notícias</a></li>
+      <li><a href="{{ '/posteres.html' | relative_url }}"{% if page.url contains 'posteres' %} class="ativa" aria-current="page"{% endif %}>Pôsteres</a></li>
+    </ul>
+    <button id="nav-theme-btn" aria-label="Ativar tema escuro" aria-pressed="false">
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+    <button class="nav-hamburger" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="conteudo">
+{{ content }}
+</main>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <img class="footer-logo-svg" src="{{ '/logo/logo-gema.svg' | relative_url }}" alt="GEMA — Grupo de Estudos em Melhoramento Animal" width="89" height="64" loading="lazy">
+      <p class="footer-tagline">Grupo de Estudos em Melhoramento Animal,<br>Genética Quantitativa e Genômica Aplicada.<br><span style="color:rgba(255,255,255,.2);font-size:.8rem">EMEVZ · UFBA · Salvador, Bahia</span></p>
+    </div>
+    <nav aria-label="Páginas do site">
+      <div class="footer-col-title">Navegação</div>
+      <ul class="footer-links">
+        <li><a href="{{ '/professores.html' | relative_url }}">Professores</a></li>
+        <li><a href="{{ '/publicacoes.html' | relative_url }}">Publicações</a></li>
+        <li><a href="{{ '/premios.html' | relative_url }}">Prêmios</a></li>
+        <li><a href="{{ '/noticias.html' | relative_url }}">Notícias</a></li>
+        <li><a href="{{ '/posteres.html' | relative_url }}">Pôsteres</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span>© {{ site.time | date: "%Y" }} GEMA · EMEVZ/UFBA</span>
+    <span><a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a></span>
+  </div>
+</footer>
+
+<button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<script>
+// ── Hamburger ──────────────────────────────────────────────────────────────
+(function () {
+  var btn = document.querySelector('.nav-hamburger');
+  if (!btn) return;
+  var menu = document.getElementById('nav-menu');
+
+  btn.addEventListener('click', function () {
+    var open = document.body.classList.toggle('nav-open');
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu de navegação');
+  });
+
+  if (menu) {
+    menu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        document.body.classList.remove('nav-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Abrir menu de navegação');
+      });
+    });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    var isOpen = document.body.classList.contains('nav-open');
+
+    if (e.key === 'Escape' && isOpen) {
+      document.body.classList.remove('nav-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Abrir menu de navegação');
+      btn.focus();
+      return;
+    }
+
+    // Focus trap — mantém Tab dentro do menu aberto
+    if (e.key === 'Tab' && isOpen) {
+      var nav = document.querySelector('nav');
+      if (!nav) return;
+      var focusable = Array.from(nav.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )).filter(function (el) { return el.offsetParent !== null; });
+      if (focusable.length < 2) return;
+      var first = focusable[0];
+      var last  = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+      }
+    }
+  });
+})();
+
+// ── Tema escuro ────────────────────────────────────────────────────────────
+(function () {
+  var btn = document.getElementById('nav-theme-btn');
+  if (!btn) return;
+
+  function apply(dark) {
+    document.documentElement.classList.toggle('dark', dark);
+    btn.setAttribute('aria-pressed', String(dark));
+    btn.setAttribute('aria-label', dark ? 'Ativar tema claro' : 'Ativar tema escuro');
+  }
+
+  apply(document.documentElement.classList.contains('dark'));
+
+  btn.addEventListener('click', function () {
+    var dark = !document.documentElement.classList.contains('dark');
+    apply(dark);
+    try { localStorage.setItem('gema-theme', dark ? 'dark' : 'light'); } catch (e) {}
+  });
+})();
+
+// ── Voltar ao topo ─────────────────────────────────────────────────────────
+(function () {
+  var btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  window.addEventListener('scroll', function () {
+    btn.classList.toggle('visible', window.scrollY > 500);
+  }, { passive: true });
+  btn.addEventListener('click', function () {
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+  });
+})();
+
+// ── Animações de entrada (IntersectionObserver) ────────────────────────────
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+
+  var sel = '.prof-card, .premio-card, .noticia-card, .linha-card, .noticia-mini, .pub-year-group, .home-nav-card';
+  var targets = Array.from(document.querySelectorAll(sel));
+  if (!targets.length) return;
+
+  var stagger = typeof WeakMap !== 'undefined' ? new WeakMap() : null;
+
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('fade-in--visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -28px 0px' });
+
+  targets.forEach(function (el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 10) {
+      // Já visível no carregamento — mostra sem animação
+      return;
+    }
+    el.classList.add('fade-in');
+    if (stagger) {
+      var parent = el.parentNode;
+      var count = stagger.get(parent) || 0;
+      el.style.transitionDelay = (count % 4) * 0.08 + 's';
+      stagger.set(parent, count + 1);
+    }
+    obs.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>

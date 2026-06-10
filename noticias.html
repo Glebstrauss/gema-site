@@ -1,0 +1,187 @@
+---
+layout: default
+title: "Notícias"
+description: "Últimas notícias e atualizações do GEMA — projetos, publicações e eventos"
+---
+
+{% assign ano_atual = site.time | date: "%Y" %}
+
+<header class="page-hero">
+  <div class="container">
+    <div class="section-label">Últimas</div>
+    <div class="divider"></div>
+    <h1 class="page-hero-title">Notícias do <em>Grupo</em></h1>
+    <p class="page-hero-sub">Atualizações sobre projetos, publicações, apresentações e eventos do GEMA.</p>
+    <p class="page-hero-count">{{ site.data.noticias.items | size }} notícias publicadas</p>
+  </div>
+</header>
+
+<section aria-label="Notícia em destaque" style="background:var(--branco)">
+  <div class="container">
+    <div class="section-label">Destaque</div>
+    <div class="divider"></div>
+    {% assign destaque = site.data.noticias.items | where: "destaque", true | first %}
+    {% assign secundarias = site.data.noticias.items | where: "destaque", false | limit: 3 %}
+    <div class="noticias-grid">
+      {% if destaque %}
+      <div class="noticia-destaque">
+        <div>
+          <div class="noticia-data nd-data">{{ destaque.data }}</div>
+          <h2 class="noticia-titulo">{{ destaque.titulo }}</h2>
+          <p class="noticia-texto">{{ destaque.texto }}</p>
+        </div>
+        {% if destaque.link != "" %}<a href="{{ destaque.link }}" class="noticia-link-btn" target="_blank" rel="noopener noreferrer">Ler mais →</a>{% endif %}
+      </div>
+      {% endif %}
+      <div class="noticias-lista">
+        {% for noticia in secundarias %}
+        <button class="noticia-mini noticia-abre-modal"
+          data-titulo="{{ noticia.titulo | escape }}"
+          data-data="{{ noticia.data }}"
+          data-texto="{{ noticia.texto | escape }}"
+          data-link="{{ noticia.link }}"
+          aria-label="Ler notícia: {{ noticia.titulo | escape }}">
+          <div class="noticia-data nm-data">{{ noticia.data }}</div>
+          <h3 class="nm-titulo">{{ noticia.titulo }}</h3>
+          <p class="nm-texto">{{ noticia.texto | truncatewords: 16 }}</p>
+        </button>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Arquivo de notícias" style="background:var(--cinza-claro)">
+  <div class="container">
+    <div class="section-label">Arquivo</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Todas as Notícias</h2>
+    <div class="noticias-all">
+      {% for noticia in site.data.noticias.items %}
+      <button class="noticia-card noticia-abre-modal{% if noticia.destaque %} noticia-card--destaque{% endif %}"
+        data-titulo="{{ noticia.titulo | escape }}"
+        data-data="{{ noticia.data }}"
+        data-texto="{{ noticia.texto | escape }}"
+        data-link="{{ noticia.link }}"
+        aria-label="Ler notícia: {{ noticia.titulo | escape }}">
+        {% if noticia.destaque %}<span class="noticia-badge">Destaque</span>{% endif %}
+        {% if noticia.data contains ano_atual %}<span class="noticia-badge noticia-badge--novo">Novo</span>{% endif %}
+        <span class="noticia-data">{{ noticia.data }}</span>
+        <h3 class="noticia-titulo">{{ noticia.titulo }}</h3>
+        <p>{{ noticia.texto | truncatewords: 30 }}</p>
+        {% if noticia.link != "" %}<span class="noticia-card-hint">Clique para ler →</span>{% else %}<span class="noticia-card-hint">Clique para ler →</span>{% endif %}
+      </button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Modal de notícia -->
+<div class="noticia-modal-overlay" id="noticia-modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" hidden>
+  <div class="noticia-modal">
+    <button class="noticia-modal-fechar" id="modal-fechar" aria-label="Fechar notícia">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="noticia-modal-data" id="modal-data"></div>
+    <h2 class="noticia-modal-titulo" id="modal-titulo"></h2>
+    <p class="noticia-modal-texto" id="modal-texto"></p>
+    <div id="modal-link-wrap"></div>
+  </div>
+</div>
+
+<style>
+.noticia-mini.noticia-abre-modal,
+.noticia-card.noticia-abre-modal{
+  cursor:pointer;text-align:left;width:100%;background:none;font-family:inherit
+}
+.noticia-mini.noticia-abre-modal:focus-visible,
+.noticia-card.noticia-abre-modal:focus-visible{
+  outline:2px solid var(--azul);outline-offset:3px
+}
+.noticia-card-hint{font-size:.78rem;color:var(--azul);font-weight:500;margin-top:.25rem;display:block}
+
+/* Modal */
+.noticia-modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;
+  display:flex;align-items:center;justify-content:center;padding:1.5rem;
+  animation:fadeOverlay .18s ease
+}
+.noticia-modal-overlay[hidden]{display:none}
+@keyframes fadeOverlay{from{opacity:0}to{opacity:1}}
+.noticia-modal{
+  background:var(--branco);border-radius:20px;padding:2.5rem;
+  max-width:640px;width:100%;max-height:85vh;overflow-y:auto;
+  position:relative;animation:slideModal .2s ease;
+  box-shadow:0 24px 64px rgba(0,0,0,.18)
+}
+@keyframes slideModal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.noticia-modal-fechar{
+  position:absolute;top:1.25rem;right:1.25rem;
+  background:none;border:1px solid var(--borda);border-radius:50%;
+  width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--cinza);transition:background .15s,color .15s
+}
+.noticia-modal-fechar:hover{background:var(--azul-claro);color:var(--azul);border-color:var(--azul)}
+.noticia-modal-data{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);margin-bottom:.75rem}
+.noticia-modal-titulo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:var(--preto);line-height:1.3;margin-bottom:1.25rem;padding-right:2rem}
+.noticia-modal-texto{font-size:.95rem;color:var(--cinza);line-height:1.8;white-space:pre-line}
+.noticia-modal-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.5rem;background:var(--azul);color:#fff;text-decoration:none;padding:.65rem 1.4rem;border-radius:100px;font-size:.875rem;font-weight:500;transition:background .2s}
+.noticia-modal-link:hover{background:var(--azul-escuro)}
+</style>
+
+<script>
+(function () {
+  var overlay = document.getElementById('noticia-modal');
+  var btnFechar = document.getElementById('modal-fechar');
+  var elData  = document.getElementById('modal-data');
+  var elTitulo = document.getElementById('modal-titulo');
+  var elTexto  = document.getElementById('modal-texto');
+  var elLinkWrap = document.getElementById('modal-link-wrap');
+  var anteriorFoco = null;
+
+  function abrirModal(titulo, data, texto, link) {
+    elData.textContent  = data;
+    elTitulo.textContent = titulo;
+    elTexto.textContent  = texto;
+    elLinkWrap.innerHTML = '';
+    if (link) {
+      var a = document.createElement('a');
+      a.href = link; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.className = 'noticia-modal-link';
+      a.textContent = 'Ler reportagem completa →';
+      elLinkWrap.appendChild(a);
+    }
+    overlay.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    btnFechar.focus();
+  }
+
+  function fecharModal() {
+    overlay.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+    if (anteriorFoco) anteriorFoco.focus();
+  }
+
+  document.querySelectorAll('.noticia-abre-modal').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      anteriorFoco = btn;
+      abrirModal(
+        btn.dataset.titulo,
+        btn.dataset.data,
+        btn.dataset.texto,
+        btn.dataset.link || ''
+      );
+    });
+  });
+
+  btnFechar.addEventListener('click', fecharModal);
+
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) fecharModal();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !overlay.hasAttribute('hidden')) fecharModal();
+  });
+})();
+</script>
