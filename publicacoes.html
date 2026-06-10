@@ -8,6 +8,12 @@ description: "Produção científica do GEMA em genética quantitativa, genômic
 {% assign pub_ano_min     = _pub_anos_asc | first %}
 {% assign pub_ano_max     = _pub_anos_asc | last %}
 {% assign pub_periodicos  = site.data.publicacoes.items | map: "periodico" | uniq | size %}
+{% comment %} Qualis preenchidos (o filtro só aparece quando houver ao menos um) {% endcomment %}
+{% assign _q = "" | split: "" %}
+{% for pub in site.data.publicacoes.items %}
+  {% if pub.qualis and pub.qualis != "" %}{% assign _q = _q | push: pub.qualis %}{% endif %}
+{% endfor %}
+{% assign qualis_disponiveis = _q | uniq | sort %}
 
 <header class="page-hero">
   <div class="container">
@@ -53,6 +59,14 @@ description: "Produção científica do GEMA em genética quantitativa, genômic
           <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
         </button>
       </div>
+      {% if qualis_disponiveis.size > 0 %}
+      <div class="pub-filter-qualis" role="group" aria-label="Filtrar por Qualis">
+        <button class="pub-filter-btn is-active" type="button" data-qualis="">Todas</button>
+        {% for q in qualis_disponiveis %}
+        <button class="pub-filter-btn pub-badge--{{ q | downcase }}" type="button" data-qualis="{{ q }}">{{ q }}</button>
+        {% endfor %}
+      </div>
+      {% endif %}
       <button class="pub-print-btn" id="pub-print-btn" aria-label="Imprimir lista de publicações">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
         Imprimir
@@ -87,16 +101,17 @@ description: "Produção científica do GEMA em genética quantitativa, genômic
              data-titulo="{{ pub.titulo | downcase | escape }}"
              data-autores="{{ pub.autores | downcase | escape }}"
              data-periodico="{{ pub.periodico | downcase | escape }}"
+             data-qualis="{{ pub.qualis }}"
              data-ano="{{ pub.ano }}">
           <div class="pub-year">{{ pub.ano }}</div>
           <div class="pub-body">
             <div class="pub-title">{{ pub.titulo }}</div>
             <div class="pub-authors">{{ pub.autores }}</div>
             <div class="pub-journal">
-              {{ pub.periodico }}
+              {{ pub.periodico }}{% if pub.qualis and pub.qualis != "" %}<span class="pub-badge pub-badge--{{ pub.qualis | downcase }}">{{ pub.qualis }}</span>{% endif %}
             </div>
             <div class="pub-actions">
-              {% if pub.doi != "" %}<a href="{{ pub.doi }}" class="pub-doi" target="_blank" rel="noopener noreferrer" aria-label="Abrir no DOI (nova aba): {{ pub.titulo | truncate: 80 | escape }}">↗ DOI</a>{% endif %}
+              {% if pub.doi and pub.doi != "" %}<a href="{{ pub.doi }}" class="pub-doi" target="_blank" rel="noopener noreferrer" aria-label="Abrir no DOI (nova aba): {{ pub.titulo | truncate: 80 | escape }}">↗ DOI</a>{% endif %}
               <button class="pub-citar" type="button" aria-label="Copiar citação: {{ pub.titulo | truncate: 80 | escape }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
                 <span class="pub-citar-label" aria-live="polite">Citar</span>
@@ -124,6 +139,8 @@ description: "Produção científica do GEMA em genética quantitativa, genômic
   var items  = Array.from(document.querySelectorAll('.pub-item'));
   var groups = Array.from(document.querySelectorAll('.pub-year-group'));
   var total  = items.length;
+  var qualisBtns  = Array.from(document.querySelectorAll('.pub-filter-btn'));
+  var qualisAtivo = '';
 
   // ── Estado do campo de busca (mostra/oculta botão × e hint /) ────────────
   function updateSearchWrap() {
@@ -145,9 +162,11 @@ description: "Produção científica do GEMA em genética quantitativa, genômic
     var matched = 0;
 
     items.forEach(function (item) {
-      var ok = !q || item.dataset.titulo.includes(q)
-                  || item.dataset.autores.includes(q)
-                  || item.dataset.periodico.includes(q);
+      var okTexto = !q || item.dataset.titulo.includes(q)
+                       || item.dataset.autores.includes(q)
+                       || item.dataset.periodico.includes(q);
+      var okQualis = !qualisAtivo || item.dataset.qualis === qualisAtivo;
+      var ok = okTexto && okQualis;
       item.classList.toggle('pub-hidden', !ok);
       if (ok) matched++;
     });
@@ -157,22 +176,36 @@ description: "Produção científica do GEMA em genética quantitativa, genômic
         !g.querySelectorAll('.pub-item:not(.pub-hidden)').length);
     });
 
-    var filtering = !!q;
+    var filtering = !!q || !!qualisAtivo;
     if (yearNav)  yearNav.style.display  = filtering ? 'none' : '';
     if (countEl)  countEl.style.display  = filtering ? ''     : 'none';
     if (noRes)    noRes.classList.toggle('visible', matched === 0);
     updateCount(matched);
   }
 
+  function setQualis(valor) {
+    qualisAtivo = valor;
+    qualisBtns.forEach(function (b) {
+      b.classList.toggle('is-active', b.dataset.qualis === valor);
+    });
+    applyFilter();
+  }
+
   function reset() {
     if (search) search.value = '';
     updateSearchWrap();
-    applyFilter();
+    setQualis('');
     if (search) search.focus();
   }
 
   if (search) search.addEventListener('input', function () { updateSearchWrap(); applyFilter(); });
   if (resetBtn) resetBtn.addEventListener('click', reset);
+
+  qualisBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setQualis(btn.dataset.qualis === qualisAtivo ? '' : btn.dataset.qualis);
+    });
+  });
 
   // ── Botão × — limpa busca sem tirar o foco do input ──────────────────────
   if (clearBtn) {

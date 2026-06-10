@@ -68,16 +68,17 @@ og_image: /assets/img/posteres/equinos.jpg
           <p class="poster-card-racas">{{ poster.racas }}</p>
           <div class="poster-card-footer">
             <div class="poster-card-preco">
-              {% if poster.preco != "" %}
+              {% if poster.preco and poster.preco != "" %}
                 <span class="poster-preco-valor">R$ {{ poster.preco }}</span>
               {% else %}
                 <span class="poster-preco-placeholder">Consultar preço</span>
               {% endif %}
             </div>
+            {% assign tem_link = false %}{% if poster.link and poster.link != "" %}{% assign tem_link = true %}{% endif %}
             <a
-              href="{% if poster.link != '' %}{{ poster.link }}{% else %}mailto:gleb.strauss@ufba.br?subject={{ 'Pedido de pôster: ' | append: poster.titulo | uri_escape }}{% endif %}"
+              href="{% if tem_link %}{{ poster.link }}{% else %}mailto:gerencia.gemaufba@gmail.com?subject={{ 'Pedido de pôster: ' | append: poster.titulo | uri_escape }}{% endif %}"
               class="poster-btn"
-              {% if poster.link != "" %}target="_blank" rel="noopener noreferrer"{% endif %}>
+              {% if tem_link %}target="_blank" rel="noopener noreferrer"{% endif %}>
               Solicitar →
             </a>
           </div>
@@ -101,7 +102,7 @@ og_image: /assets/img/posteres/equinos.jpg
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
         <h3 class="poster-como-titulo">1. Solicite</h3>
-        <p class="poster-como-desc">Clique em "Solicitar" no pôster desejado ou envie um e-mail para <strong>gleb.strauss@ufba.br</strong> informando o título e a quantidade.</p>
+        <p class="poster-como-desc">Clique em "Solicitar" no pôster desejado ou envie um e-mail para <strong>gerencia.gemaufba@gmail.com</strong> informando o título e a quantidade.</p>
       </div>
 
       <div class="poster-como-card">
@@ -126,7 +127,7 @@ og_image: /assets/img/posteres/equinos.jpg
     <div class="poster-contato-box">
       <div class="poster-contato-info">
         <div class="poster-contato-label">Dúvidas ou pedidos</div>
-        <a href="mailto:gleb.strauss@ufba.br" class="poster-contato-email">gleb.strauss@ufba.br</a>
+        <a href="mailto:gerencia.gemaufba@gmail.com" class="poster-contato-email">gerencia.gemaufba@gmail.com</a>
       </div>
       <div class="poster-contato-pix">
         <div class="poster-contato-label">Pagamento</div>

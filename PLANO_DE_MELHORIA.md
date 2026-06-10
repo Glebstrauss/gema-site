@@ -66,6 +66,13 @@ Auditoria e plano executados em **junho/2026** sobre o site original (`site_gema
 - ✅ Contraste do tema escuro nos elementos da página (hint, data do modal, focus rings)
 - ✅ Link "Assinar via RSS" na hero; estados vazios para quando não houver notícias
 
+## Quarta rodada — publicações e robustez (jun/2026)
+
+- ✅ Badges e filtro **Qualis** restaurados em Publicações como melhoria progressiva: aparecem automaticamente quando o campo for preenchido pelo painel (hoje, com todos vazios, nenhuma UI morta é exibida)
+- ✅ Condicionais nil-safe em todo conteúdo gerenciado pelo painel (`{% if campo and campo != "" %}`): DOI, links de notícia, preço/link de pôster, foto/Lattes/e-mail de professor — o Sveltia pode omitir campos opcionais e `nil != ""` é verdadeiro no Liquid
+- ✅ Contato de pedidos de pôster trocado para o e-mail institucional do grupo (gerencia.gemaufba@gmail.com), o mesmo da seção "Faça parte"
+- ✅ `width/height` corretos (88px) nas fotos dos cards de professor
+
 ## Próximos passos sugeridos
 
 - Definir preços reais dos pôsteres em `_data/posteres.yml` (campo `preco`) — editável pelo painel

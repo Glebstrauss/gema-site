@@ -38,7 +38,7 @@ description: "Últimas notícias e atualizações do GEMA — projetos, publica�
           <h2 class="noticia-titulo">{{ destaque.titulo }}</h2>
           <p class="noticia-texto">{{ destaque.texto }}</p>
         </div>
-        {% if destaque.link != "" %}<a href="{{ destaque.link | escape }}" class="noticia-link-btn" target="_blank" rel="noopener noreferrer">Ler mais →</a>{% endif %}
+        {% if destaque.link and destaque.link != "" %}<a href="{{ destaque.link | escape }}" class="noticia-link-btn" target="_blank" rel="noopener noreferrer">Ler mais →</a>{% endif %}
       </div>
       <div class="noticias-lista">
         {% for noticia in secundarias limit: 3 %}
@@ -82,7 +82,7 @@ description: "Últimas notícias e atualizações do GEMA — projetos, publica�
         <span class="noticia-data">{{ noticia.data }}</span>
         <h3 class="noticia-titulo">{{ noticia.titulo }}</h3>
         <p>{{ noticia.texto | truncatewords: 30 }}</p>
-        {% if noticia.link != "" %}<span class="noticia-card-hint">Ler · reportagem completa disponível →</span>{% else %}<span class="noticia-card-hint">Clique para ler →</span>{% endif %}
+        {% if noticia.link and noticia.link != "" %}<span class="noticia-card-hint">Ler · reportagem completa disponível →</span>{% else %}<span class="noticia-card-hint">Clique para ler →</span>{% endif %}
       </button>
       {% endfor %}
     </div>
