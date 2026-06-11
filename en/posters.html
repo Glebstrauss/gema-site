@@ -51,12 +51,16 @@ alt_url: /posteres.html
       <div class="poster-card">
         <div class="poster-card-img-wrap">
           <button type="button" class="poster-zoom" aria-label="Enlarge poster: {% if poster.titulo_en and poster.titulo_en != '' %}{{ poster.titulo_en }}{% else %}{{ poster.titulo }}{% endif %}">
-            <img
-              src="{{ '/assets/img/posteres/' | append: poster.id | append: '.jpg' | relative_url }}"
-              alt="Poster: {% if poster.titulo_en and poster.titulo_en != '' %}{{ poster.titulo_en }}{% else %}{{ poster.titulo }}{% endif %}"
-              class="poster-card-img"
-              loading="lazy"
-              decoding="async">
+            <picture>
+              <source srcset="{{ '/assets/img/posteres/' | append: poster.id | append: '.webp' | relative_url }}" type="image/webp">
+              <img
+                src="{{ '/assets/img/posteres/' | append: poster.id | append: '.jpg' | relative_url }}"
+                alt="Poster: {% if poster.titulo_en and poster.titulo_en != '' %}{{ poster.titulo_en }}{% else %}{{ poster.titulo }}{% endif %}"
+                class="poster-card-img"
+                width="600" height="800"
+                loading="lazy"
+                decoding="async">
+            </picture>
           </button>
           <div class="poster-card-badge" aria-hidden="true">{{ poster.total_racas }} breeds</div>
         </div>

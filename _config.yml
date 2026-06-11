@@ -25,6 +25,10 @@ defaults:
     values:
       layout: null
 
+# CSS minificado (style.scss → style.css comprimido)
+sass:
+  style: compressed
+
 # Plugins (permitidos pelo GitHub Pages)
 plugins:
   - jekyll-seo-tag
