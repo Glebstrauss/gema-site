@@ -71,14 +71,14 @@ alt_url: /premios.html
      data-label="awards" data-of="of">
     {{ site.data.premios.items | size }} awards
   </p>
-</div>
 
-<nav class="premio-year-nav" aria-label="Browse by award year" id="premio-year-nav">
-  {% for ano in anos_premios %}
-  {% assign n_ano = site.data.premios.items | where: "ano", ano | size %}
-  <a href="#premio-{{ ano }}" class="pub-year-btn">{{ ano }}<span class="pub-year-count"> ({{ n_ano }})</span></a>
-  {% endfor %}
-</nav>
+  <nav class="pub-year-nav" aria-label="Browse by award year" id="premio-year-nav">
+    {% for ano in anos_premios %}
+    {% assign n_ano = site.data.premios.items | where: "ano", ano | size %}
+    <a href="#premio-{{ ano }}" class="pub-year-btn">{{ ano }}<span class="pub-year-count"> ({{ n_ano }})</span></a>
+    {% endfor %}
+  </nav>
+</div>
 
 {% for ano in anos_premios %}
   {% assign premios_ano = site.data.premios.items | where: "ano", ano %}

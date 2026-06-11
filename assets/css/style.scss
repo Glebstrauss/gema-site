@@ -244,16 +244,9 @@ section[id]{scroll-margin-top:84px}
 /* esconde coluna de ano redundante dentro dos grupos de ano */
 .pub-year-group .pub-item .pub-year{display:none}
 
-/* ── navegação por ano de prêmios ────────────────────────────────────────── */
-.premio-year-nav{display:flex;flex-wrap:wrap;gap:.5rem;padding:1rem 3rem;background:var(--branco);border-bottom:1px solid var(--borda);position:sticky;top:68px;z-index:80}
-.premio-year-nav .pub-year-btn{border-color:rgba(28,78,221,.25);color:var(--azul)}
-.premio-year-nav .pub-year-btn:hover{background:var(--azul-claro);border-color:var(--azul)}
+/* contagem por ano nos botões (usada em publicações e prêmios) */
 .pub-year-count{font-size:.72em;opacity:.6;font-family:'DM Sans',sans-serif}
-.premio-year-nav .pub-year-btn.is-active{background:var(--azul);color:#fff;border-color:var(--azul)}
-@media(max-width:600px){
-  .premio-year-nav{padding:.6rem 1.25rem;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:.4rem}
-  .premio-year-nav::-webkit-scrollbar{display:none}
-}
+/* (prêmios agora usa .pub-year-nav — mesma navegação por ano de publicações) */
 
 /* ── barra de stats de prêmios ───────────────────────────────────────────── */
 .premios-statsbar{background:var(--cinza-claro);border-bottom:1px solid var(--borda);padding:.1rem 0}
@@ -325,7 +318,7 @@ section[id]{scroll-margin-top:84px}
 @media print{
   nav,footer,.pub-filter-bar,.pub-year-nav,.back-to-top,
   .btn-primary,.btn-outline,.pub-print-btn,.linha-deco,.page-hero .hero-actions,
-  .skip-link,.pub-citar,.hero-actions,.premio-year-nav,
+  .skip-link,.pub-citar,.hero-actions,
   .premios-statsbar,.pub-statsbar,.section-join,.noticia-link-btn{display:none !important}
   body{font-size:10.5pt;color:#000;background:#fff}
   .page-hero{padding:1rem 0;background:#fff !important;border:none !important;color:#000 !important}
@@ -445,13 +438,12 @@ html.dark .pub-item,html.dark .pub-item:first-child{border-color:rgba(85,120,232
 
 /* botões-pílula (ano, filtro, reset, outline) */
 html.dark .pub-year-btn,
-html.dark .premio-year-nav .pub-year-btn,
 html.dark .pub-reset,
 html.dark .btn-outline{color:var(--azul-mid);border-color:rgba(85,120,232,.45)}
-html.dark .pub-year-btn:hover,html.dark .premio-year-nav .pub-year-btn:hover{background:rgba(85,120,232,.14);border-color:var(--azul-mid)}
+html.dark .pub-year-btn:hover{background:rgba(85,120,232,.14);border-color:var(--azul-mid)}
 html.dark .pub-reset:hover{background:rgba(85,120,232,.14)}
 html.dark .btn-outline:hover{border-color:var(--azul-mid);background:rgba(85,120,232,.12)}
-html.dark .pub-year-btn.is-active,html.dark .premio-year-nav .pub-year-btn.is-active{background:var(--azul);color:#fff;border-color:var(--azul)}
+html.dark .pub-year-btn.is-active{background:var(--azul);color:#fff;border-color:var(--azul)}
 html.dark .pub-filter-btn:not(.is-active){color:var(--azul-mid);border-color:rgba(85,120,232,.45)}
 html.dark .pub-filter-btn.pub-badge--q2:not(.is-active){color:#5fc9c0;border-color:rgba(0,140,130,.45)}
 html.dark .pub-filter-btn.pub-badge--q3:not(.is-active){color:#d3b35c;border-color:rgba(200,160,40,.4)}
@@ -715,7 +707,7 @@ body.nav-open .nav-hamburger span:nth-child(3){transform:translateY(-7px) rotate
   .btn-outline,.pub-filter-btn,.pub-print-btn,.pub-reset,.pub-citar{border-width:2px !important}
   .prof-card,.noticia-card,.noticia-mini,.linha-card,.premio-card{border-width:2px}
   .pub-search{border-width:2px}
-  .pub-year-btn,.pub-year-nav,.premio-year-nav{border-width:2px}
+  .pub-year-btn,.pub-year-nav{border-width:2px}
   .tag{border:1px solid rgba(28,78,221,.45)}
   .nav-links a{color:var(--preto)}
   .nav-links a.ativa{color:var(--azul)}
@@ -733,8 +725,7 @@ body.nav-open .nav-hamburger span:nth-child(3){transform:translateY(-7px) rotate
 
 /* ── alvos de toque ≥44px só em telas de toque (desktop intocado) ─────────── */
 @media(pointer:coarse){
-  .pub-year-btn,.pub-filter-btn,.pub-doi,.pub-citar,.pub-reset,
-  .premio-year-nav .pub-year-btn{min-height:44px;display:inline-flex;align-items:center}
+  .pub-year-btn,.pub-filter-btn,.pub-doi,.pub-citar,.pub-reset{min-height:44px;display:inline-flex;align-items:center}
   .nav-lang,#nav-theme-btn{min-width:44px;min-height:44px}
   .poster-btn{min-height:40px}
 }

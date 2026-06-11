@@ -70,14 +70,14 @@ alt_url: /en/awards.html
      data-label="prêmios" data-of="de">
     {{ site.data.premios.items | size }} prêmios
   </p>
-</div>
 
-<nav class="premio-year-nav" aria-label="Navegar por ano de prêmio" id="premio-year-nav">
-  {% for ano in anos_premios %}
-  {% assign n_ano = site.data.premios.items | where: "ano", ano | size %}
-  <a href="#premio-{{ ano }}" class="pub-year-btn">{{ ano }}<span class="pub-year-count"> ({{ n_ano }})</span></a>
-  {% endfor %}
-</nav>
+  <nav class="pub-year-nav" aria-label="Navegar por ano de prêmio" id="premio-year-nav">
+    {% for ano in anos_premios %}
+    {% assign n_ano = site.data.premios.items | where: "ano", ano | size %}
+    <a href="#premio-{{ ano }}" class="pub-year-btn">{{ ano }}<span class="pub-year-count"> ({{ n_ano }})</span></a>
+    {% endfor %}
+  </nav>
+</div>
 
 {% for ano in anos_premios %}
   {% assign premios_ano = site.data.premios.items | where: "ano", ano %}
