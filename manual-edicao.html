@@ -19,7 +19,9 @@ sitemap: false
     <div class="section-label">Visão geral</div>
     <div class="divider"></div>
     <h2 class="section-title">O que você pode editar</h2>
-    <p class="section-desc">Tudo é feito no painel <a class="manual-link" href="{{ '/admin/' | relative_url }}">{{ site.url }}{{ site.baseurl }}/admin/</a>. Nele aparecem as seções:</p>
+    <p class="section-desc">Tudo é feito pelo painel de edição. Guarde um único endereço — ele leva direto ao painel:</p>
+    <p class="manual-endereco"><a class="manual-link" href="{{ '/editar/' | relative_url }}">{{ site.url }}{{ site.baseurl }}/editar</a></p>
+    <p class="section-desc">No painel aparecem as seções:</p>
     <ul class="manual-lista">
       <li>👨‍🏫 <strong>Professores</strong> — membros da equipe, com foto, Lattes e áreas de pesquisa</li>
       <li>📄 <strong>Publicações</strong> — artigos científicos, com Qualis e DOI</li>
@@ -97,6 +99,8 @@ sitemap: false
 </section>
 
 <style>
+.manual-endereco{font-size:1.15rem;margin:-1.5rem 0 1.75rem;padding:.85rem 1.5rem;background:var(--azul-claro);border:1px solid var(--borda);border-radius:12px;display:inline-block;font-family:monospace}
+html.dark .manual-endereco{background:rgba(85,120,232,.1)}
 .manual-link{color:var(--azul);font-weight:500;text-decoration:none}
 .manual-link:hover{text-decoration:underline}
 html.dark .manual-link{color:var(--azul-mid)}

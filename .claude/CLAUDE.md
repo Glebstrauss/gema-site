@@ -31,6 +31,7 @@ premios.html                 # Stats bar + cards por ano
 noticias.html                # Destaque + lista
 posteres.html                # Catálogo de pôsteres (CSS próprio no <style> da página; lightbox <dialog>)
 manual-edicao.html           # Guia de edição para a equipe (painel + token)
+editar.html                  # /editar → redireciona ao painel (endereço memorável da equipe)
 feed.xml                     # RSS das notícias (gerado de _data/noticias.yml)
 assets/fonts/                # 3 woff2 variáveis auto-hospedadas (DM Sans, Playfair)
 404.html                     # Página de erro personalizada

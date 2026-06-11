@@ -32,7 +32,7 @@ bundle exec jekyll serve --baseurl "" --livereload
 
 ## Edição de conteúdo
 
-**Para a equipe (sem GitHub):** acesse `/admin/`, entre com token e edite pelo painel — passo a passo em `/manual-edicao.html`. Fotos enviadas pelo painel são convertidas para WebP e redimensionadas automaticamente.
+**Para a equipe (sem GitHub):** acesse **`/editar`** (redireciona ao painel), entre com token e edite — passo a passo em `/manual-edicao.html`. Fotos enviadas pelo painel são convertidas para WebP e redimensionadas automaticamente.
 
 Para quem prefere editar os arquivos YAML/Markdown diretamente:
 
