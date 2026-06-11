@@ -98,6 +98,28 @@ Versão em inglês sem plugins (o builder do Pages não permite jekyll-polyglot)
 - ✅ Campos `_en` adicionados ao painel Sveltia, todos opcionais
 - ✅ Corrige de quebra um campo `qualis` duplicado que havia no CMS
 
+## Sexta rodada — performance, estrutura e experiência multi-dispositivo (jun/2026)
+
+**P0 — Performance** (pesos medidos no ar antes/depois):
+- ✅ logo-gema.svg via svgo: 57KB → 37KB (carrega em todas as páginas)
+- ✅ Fotos da equipe 480px → 176px (88px @2x): ~460KB → 132KB
+- ✅ Pôsteres em WebP (~−60%) com `<picture>` + fallback JPEG e `width`/`height` (sem layout shift)
+- ✅ CSS minificado via Sass (`style.scss`, saída comprimida): 45,8KB → 38KB
+
+**P1 — Estrutural** (paga a dívida da i18n por cópia):
+- ✅ CSS de pôsteres e notícias movido para a folha única cacheada (HTML de pôsteres 41KB → 35KB)
+- ✅ Lightbox e modal extraídos para `/assets/js/*.js`, textos via `data-*` no `<dialog>` — lógica única para PT e EN
+- ✅ 404 bilíngue (detecta `/en/` no caminho)
+
+**P2 — Experiência por dispositivo:**
+- ✅ Hambúrguer a 720px (5 links + idioma + tema apertavam em 600–720px)
+- ✅ Pacote iOS: busca 16px no mobile (sem auto-zoom), hero `100svh` (sem pulo da barra), `safe-area` no voltar-ao-topo
+- ✅ Alvos de toque ≥44px só em `(pointer:coarse)`
+- ✅ Web App Manifest + ícones 192/512; letreiro pausa fora da viewport
+
+**P3 — Guardas:**
+- ✅ Hook `pre-push` (`.githooks/pre-push`): build do Jekyll + bloqueio de Liquid literal em `.md` não-excluído — torna o incidente do PLANO estruturalmente impossível. Ativar: `git config core.hooksPath .githooks`
+
 ## Próximos passos sugeridos
 
 - Traduzir o conteúdo dos dados para inglês preenchendo os campos `_en` no painel (hoje caem no fallback PT)

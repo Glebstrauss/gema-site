@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# Guarda de pré-push do gema-site.
+# Ativar uma vez: git config core.hooksPath .githooks
+#
+# 1) Bloqueia tag Liquid literal ({% %} ou {{ }}) em .md versionado fora de
+#    .claude/ — foi exatamente isso que derrubou o build do Pages por ~14h
+#    (o builder clássico processa Markdown sem front matter com Liquid).
+# 2) Roda o build do Jekyll e aborta o push se ele falhar.
+set -euo pipefail
+
+red()  { printf '\033[31m%s\033[0m\n' "$1"; }
+grn()  { printf '\033[32m%s\033[0m\n' "$1"; }
+
+echo "→ pre-push: procurando Liquid literal em Markdown…"
+# Só importam os .md que o Jekyll de fato processa: ignora .claude/ (instruções
+# do agente) e os arquivos listados no exclude: do _config.yml (não vão ao build).
+is_excluded() {
+  awk '/^exclude:/{f=1;next} f&&/^[a-zA-Z]/{f=0} f&&/^[[:space:]]*-/{gsub(/[[:space:]"-]/,"");print}' _config.yml \
+    | grep -Fxq "$1"
+}
+mapfile -t MD < <(git ls-files '*.md' ':!:.claude/**')
+offenders=""
+for f in "${MD[@]}"; do
+  [ -f "$f" ] || continue
+  is_excluded "$f" && continue
+  if grep -nE '\{%|\{\{' "$f" >/dev/null 2>&1; then
+    offenders+="  $f"$'\n'$(grep -nE '\{%|\{\{' "$f" | sed 's/^/    /')$'\n'
+  fi
+done
+if [ -n "$offenders" ]; then
+  red "✗ Liquid literal encontrado em Markdown (quebra o build do GitHub Pages):"
+  printf '%s\n' "$offenders"
+  red "  Reescreva sem {% %}/{{ }} ou adicione o arquivo ao exclude do _config.yml."
+  exit 1
+fi
+grn "✓ Sem Liquid literal em Markdown."
+
+echo "→ pre-push: build do Jekyll…"
+# Prefere o Ruby do Homebrew (o do sistema costuma ser antigo demais p/ Jekyll 4)
+BUNDLE=""
+for cand in /opt/homebrew/opt/ruby/bin/bundle "$(command -v bundle 2>/dev/null || true)"; do
+  if [ -n "$cand" ] && [ -x "$cand" ]; then BUNDLE="$cand"; break; fi
+done
+if [ -n "$BUNDLE" ]; then
+  if ! "$BUNDLE" exec jekyll build --quiet; then
+    red "✗ Build do Jekyll falhou — push abortado."
+    exit 1
+  fi
+  grn "✓ Build do Jekyll OK."
+else
+  echo "  (bundle não encontrado — pulando build; instale para a verificação completa)"
+fi
+
+grn "✓ pre-push OK."

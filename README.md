@@ -30,6 +30,15 @@ bundle exec jekyll serve --baseurl "" --livereload
 # http://localhost:4000
 ```
 
+### Guarda de pré-push (recomendado)
+
+Ative uma vez por clone para validar o build e bloquear Liquid literal em
+Markdown (o que já derrubou o deploy do GitHub Pages):
+
+```bash
+git config core.hooksPath .githooks
+```
+
 ## Edição de conteúdo
 
 **Para a equipe (sem GitHub):** acesse **`/editar`** (redireciona ao painel), entre com token e edite — passo a passo em `/manual-edicao.html`. Fotos enviadas pelo painel são convertidas para WebP e redimensionadas automaticamente.
