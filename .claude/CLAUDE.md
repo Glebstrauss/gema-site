@@ -21,6 +21,7 @@ _data/
 assets/css/style.scss        # CSS único minificado (Sass compressed) — :root + html.dark + CSS de pôsteres/notícias
 assets/js/                   # JS compartilhado PT/EN: poster-lightbox.js, noticia-modal.js (textos via data-*)
 .githooks/pre-push           # Guarda: build + bloqueia Liquid literal em .md (ativar: git config core.hooksPath .githooks)
+scripts/aplicar-marca-dagua.sh # Marca d'água GEMA·UFBA em pôster novo (rodar 1x por imagem; gera o .webp junto)
 assets/img/professores/      # Fotos dos professores
 assets/img/posteres/         # Miniaturas dos pôsteres (<id>.jpg)
 logo/logo-gema.svg           # Logo oficial

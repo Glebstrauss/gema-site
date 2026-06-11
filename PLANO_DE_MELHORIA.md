@@ -120,6 +120,12 @@ Versão em inglês sem plugins (o builder do Pages não permite jekyll-polyglot)
 **P3 — Guardas:**
 - ✅ Hook `pre-push` (`.githooks/pre-push`): build do Jekyll + bloqueio de Liquid literal em `.md` não-excluído — torna o incidente do PLANO estruturalmente impossível. Ativar: `git config core.hooksPath .githooks`
 
+## Marca d'água nos pôsteres (jun/2026)
+
+- ✅ Padrão diagonal "GEMA · UFBA" (azul da marca, 17%, escalonado) gravado **nos próprios arquivos** servidos (JPEG e WebP) — aparece em screenshot, clique-direito-salvar e acesso direto à URL; o preview continua apresentável, mas a impressão fica inutilizada
+- ✅ Script repetível `scripts/aplicar-marca-dagua.sh` para pôsteres futuros (aplicar **uma única vez** por imagem; regenera o .webp junto)
+- ℹ Originais limpos: histórico do git (até o commit anterior à marca) e os PDFs-fonte do grupo
+
 ## Próximos passos sugeridos
 
 - Traduzir o conteúdo dos dados para inglês preenchendo os campos `_en` no painel (hoje caem no fallback PT)
