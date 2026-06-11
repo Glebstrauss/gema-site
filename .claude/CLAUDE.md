@@ -18,7 +18,9 @@ _data/
   premios.yml                # Lista de prêmios e distinções
   noticias.yml               # Lista de notícias
   posteres.yml               # Catálogo de pôsteres de raças nativas
-assets/css/style.css         # CSS único — ~620 linhas, variáveis em :root + bloco html.dark
+assets/css/style.scss        # CSS único minificado (Sass compressed) — :root + html.dark + CSS de pôsteres/notícias
+assets/js/                   # JS compartilhado PT/EN: poster-lightbox.js, noticia-modal.js (textos via data-*)
+.githooks/pre-push           # Guarda: build + bloqueia Liquid literal em .md (ativar: git config core.hooksPath .githooks)
 assets/img/professores/      # Fotos dos professores
 assets/img/posteres/         # Miniaturas dos pôsteres (<id>.jpg)
 logo/logo-gema.svg           # Logo oficial
