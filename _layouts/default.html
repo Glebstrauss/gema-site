@@ -42,6 +42,7 @@
 <link rel="icon" href="{{ '/logo/favicon-32.png' | relative_url }}?v=3" type="image/png" sizes="32x32">
 <link rel="icon" href="{{ '/logo/favicon-48.png' | relative_url }}?v=3" type="image/png" sizes="48x48">
 <link rel="apple-touch-icon" href="{{ '/logo/favicon-192.png' | relative_url }}?v=3" sizes="192x192">
+<link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
 <link rel="sitemap" type="application/xml" href="{{ '/sitemap.xml' | relative_url }}">
 <link rel="alternate" type="application/rss+xml" title="Notícias do GEMA" href="{{ '/feed.xml' | relative_url }}">
 <meta name="theme-color" content="#1C4EDD" media="(prefers-color-scheme: light)">
@@ -221,6 +222,17 @@
     var reducedMotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
   });
+})();
+
+// ── Pausa o letreiro fora da viewport (economia de bateria/CPU) ─────────────
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  var marquee = document.querySelector('.linha-inner');
+  if (!marquee) return;
+  var obs = new IntersectionObserver(function (entries) {
+    marquee.style.animationPlayState = entries[0].isIntersecting ? 'running' : 'paused';
+  }, { threshold: 0 });
+  obs.observe(marquee);
 })();
 
 // ── Animações de entrada (IntersectionObserver) ────────────────────────────

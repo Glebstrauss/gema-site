@@ -30,7 +30,7 @@ body > nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-it
 
 /* hero wrapper + section */
 .hero-wrapper{max-width:1200px;margin:0 auto}
-#inicio{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;padding:8rem 3rem 4rem;min-height:100vh}
+#inicio{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;padding:8rem 3rem 4rem;min-height:100vh;min-height:100svh}
 
 /* hero da home */
 .hero-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);border:1px solid rgba(28,78,221,0.25);padding:.35rem .9rem;border-radius:100px;margin-bottom:1.5rem}
@@ -192,7 +192,7 @@ footer{background:var(--preto);padding:4.5rem 3rem 2rem}
 .footer-bottom a{color:var(--azul-mid);text-decoration:none}
 
 /* ── voltar ao topo ─────────────────────────────────────────────────────── */
-.back-to-top{position:fixed;bottom:1.75rem;right:1.75rem;width:44px;height:44px;border-radius:50%;background:var(--azul);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity .25s,transform .25s,background .2s;z-index:200;box-shadow:0 4px 18px rgba(28,78,221,.3)}
+.back-to-top{position:fixed;bottom:1.75rem;right:1.75rem;bottom:calc(1.75rem + env(safe-area-inset-bottom));width:44px;height:44px;border-radius:50%;background:var(--azul);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity .25s,transform .25s,background .2s;z-index:200;box-shadow:0 4px 18px rgba(28,78,221,.3)}
 .back-to-top.visible{opacity:1;transform:translateY(0)}
 .back-to-top:hover{background:var(--azul-escuro)}
 .back-to-top:focus-visible{outline:2px solid var(--azul);outline-offset:4px;border-radius:50%}
@@ -409,10 +409,7 @@ html.dark .nav-logo img,html.dark .hero-logo-svg{filter:invert(1) hue-rotate(180
   .nav-right{gap:1rem}
 }
 
-/* mobile nav overlay */
-@media(max-width:600px){
-  html.dark .nav-links{background:rgba(13,13,24,.97);box-shadow:0 8px 24px rgba(0,0,0,.5)}
-}
+/* (overlay dark do menu mobile movido para o bloco @media 720px) */
 
 /* contraste: --azul (#1C4EDD) sobre fundo escuro falha WCAG AA (~2.4:1);
    --azul-mid (#5578e8) sobre #0d0d18 / #14141f atinge 5:1 / 4.7:1 ✓ */
@@ -647,11 +644,10 @@ body.nav-open .nav-hamburger span:nth-child(3){transform:translateY(-7px) rotate
   .footer-bottom{flex-direction:column;gap:.5rem;text-align:center}
 }
 
-/* ── responsivo 600px (mobile) ───────────────────────────────────────────── */
-@media(max-width:600px){
+/* ── nav vira menu dropdown a partir de 720px ────────────────────────────── */
+/* (5 links + idioma + tema apertavam entre 600–720px; hambúrguer entra antes) */
+@media(max-width:720px){
   body > nav{padding:0 1.25rem}
-
-  /* hamburger visível, links viram menu dropdown */
   .nav-hamburger{display:flex}
   .nav-links{
     display:none;
@@ -671,7 +667,11 @@ body.nav-open .nav-hamburger span:nth-child(3){transform:translateY(-7px) rotate
   .nav-links li:last-child{border-bottom:none}
   .nav-links a{display:block;padding:.9rem 0;font-size:1rem;color:var(--preto);font-weight:400}
   .nav-links a.ativa{color:var(--azul)}
+  html.dark .nav-links{background:rgba(13,13,24,.97);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+}
 
+/* ── responsivo 600px (mobile) ───────────────────────────────────────────── */
+@media(max-width:600px){
   section{padding:4rem 1.25rem}
   #inicio{padding:7rem 1.25rem 3rem}
   .page-hero{padding:5.5rem 1.25rem 2.5rem}
@@ -723,4 +723,18 @@ body.nav-open .nav-hamburger span:nth-child(3){transform:translateY(-7px) rotate
   html.dark{--borda:rgba(85,120,232,.55);--cinza:#d0d0da}
   html.dark .nav-links a.ativa{color:var(--azul-mid)}
   html.dark .tag{border-color:rgba(85,120,232,.55)}
+}
+
+/* ── experiência mobile / iOS ────────────────────────────────────────────── */
+@media(max-width:600px){
+  /* iOS dá zoom automático ao focar input com fonte < 16px */
+  .pub-search{font-size:16px}
+}
+
+/* ── alvos de toque ≥44px só em telas de toque (desktop intocado) ─────────── */
+@media(pointer:coarse){
+  .pub-year-btn,.pub-filter-btn,.pub-doi,.pub-citar,.pub-reset,
+  .premio-year-nav .pub-year-btn{min-height:44px;display:inline-flex;align-items:center}
+  .nav-lang,#nav-theme-btn{min-width:44px;min-height:44px}
+  .poster-btn{min-height:40px}
 }

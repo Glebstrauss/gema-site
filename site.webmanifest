@@ -1,0 +1,20 @@
+---
+layout: null
+permalink: /site.webmanifest
+sitemap: false
+---
+{
+  "name": "GEMA — Grupo de Estudos em Melhoramento Animal",
+  "short_name": "GEMA",
+  "description": "Genética quantitativa, genômica e melhoramento de equídeos brasileiros. EMEVZ · UFBA.",
+  "lang": "pt-BR",
+  "start_url": "{{ '/' | relative_url }}",
+  "scope": "{{ site.baseurl }}/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1C4EDD",
+  "icons": [
+    { "src": "{{ '/logo/icon-192.png' | relative_url }}", "sizes": "192x192", "type": "image/png" },
+    { "src": "{{ '/logo/icon-512.png' | relative_url }}", "sizes": "512x512", "type": "image/png" }
+  ]
+}
