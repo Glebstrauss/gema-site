@@ -69,9 +69,22 @@ Auditoria e plano executados em **junho/2026** sobre o site original (`site_gema
 ## Quarta rodada — publicações e robustez (jun/2026)
 
 - ✅ Badges e filtro **Qualis** restaurados em Publicações como melhoria progressiva: aparecem automaticamente quando o campo for preenchido pelo painel (hoje, com todos vazios, nenhuma UI morta é exibida)
-- ✅ Condicionais nil-safe em todo conteúdo gerenciado pelo painel (`{% if campo and campo != "" %}`): DOI, links de notícia, preço/link de pôster, foto/Lattes/e-mail de professor — o Sveltia pode omitir campos opcionais e `nil != ""` é verdadeiro no Liquid
+- ✅ Condicionais nil-safe em todo conteúdo gerenciado pelo painel (padrão Liquid `if campo and campo != ""`, sem aceitar nil): DOI, links de notícia, preço/link de pôster, foto/Lattes/e-mail de professor — o Sveltia pode omitir campos opcionais e `nil != ""` é verdadeiro no Liquid
 - ✅ Contato de pedidos de pôster trocado para o e-mail institucional do grupo (gerencia.gemaufba@gmail.com), o mesmo da seção "Faça parte"
 - ✅ `width/height` corretos (88px) nas fotos dos cards de professor
+
+## Incidente de deploy — 10–11/jun/2026 (resolvido)
+
+O deploy do commit da quarta rodada ficou 14 h travado. Causa-raiz: o builder clássico do
+GitHub Pages ativa o plugin `jekyll-optional-front-matter`, que processa arquivos Markdown
+**sem** front matter — algo que o Jekyll 4 local não faz. Este arquivo continha, como texto
+de documentação, um trecho literal de tag Liquid de abertura sem fechamento, e o parser do
+builder falhava com o genérico "Page build failed." (duas falhas e um build zumbi de 14 h).
+Diagnóstico por bissecção de branches (`estavel` no último commit bom + reaplicação de
+arquivos um a um). Correções: trecho reescrito sem delimitadores Liquid e exclusão de
+`README.md`/`PLANO_DE_MELHORIA.md` do build no `_config.yml` — mesmo motivo pelo qual
+`IMPLEMENTACAO.md` já estava excluído. **Lição: nunca escrever delimitadores Liquid
+literais em Markdown versionado fora de `.claude/`.**
 
 ## Próximos passos sugeridos
 

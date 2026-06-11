@@ -31,10 +31,14 @@ plugins:
   - jekyll-sitemap
 
 # Excluir do build
+# (docs .md ficam fora: o builder do GitHub Pages ativa jekyll-optional-front-matter
+#  e processaria o Markdown com Liquid — texto com tag literal quebra o build)
 exclude:
   - Gemfile
   - Gemfile.lock
   - IMPLEMENTACAO.md
+  - PLANO_DE_MELHORIA.md
+  - README.md
   - "*.sh"
   - .bundle/
   - vendor/
