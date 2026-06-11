@@ -512,6 +512,109 @@ html.dark .home-nav-card:hover{border-color:rgba(85,120,232,.45)}
 html.dark .linha-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.5)}
 html.dark .poster-card:hover{box-shadow:0 16px 48px rgba(0,0,0,.5)}
 
+/* ══ PÔSTERES (PT /posteres + EN /en/posters) ════════════════════════════════ */
+.poster-infobar{background:var(--azul-claro);border-top:1px solid var(--borda);border-bottom:1px solid var(--borda);padding:.9rem 3rem}
+.poster-infobar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.poster-info-item{display:flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:500;color:var(--azul-escuro);padding:.3rem 2rem .3rem 0}
+.poster-info-item svg{flex-shrink:0;opacity:.7}
+.poster-info-sep{width:1px;height:1.25rem;background:var(--borda);margin-right:2rem;flex-shrink:0}
+.poster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;margin-top:2rem}
+.poster-card{background:var(--branco);border:1px solid var(--borda);border-radius:20px;overflow:hidden;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
+.poster-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(28,78,221,.1)}
+.poster-card-img-wrap{position:relative;overflow:hidden;background:#f8f8f6;aspect-ratio:3/4}
+.poster-card-img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .35s ease;display:block}
+.poster-card:hover .poster-card-img{transform:scale(1.03)}
+.poster-card-badge{position:absolute;bottom:.75rem;right:.75rem;background:var(--azul);color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.04em;padding:.25rem .7rem;border-radius:100px}
+.poster-card-body{padding:1.25rem 1.25rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.poster-card-grupo{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);display:flex;align-items:center;gap:.35rem}
+.poster-card-titulo{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:600;color:var(--preto);line-height:1.35}
+.poster-card-racas{font-size:.72rem;color:var(--cinza);line-height:1.6;flex:1}
+.poster-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--borda);gap:.5rem}
+.poster-preco-valor{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:var(--preto)}
+.poster-preco-placeholder{font-size:.78rem;color:var(--cinza);font-style:italic}
+.poster-btn{display:inline-flex;align-items:center;background:var(--azul);color:#fff;text-decoration:none;padding:.45rem 1rem;border-radius:100px;font-size:.78rem;font-weight:500;white-space:nowrap;transition:background .2s;border:none;cursor:pointer;font-family:inherit}
+.poster-btn:hover{background:var(--azul-escuro)}
+.poster-como-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.poster-como-card{background:var(--cinza-claro);border-radius:16px;padding:2rem;border:1px solid var(--borda)}
+.poster-como-icon{width:48px;height:48px;background:var(--azul-claro);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--azul);margin-bottom:1rem}
+.poster-como-titulo{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:var(--preto);margin-bottom:.5rem}
+.poster-como-desc{font-size:.875rem;color:var(--cinza);line-height:1.65}
+.poster-contato-box{margin-top:2.5rem;background:var(--azul-claro);border:1px solid var(--borda);border-radius:16px;padding:1.75rem 2rem;display:flex;flex-wrap:wrap;gap:2rem;align-items:center}
+.poster-contato-label{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);margin-bottom:.3rem}
+.poster-contato-email{font-size:.95rem;font-weight:500;color:var(--preto);text-decoration:none}
+.poster-contato-email:hover{color:var(--azul);text-decoration:underline}
+.poster-pix-chave{font-size:.95rem;font-weight:500;color:var(--preto);font-family:monospace}
+.poster-zoom{display:block;width:100%;height:100%;padding:0;border:none;background:none;cursor:zoom-in;font:inherit}
+.poster-dialog{margin:auto;border:none;border-radius:16px;padding:0;background:var(--branco);max-width:min(92vw,620px);box-shadow:0 24px 80px rgba(0,0,0,.4);overflow:visible}
+.poster-dialog::backdrop{background:rgba(8,10,22,.78);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.poster-dialog-img{display:block;width:auto;height:auto;max-width:100%;max-height:85vh;border-radius:16px}
+.poster-dialog-close{position:absolute;top:.6rem;right:.6rem;width:38px;height:38px;border-radius:50%;border:none;background:rgba(13,13,24,.55);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.poster-dialog-close:hover{background:rgba(13,13,24,.85)}
+html.dark .poster-dialog{background:#14141f}
+html.dark .poster-card-img-wrap{background:#1a1a26}
+html.dark .poster-info-item{color:var(--azul-mid)}
+html.dark .poster-infobar,
+html.dark .poster-contato-box{background:rgba(85,120,232,.08)}
+html.dark .poster-contato-label,
+html.dark .poster-card-grupo{color:var(--azul-mid)}
+@media(max-width:900px){
+  .poster-como-grid{grid-template-columns:1fr}
+  .poster-infobar{padding:.75rem 1.5rem}
+  .poster-info-sep{display:none}
+  .poster-info-item{padding:.25rem 1rem .25rem 0}
+}
+@media(max-width:600px){
+  .poster-infobar{padding:.6rem 1.25rem}
+  .poster-grid{grid-template-columns:repeat(2,1fr);gap:1rem}
+  .poster-card-body{padding:1rem}
+  .poster-card-titulo{font-size:.85rem}
+  .poster-card-racas{display:none}
+  .poster-contato-box{flex-direction:column;gap:1.25rem;padding:1.25rem}
+}
+@media(max-width:380px){
+  .poster-grid{grid-template-columns:1fr}
+}
+
+/* ══ NOTÍCIAS — cards clicáveis + modal (PT /noticias + EN /en/news) ═════════ */
+.noticia-rss{display:inline-flex;align-items:center;gap:.45rem;margin-top:1rem;font-size:.8rem;font-weight:500;color:var(--azul);text-decoration:none;border:1px solid rgba(28,78,221,.3);padding:.35rem 1rem;border-radius:100px;transition:background .15s,border-color .2s}
+.noticia-rss:hover{background:var(--azul-claro);border-color:var(--azul)}
+html.dark .noticia-rss{color:var(--azul-mid);border-color:rgba(85,120,232,.45)}
+html.dark .noticia-rss:hover{background:rgba(85,120,232,.14);border-color:var(--azul-mid)}
+.noticia-mini.noticia-abre-modal,
+.noticia-card.noticia-abre-modal{cursor:pointer;text-align:left;width:100%;background:none;font-family:inherit}
+.noticia-mini.noticia-abre-modal:focus-visible,
+.noticia-card.noticia-abre-modal:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
+html.dark .noticia-mini.noticia-abre-modal:focus-visible,
+html.dark .noticia-card.noticia-abre-modal:focus-visible{outline-color:var(--azul-mid)}
+.noticia-card-hint{font-size:.78rem;color:var(--azul);font-weight:500;margin-top:.25rem;display:block}
+html.dark .noticia-card-hint{color:var(--azul-mid)}
+.noticias-vazio{padding:2.5rem 0;color:var(--cinza);font-size:.95rem}
+.noticia-modal{margin:auto;background:var(--branco);border:none;border-radius:20px;padding:2.5rem;width:min(640px,calc(100vw - 3rem));max-height:85vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.18);color:var(--preto)}
+.noticia-modal[open]{animation:slideModal .2s ease}
+.noticia-modal::backdrop{background:rgba(8,10,22,.5);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+@keyframes slideModal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+html.dark .noticia-modal{box-shadow:0 24px 64px rgba(0,0,0,.6)}
+.noticia-modal-fechar{position:absolute;top:1.25rem;right:1.25rem;background:none;border:1px solid var(--borda);border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--cinza);transition:background .15s,color .15s}
+.noticia-modal-fechar:hover{background:var(--azul-claro);color:var(--azul);border-color:var(--azul)}
+html.dark .noticia-modal-fechar:hover{background:rgba(85,120,232,.14);color:var(--azul-mid);border-color:var(--azul-mid)}
+.noticia-modal-data{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);margin-bottom:.75rem}
+html.dark .noticia-modal-data{color:var(--azul-mid)}
+.noticia-modal-titulo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:var(--preto);line-height:1.3;margin-bottom:1.25rem;padding-right:2rem}
+.noticia-modal-texto{font-size:.95rem;color:var(--cinza);line-height:1.8;white-space:pre-line}
+.noticia-modal-acoes{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin-top:1.5rem}
+.noticia-modal-link{display:inline-flex;align-items:center;gap:.4rem;background:var(--azul);color:#fff;text-decoration:none;padding:.6rem 1.4rem;border-radius:100px;font-size:.85rem;font-weight:500;transition:background .2s}
+.noticia-modal-link:hover{background:var(--azul-escuro)}
+html.dark .noticia-modal-link:hover{background:#3d63e3}
+.noticia-modal-copiar{display:inline-flex;align-items:center;gap:.4rem;background:none;border:1px solid var(--borda);border-radius:100px;padding:.55rem 1.1rem;font-size:.82rem;color:var(--cinza);cursor:pointer;font-family:inherit;transition:color .2s,border-color .2s,background .2s}
+.noticia-modal-copiar:hover{color:var(--azul);border-color:var(--azul)}
+html.dark .noticia-modal-copiar:hover{color:var(--azul-mid);border-color:var(--azul-mid)}
+.noticia-modal-copiar.copiado{color:#0a6b64;border-color:#0a6b64;background:rgba(0,140,130,.07)}
+html.dark .noticia-modal-copiar.copiado{color:#5fc9c0;border-color:#5fc9c0;background:rgba(0,140,130,.12)}
+@media(max-width:600px){
+  .noticia-modal{padding:1.5rem;width:calc(100vw - 2rem)}
+  .noticia-modal-titulo{font-size:1.2rem}
+}
+
 /* ── acessibilidade ──────────────────────────────────────────────────────── */
 .skip-link{position:absolute;top:-48px;left:1rem;background:var(--azul);color:#fff;padding:.5rem 1.25rem;border-radius:0 0 8px 8px;text-decoration:none;font-size:.85rem;font-weight:500;z-index:9999;transition:top .2s}
 .skip-link:focus{top:0}

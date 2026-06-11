@@ -99,7 +99,9 @@ alt_url: /noticias.html
   </div>
 </section>
 
-<dialog class="noticia-modal" id="noticia-modal" aria-labelledby="modal-titulo">
+<dialog class="noticia-modal" id="noticia-modal" aria-labelledby="modal-titulo"
+  data-read-more="Read full report →"
+  data-copy="Copy link" data-copied="Link copied!" data-copy-fail="Could not copy">
   <button class="noticia-modal-fechar" id="modal-fechar" aria-label="Close news">
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
   </button>
@@ -115,114 +117,4 @@ alt_url: /noticias.html
   </div>
 </dialog>
 
-<style>
-.noticia-rss{display:inline-flex;align-items:center;gap:.45rem;margin-top:1rem;font-size:.8rem;font-weight:500;color:var(--azul);text-decoration:none;border:1px solid rgba(28,78,221,.3);padding:.35rem 1rem;border-radius:100px;transition:background .15s,border-color .2s}
-.noticia-rss:hover{background:var(--azul-claro);border-color:var(--azul)}
-html.dark .noticia-rss{color:var(--azul-mid);border-color:rgba(85,120,232,.45)}
-html.dark .noticia-rss:hover{background:rgba(85,120,232,.14);border-color:var(--azul-mid)}
-.noticia-mini.noticia-abre-modal,
-.noticia-card.noticia-abre-modal{cursor:pointer;text-align:left;width:100%;background:none;font-family:inherit}
-.noticia-mini.noticia-abre-modal:focus-visible,
-.noticia-card.noticia-abre-modal:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
-html.dark .noticia-mini.noticia-abre-modal:focus-visible,
-html.dark .noticia-card.noticia-abre-modal:focus-visible{outline-color:var(--azul-mid)}
-.noticia-card-hint{font-size:.78rem;color:var(--azul);font-weight:500;margin-top:.25rem;display:block}
-html.dark .noticia-card-hint{color:var(--azul-mid)}
-.noticias-vazio{padding:2.5rem 0;color:var(--cinza);font-size:.95rem}
-.noticia-modal{margin:auto;background:var(--branco);border:none;border-radius:20px;padding:2.5rem;width:min(640px,calc(100vw - 3rem));max-height:85vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.18);color:var(--preto)}
-.noticia-modal[open]{animation:slideModal .2s ease}
-.noticia-modal::backdrop{background:rgba(8,10,22,.5);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
-@keyframes slideModal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-html.dark .noticia-modal{box-shadow:0 24px 64px rgba(0,0,0,.6)}
-.noticia-modal-fechar{position:absolute;top:1.25rem;right:1.25rem;background:none;border:1px solid var(--borda);border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--cinza);transition:background .15s,color .15s}
-.noticia-modal-fechar:hover{background:var(--azul-claro);color:var(--azul);border-color:var(--azul)}
-html.dark .noticia-modal-fechar:hover{background:rgba(85,120,232,.14);color:var(--azul-mid);border-color:var(--azul-mid)}
-.noticia-modal-data{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);margin-bottom:.75rem}
-html.dark .noticia-modal-data{color:var(--azul-mid)}
-.noticia-modal-titulo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:var(--preto);line-height:1.3;margin-bottom:1.25rem;padding-right:2rem}
-.noticia-modal-texto{font-size:.95rem;color:var(--cinza);line-height:1.8;white-space:pre-line}
-.noticia-modal-acoes{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin-top:1.5rem}
-.noticia-modal-link{display:inline-flex;align-items:center;gap:.4rem;background:var(--azul);color:#fff;text-decoration:none;padding:.6rem 1.4rem;border-radius:100px;font-size:.85rem;font-weight:500;transition:background .2s}
-.noticia-modal-link:hover{background:var(--azul-escuro)}
-html.dark .noticia-modal-link:hover{background:#3d63e3}
-.noticia-modal-copiar{display:inline-flex;align-items:center;gap:.4rem;background:none;border:1px solid var(--borda);border-radius:100px;padding:.55rem 1.1rem;font-size:.82rem;color:var(--cinza);cursor:pointer;font-family:inherit;transition:color .2s,border-color .2s,background .2s}
-.noticia-modal-copiar:hover{color:var(--azul);border-color:var(--azul)}
-html.dark .noticia-modal-copiar:hover{color:var(--azul-mid);border-color:var(--azul-mid)}
-.noticia-modal-copiar.copiado{color:#0a6b64;border-color:#0a6b64;background:rgba(0,140,130,.07)}
-html.dark .noticia-modal-copiar.copiado{color:#5fc9c0;border-color:#5fc9c0;background:rgba(0,140,130,.12)}
-@media(max-width:600px){.noticia-modal{padding:1.5rem;width:calc(100vw - 2rem)}.noticia-modal-titulo{font-size:1.2rem}}
-</style>
-
-<script>
-(function () {
-  var dlg = document.getElementById('noticia-modal');
-  if (!dlg || typeof dlg.showModal !== 'function') return;
-  var elData = document.getElementById('modal-data');
-  var elTitulo = document.getElementById('modal-titulo');
-  var elTexto = document.getElementById('modal-texto');
-  var elLinkWrap = document.getElementById('modal-link-wrap');
-  var btnCopiar = document.getElementById('modal-copiar');
-  var lblCopiar = document.getElementById('modal-copiar-label');
-  var timerCopiar = null;
-
-  function abrirModal(btn) {
-    elData.textContent = btn.dataset.data;
-    elTitulo.textContent = btn.dataset.titulo;
-    elTexto.textContent = btn.dataset.texto;
-    elLinkWrap.innerHTML = '';
-    if (btn.dataset.link) {
-      var a = document.createElement('a');
-      a.href = btn.dataset.link; a.target = '_blank'; a.rel = 'noopener noreferrer';
-      a.className = 'noticia-modal-link';
-      a.textContent = 'Read full report →';
-      elLinkWrap.appendChild(a);
-    }
-    history.replaceState(null, '', '#' + btn.dataset.slug);
-    dlg.showModal();
-    document.body.style.overflow = 'hidden';
-  }
-
-  document.querySelectorAll('.noticia-abre-modal').forEach(function (btn) {
-    btn.addEventListener('click', function () { abrirModal(btn); });
-  });
-
-  document.getElementById('modal-fechar').addEventListener('click', function () { dlg.close(); });
-  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
-  dlg.addEventListener('close', function () {
-    document.body.style.overflow = '';
-    history.replaceState(null, '', window.location.pathname + window.location.search);
-    btnCopiar.classList.remove('copiado');
-    lblCopiar.textContent = 'Copy link';
-  });
-
-  btnCopiar.addEventListener('click', function () {
-    var url = window.location.origin + window.location.pathname + window.location.hash;
-    function feito(ok) {
-      lblCopiar.textContent = ok ? 'Link copied!' : 'Could not copy';
-      btnCopiar.classList.toggle('copiado', ok);
-      clearTimeout(timerCopiar);
-      timerCopiar = setTimeout(function () { lblCopiar.textContent = 'Copy link'; btnCopiar.classList.remove('copiado'); }, 2200);
-    }
-    function copiarFallback() {
-      var ta = document.createElement('textarea');
-      ta.value = url; ta.setAttribute('readonly', '');
-      ta.style.position = 'fixed'; ta.style.opacity = '0';
-      dlg.appendChild(ta); ta.select();
-      var ok = false;
-      try { ok = document.execCommand('copy'); } catch (e) {}
-      ta.remove(); feito(ok);
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(function () { feito(true); }, copiarFallback);
-    } else { copiarFallback(); }
-  });
-
-  if (window.location.hash.length > 1) {
-    var slug = window.location.hash.slice(1);
-    try { slug = decodeURIComponent(slug); } catch (e) {}
-    var alvo = null;
-    try { alvo = document.querySelector('.noticia-abre-modal[data-slug="' + CSS.escape(slug) + '"]'); } catch (e) {}
-    if (alvo) abrirModal(alvo);
-  }
-})();
-</script>
+<script src="{{ '/assets/js/noticia-modal.js' | relative_url }}" defer></script>

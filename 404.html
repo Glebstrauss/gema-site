@@ -8,17 +8,46 @@ permalink: /404.html
 <section style="background:var(--cinza-claro);min-height:70vh;display:flex;align-items:center">
   <div class="container" style="text-align:center;padding:6rem 2rem">
     <div class="notfound-num" aria-hidden="true">404</div>
-    <div class="section-label" style="justify-content:center;display:flex">Página não encontrada</div>
-    <div class="divider" style="margin:1rem auto 1.25rem"></div>
-    <h1 class="page-hero-title" style="margin-bottom:1rem">Essa página <em>não existe</em></h1>
-    <p style="color:var(--cinza);max-width:480px;margin:0 auto 2.5rem;line-height:1.8">
-      O link pode estar desatualizado ou a página foi movida.<br>
-      Use o menu acima para encontrar o que você procura.
-    </p>
-    <div class="hero-actions" style="justify-content:center">
-      <a href="{{ '/' | relative_url }}" class="btn-primary">← Início</a>
-      <a href="{{ '/publicacoes.html' | relative_url }}" class="btn-outline">Publicações</a>
-      <a href="{{ '/professores.html' | relative_url }}" class="btn-outline">Professores</a>
+
+    <div data-nf="pt">
+      <div class="section-label" style="justify-content:center;display:flex">Página não encontrada</div>
+      <div class="divider" style="margin:1rem auto 1.25rem"></div>
+      <h1 class="page-hero-title" style="margin-bottom:1rem">Essa página <em>não existe</em></h1>
+      <p style="color:var(--cinza);max-width:480px;margin:0 auto 2.5rem;line-height:1.8">
+        O link pode estar desatualizado ou a página foi movida.<br>
+        Use o menu acima para encontrar o que você procura.
+      </p>
+      <div class="hero-actions" style="justify-content:center">
+        <a href="{{ '/' | relative_url }}" class="btn-primary">← Início</a>
+        <a href="{{ '/publicacoes.html' | relative_url }}" class="btn-outline">Publicações</a>
+        <a href="{{ '/professores.html' | relative_url }}" class="btn-outline">Professores</a>
+      </div>
+    </div>
+
+    <div data-nf="en" hidden>
+      <div class="section-label" style="justify-content:center;display:flex">Page not found</div>
+      <div class="divider" style="margin:1rem auto 1.25rem"></div>
+      <h1 class="page-hero-title" style="margin-bottom:1rem">This page <em>doesn't exist</em></h1>
+      <p style="color:var(--cinza);max-width:480px;margin:0 auto 2.5rem;line-height:1.8">
+        The link may be outdated or the page was moved.<br>
+        Use the menu above to find what you're looking for.
+      </p>
+      <div class="hero-actions" style="justify-content:center">
+        <a href="{{ '/en/' | relative_url }}" class="btn-primary">← Home</a>
+        <a href="{{ '/en/publications.html' | relative_url }}" class="btn-outline">Publications</a>
+        <a href="{{ '/en/team.html' | relative_url }}" class="btn-outline">Team</a>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+// 404 é servida em qualquer URL inexistente — detecta idioma pelo caminho /en/
+(function () {
+  if (location.pathname.indexOf('{{ site.baseurl }}/en/') === 0 || location.pathname.indexOf('/en/') === 0) {
+    var pt = document.querySelector('[data-nf="pt"]');
+    var en = document.querySelector('[data-nf="en"]');
+    if (pt && en) { pt.hidden = true; en.hidden = false; document.documentElement.lang = 'en'; }
+  }
+})();
+</script>
