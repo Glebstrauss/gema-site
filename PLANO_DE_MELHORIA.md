@@ -86,8 +86,22 @@ arquivos um a um). Correções: trecho reescrito sem delimitadores Liquid e excl
 `IMPLEMENTACAO.md` já estava excluído. **Lição: nunca escrever delimitadores Liquid
 literais em Markdown versionado fora de `.claude/`.**
 
+## Quinta rodada — internacionalização (jun/2026)
+
+Versão em inglês sem plugins (o builder do Pages não permite jekyll-polyglot):
+
+- ✅ Subárvore `/en/` com 6 páginas (home, team, publications, awards, news, posters) e slugs em inglês
+- ✅ Strings de interface centralizadas em `_data/i18n.yml` (pt/en); `_layouts/default.html` parametrizado por `page.lang` — nav, rodapé, aria-labels e rótulos de JS (tema, menu) traduzidos
+- ✅ Alternador de idioma PT/EN na nav, ligando cada página ao seu par via `alt_url`; volta para a home do outro idioma quando não há par
+- ✅ SEO: `hreflang` recíproco, `og:locale`/`og:locale:alternate`, `<html lang>` correto; `/en/` entra no sitemap automaticamente
+- ✅ Dados (notícias, prêmios, pôsteres, professores) reaproveitados com campos opcionais `_en` (`titulo_en`, `texto_en`, `descricao_en`, `cargo_en`, `nome_en`, `grupo_en`) e **fallback honesto** ao português quando vazios
+- ✅ Campos `_en` adicionados ao painel Sveltia, todos opcionais
+- ✅ Corrige de quebra um campo `qualis` duplicado que havia no CMS
+
 ## Próximos passos sugeridos
 
+- Traduzir o conteúdo dos dados para inglês preenchendo os campos `_en` no painel (hoje caem no fallback PT)
+- Traduzir o manual de edição (`/en/manual…`) se a equipe internacional for editar
 - Definir preços reais dos pôsteres em `_data/posteres.yml` (campo `preco`) — editável pelo painel
 - Adicionar chave PIX real na página de pôsteres quando o processo de venda for definido
 - Convidar os professores como colaboradores do repositório (Settings → Collaborators) para o painel funcionar para eles

@@ -1,0 +1,94 @@
+---
+layout: default
+lang: en
+permalink: /en/team.html
+title: "Team"
+description: "Meet the faculty and researchers of GEMA, the animal breeding group at EMEVZ/UFBA"
+alt_url: /professores.html
+---
+
+<header class="page-hero">
+  <div class="container">
+    <div class="section-label">Team</div>
+    <div class="divider"></div>
+    <h1 class="page-hero-title">Faculty & <em>Researchers</em></h1>
+    <p class="page-hero-sub">Researchers devoted to biostatistics applied to genomics, molecular and quantitative genetics, and conservation of domestic animals.</p>
+    {% assign n_doc = site.professores | where: "tipo", "docente" | size %}
+    {% assign n_est = site.professores | where: "tipo", "estudante" | size %}
+    <p class="page-hero-count">{{ n_doc }} faculty · {{ n_est }} graduate student{% if n_est != 1 %}s{% endif %}</p>
+  </div>
+</header>
+
+<section aria-label="Faculty" style="background:var(--cinza-claro)">
+  <div class="container">
+    <div class="section-label">Faculty & Advisors</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Faculty</h2>
+    <div class="prof-grid">
+      {% assign docentes = site.professores | where: "tipo", "docente" | sort: "ordem" %}
+      {% for prof in docentes %}
+        {% include prof-card.html prof=prof lang=page.lang %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% assign estudantes = site.professores | where: "tipo", "estudante" | sort: "ordem" %}
+{% if estudantes.size > 0 %}
+<section aria-label="Graduate students" style="background:var(--branco)">
+  <div class="container">
+    <div class="section-label">Graduate Program</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Students</h2>
+    <div class="prof-grid">
+      {% for prof in estudantes %}
+        {% include prof-card.html prof=prof lang=page.lang %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section id="pesquisa" aria-label="Research lines" style="background:var(--cinza-claro)">
+  <div class="container">
+    <div class="section-label">Research</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Research Lines</h2>
+    <p class="section-desc">Four research lines guide GEMA's investigations, combining quantitative, molecular and conservation methods applied to domestic animals.</p>
+    <div class="linhas-grid">
+      <div class="linha-card">
+        <div class="linha-num" aria-hidden="true">01</div>
+        <div class="linha-titulo">Biostatistics Applied to Genomics</div>
+        <p class="linha-desc">Development and application of biostatistical methods for genomic data analysis and animal evaluation, including mixed models and genomic selection.</p>
+      </div>
+      <div class="linha-card">
+        <div class="linha-num" aria-hidden="true">02</div>
+        <div class="linha-titulo">Molecular Genetics Applied to Breeding</div>
+        <p class="linha-desc">Use of molecular markers, SNP analysis and genomic tools to support animal breeding programs in breeds of zootechnical interest.</p>
+      </div>
+      <div class="linha-card">
+        <div class="linha-num" aria-hidden="true">03</div>
+        <div class="linha-titulo">Quantitative Genetics and Genomics</div>
+        <p class="linha-desc">Estimation of genetic parameters, prediction of breeding values (BLUP/BLUPF90+) and assessment of genetic progress in domestic animal populations.</p>
+      </div>
+      <div class="linha-card">
+        <div class="linha-num" aria-hidden="true">04</div>
+        <div class="linha-titulo">Conservation Genetics</div>
+        <p class="linha-desc">Analysis of genetic diversity, population structure, inbreeding and conservation strategies for locally adapted domestic animal breeds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-join" aria-label="Opportunities" style="background:var(--azul)">
+  <div class="container join-section">
+    <div class="section-label">Opportunities</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Join <em>GEMA</em></h2>
+    <p>The group welcomes undergraduate, master's and doctoral students interested in quantitative genetics, genomics and animal breeding. Learn more about UFBA's Graduate Program in Animal Science.</p>
+    <div class="hero-actions" style="justify-content:center">
+      <a href="https://ppgz.ufba.br" target="_blank" rel="noopener noreferrer" class="btn-join">Visit PPGZ/UFBA →</a>
+      <a href="mailto:gerencia.gemaufba@gmail.com" class="btn-join btn-join--outline">Get in touch</a>
+    </div>
+  </div>
+</section>

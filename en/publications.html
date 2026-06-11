@@ -1,15 +1,16 @@
 ---
 layout: default
-title: "Publicações"
-description: "Produção científica do GEMA em genética quantitativa, genômica e melhoramento de equídeos brasileiros"
-alt_url: /en/publications.html
+lang: en
+permalink: /en/publications.html
+title: "Publications"
+description: "GEMA's scientific output in quantitative genetics, genomics and breeding of Brazilian equids"
+alt_url: /publicacoes.html
 ---
 
 {% assign _pub_anos_asc   = site.data.publicacoes.items | map: "ano" | uniq | sort %}
 {% assign pub_ano_min     = _pub_anos_asc | first %}
 {% assign pub_ano_max     = _pub_anos_asc | last %}
 {% assign pub_periodicos  = site.data.publicacoes.items | map: "periodico" | uniq | size %}
-{% comment %} Qualis preenchidos (o filtro só aparece quando houver ao menos um) {% endcomment %}
 {% assign _q = "" | split: "" %}
 {% for pub in site.data.publicacoes.items %}
   {% if pub.qualis and pub.qualis != "" %}{% assign _q = _q | push: pub.qualis %}{% endif %}
@@ -18,11 +19,11 @@ alt_url: /en/publications.html
 
 <header class="page-hero">
   <div class="container">
-    <div class="section-label">Produção Científica</div>
+    <div class="section-label">Scientific Output</div>
     <div class="divider"></div>
-    <h1 class="page-hero-title">Publicações <em>Científicas</em></h1>
-    <p class="page-hero-sub">Artigos em periódicos nacionais e internacionais em genética quantitativa, genômica e melhoramento de equídeos brasileiros.</p>
-    <p class="page-hero-count">{{ site.data.publicacoes.items | size }} publicações em {{ pub_periodicos }} periódicos</p>
+    <h1 class="page-hero-title"><em>Publications</em></h1>
+    <p class="page-hero-sub">Articles in national and international journals on quantitative genetics, genomics and breeding of Brazilian equids.</p>
+    <p class="page-hero-count">{{ site.data.publicacoes.items | size }} publications in {{ pub_periodicos }} journals</p>
   </div>
 </header>
 
@@ -31,67 +32,64 @@ alt_url: /en/publications.html
     <div class="premios-stats">
       <div class="psi">
         <span class="psi-num">{{ site.data.publicacoes.items | size }}</span>
-        <span class="psi-label">Total de publicações</span>
+        <span class="psi-label">Total publications</span>
       </div>
       <div class="psi-div" aria-hidden="true"></div>
       <div class="psi">
         <span class="psi-num">{{ pub_ano_min }}–{{ pub_ano_max }}</span>
-        <span class="psi-label">Período</span>
+        <span class="psi-label">Period</span>
       </div>
     </div>
   </div>
 </div>
 
-<section aria-label="Publicações científicas" style="background:var(--branco)">
+<section aria-label="Scientific publications" style="background:var(--branco)">
   <div class="container">
 
     {% assign anos = site.data.publicacoes.items | map: "ano" | uniq | sort | reverse %}
 
-    <!-- ── Barra de busca e filtro ─────────────────────────────────────── -->
     <div class="pub-filter-bar" role="search">
       <div class="pub-search-wrap">
         <svg class="pub-search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <input type="search" id="pub-search" class="pub-search"
-               placeholder="Buscar por título, autor ou periódico…"
+               placeholder="Search by title, author or journal…"
                autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
-               aria-label="Buscar publicações">
+               aria-label="Search publications">
         <span class="pub-search-kbd" aria-hidden="true"><kbd>/</kbd></span>
-        <button class="pub-search-clear" id="pub-search-clear" type="button" aria-label="Limpar busca">
+        <button class="pub-search-clear" id="pub-search-clear" type="button" aria-label="Clear search">
           <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
         </button>
       </div>
       {% if qualis_disponiveis.size > 0 %}
-      <div class="pub-filter-qualis" role="group" aria-label="Filtrar por Qualis">
-        <button class="pub-filter-btn is-active" type="button" data-qualis="">Todas</button>
+      <div class="pub-filter-qualis" role="group" aria-label="Filter by Qualis">
+        <button class="pub-filter-btn is-active" type="button" data-qualis="">All</button>
         {% for q in qualis_disponiveis %}
         <button class="pub-filter-btn pub-badge--{{ q | downcase }}" type="button" data-qualis="{{ q }}">{{ q }}</button>
         {% endfor %}
       </div>
       {% endif %}
-      <button class="pub-print-btn" id="pub-print-btn" aria-label="Imprimir lista de publicações">
+      <button class="pub-print-btn" id="pub-print-btn" aria-label="Print publication list">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        Imprimir
+        Print
       </button>
     </div>
 
     <p class="pub-no-results" id="pub-no-results" aria-live="polite">
-      Nenhuma publicação encontrada para essa busca.
-      <button class="pub-reset" id="pub-reset">Limpar filtros</button>
+      No publications found for this search.
+      <button class="pub-reset" id="pub-reset">Clear filters</button>
     </p>
 
     <p class="pub-result-count" id="pub-count" aria-live="polite" aria-atomic="true">
-      {{ site.data.publicacoes.items | size }} publicações
+      {{ site.data.publicacoes.items | size }} publications
     </p>
 
-    <!-- ── Navegação rápida por ano ──────────────────────────────────────── -->
-    <nav class="pub-year-nav" aria-label="Navegar por ano" id="pub-year-nav">
+    <nav class="pub-year-nav" aria-label="Browse by year" id="pub-year-nav">
       {% for ano in anos %}
       {% assign n_pub_ano = site.data.publicacoes.items | where: "ano", ano | size %}
       <a href="#pub-{{ ano }}" class="pub-year-btn">{{ ano }}<span class="pub-year-count"> ({{ n_pub_ano }})</span></a>
       {% endfor %}
     </nav>
 
-    <!-- ── Grupos por ano ─────────────────────────────────────────────────── -->
     {% for ano in anos %}
     <div class="pub-year-group" id="pub-{{ ano }}">
       <h2 class="pub-year-label"><time datetime="{{ ano }}">{{ ano }}</time></h2>
@@ -102,8 +100,8 @@ alt_url: /en/publications.html
              data-titulo="{{ pub.titulo | downcase | escape }}"
              data-autores="{{ pub.autores | downcase | escape }}"
              data-periodico="{{ pub.periodico | downcase | escape }}"
-             data-qualis="{{ pub.qualis }}"
-             data-ano="{{ pub.ano }}">
+             data-ano="{{ pub.ano }}"
+             data-qualis="{{ pub.qualis }}">
           <div class="pub-year">{{ pub.ano }}</div>
           <div class="pub-body">
             <div class="pub-title">{{ pub.titulo }}</div>
@@ -112,10 +110,10 @@ alt_url: /en/publications.html
               {{ pub.periodico }}{% if pub.qualis and pub.qualis != "" %}<span class="pub-badge pub-badge--{{ pub.qualis | downcase }}">{{ pub.qualis }}</span>{% endif %}
             </div>
             <div class="pub-actions">
-              {% if pub.doi and pub.doi != "" %}<a href="{{ pub.doi }}" class="pub-doi" target="_blank" rel="noopener noreferrer" aria-label="Abrir no DOI (nova aba): {{ pub.titulo | truncate: 80 | escape }}">↗ DOI</a>{% endif %}
-              <button class="pub-citar" type="button" aria-label="Copiar citação: {{ pub.titulo | truncate: 80 | escape }}">
+              {% if pub.doi and pub.doi != "" %}<a href="{{ pub.doi }}" class="pub-doi" target="_blank" rel="noopener noreferrer" aria-label="Open DOI (new tab): {{ pub.titulo | truncate: 80 | escape }}">↗ DOI</a>{% endif %}
+              <button class="pub-citar" type="button" aria-label="Copy citation: {{ pub.titulo | truncate: 80 | escape }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
-                <span class="pub-citar-label" aria-live="polite">Citar</span>
+                <span class="pub-citar-label" aria-live="polite">Cite</span>
               </button>
             </div>
           </div>
@@ -143,40 +141,31 @@ alt_url: /en/publications.html
   var qualisBtns  = Array.from(document.querySelectorAll('.pub-filter-btn'));
   var qualisAtivo = '';
 
-  // ── Estado do campo de busca (mostra/oculta botão × e hint /) ────────────
   function updateSearchWrap() {
     if (searchWrap) searchWrap.classList.toggle('has-value', !!(search && search.value));
   }
 
-  // ── Contador de resultados ────────────────────────────────────────────────
   function updateCount(n) {
     if (!countEl) return;
-    countEl.textContent = n === total
-      ? total + ' publicações'
-      : n + ' de ' + total + ' publicações';
+    countEl.textContent = n === total ? total + ' publications' : n + ' of ' + total + ' publications';
     countEl.classList.toggle('filtered', n !== total);
   }
 
-  // ── Filtro principal ──────────────────────────────────────────────────────
   function applyFilter() {
     var q = search ? search.value.toLowerCase().trim() : '';
     var matched = 0;
-
     items.forEach(function (item) {
-      var okTexto = !q || item.dataset.titulo.includes(q)
-                       || item.dataset.autores.includes(q)
-                       || item.dataset.periodico.includes(q);
+      var okText = !q || item.dataset.titulo.includes(q)
+                      || item.dataset.autores.includes(q)
+                      || item.dataset.periodico.includes(q);
       var okQualis = !qualisAtivo || item.dataset.qualis === qualisAtivo;
-      var ok = okTexto && okQualis;
+      var ok = okText && okQualis;
       item.classList.toggle('pub-hidden', !ok);
       if (ok) matched++;
     });
-
     groups.forEach(function (g) {
-      g.classList.toggle('pub-hidden',
-        !g.querySelectorAll('.pub-item:not(.pub-hidden)').length);
+      g.classList.toggle('pub-hidden', !g.querySelectorAll('.pub-item:not(.pub-hidden)').length);
     });
-
     var filtering = !!q || !!qualisAtivo;
     if (yearNav)  yearNav.style.display  = filtering ? 'none' : '';
     if (countEl)  countEl.style.display  = filtering ? ''     : 'none';
@@ -186,9 +175,7 @@ alt_url: /en/publications.html
 
   function setQualis(valor) {
     qualisAtivo = valor;
-    qualisBtns.forEach(function (b) {
-      b.classList.toggle('is-active', b.dataset.qualis === valor);
-    });
+    qualisBtns.forEach(function (b) { b.classList.toggle('is-active', b.dataset.qualis === valor); });
     applyFilter();
   }
 
@@ -208,7 +195,6 @@ alt_url: /en/publications.html
     });
   });
 
-  // ── Botão × — limpa busca sem tirar o foco do input ──────────────────────
   if (clearBtn) {
     clearBtn.addEventListener('mousedown', function (e) { e.preventDefault(); });
     clearBtn.addEventListener('click', function () {
@@ -219,28 +205,21 @@ alt_url: /en/publications.html
     });
   }
 
-  // ── Atalho "/" — foca o campo de busca ───────────────────────────────────
   document.addEventListener('keydown', function (e) {
     var tag = document.activeElement ? document.activeElement.tagName : '';
     if (e.key === '/' && tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
       e.preventDefault();
-      if (search) {
-        search.focus();
-        search.select();
-        search.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
+      if (search) { search.focus(); search.select(); search.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
     }
   });
 
-  // ── Scrollspy — destaca o botão de ano ativo ─────────────────────────────
   if ('IntersectionObserver' in window && groups.length) {
     var yearBtns = Array.from(document.querySelectorAll('.pub-year-btn'));
     var yearObs  = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
           yearBtns.forEach(function (btn) {
-            btn.classList.toggle('is-active',
-              btn.getAttribute('href') === '#' + e.target.id);
+            btn.classList.toggle('is-active', btn.getAttribute('href') === '#' + e.target.id);
           });
         }
       });
@@ -248,63 +227,45 @@ alt_url: /en/publications.html
     groups.forEach(function (g) { yearObs.observe(g); });
   }
 
-  // Esconde o contador inicialmente (só aparece ao filtrar)
   if (countEl) countEl.style.display = 'none';
 
-  // Botão imprimir
   var printBtn = document.getElementById('pub-print-btn');
   if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
 })();
 
-// ── Copiar citação ─────────────────────────────────────────────────────────
 (function () {
   document.querySelectorAll('.pub-citar').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var item = btn.closest('.pub-item');
       if (!item) return;
-
       var title   = (item.querySelector('.pub-title')   || {textContent:''}).textContent.trim();
       var authors = (item.querySelector('.pub-authors') || {textContent:''}).textContent.trim();
-      var year    = item.dataset.ano || (item.querySelector('.pub-year') || {textContent:''}).textContent.trim();
-
-      // Periódico: apenas o texto (primeiro nó de texto, excluindo o badge)
+      var year    = item.dataset.ano || '';
       var journalEl = item.querySelector('.pub-journal');
       var journal = '';
       if (journalEl) {
         journal = Array.from(journalEl.childNodes)
           .filter(function (n) { return n.nodeType === 3; })
           .map(function (n) { return n.textContent.trim(); })
-          .filter(function (t) { return t; })
-          .join('');
+          .filter(function (t) { return t; }).join('');
       }
-
       var doiLink = item.querySelector('a.pub-doi[href^="http"]');
       var doi = doiLink ? doiLink.href : '';
-
       var citation = authors + ' (' + year + '). ' + title + '. ' + journal + '.';
       if (doi) citation += ' ' + doi;
-
       var label = btn.querySelector('.pub-citar-label');
-      var origLabel = label ? label.textContent : 'Citar';
-
+      var origLabel = label ? label.textContent : 'Cite';
       function showFeedback() {
         btn.classList.add('copiado');
-        if (label) label.textContent = 'Copiado!';
-        setTimeout(function () {
-          btn.classList.remove('copiado');
-          if (label) label.textContent = origLabel;
-        }, 2200);
+        if (label) label.textContent = 'Copied!';
+        setTimeout(function () { btn.classList.remove('copiado'); if (label) label.textContent = origLabel; }, 2200);
       }
-
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(citation).then(showFeedback).catch(function () {});
       } else {
-        // fallback para navegadores antigos
         var ta = document.createElement('textarea');
-        ta.value = citation;
-        ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
-        document.body.appendChild(ta);
-        ta.select();
+        ta.value = citation; ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+        document.body.appendChild(ta); ta.select();
         try { document.execCommand('copy'); showFeedback(); } catch (e) {}
         document.body.removeChild(ta);
       }

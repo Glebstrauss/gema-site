@@ -1,86 +1,86 @@
 ---
 layout: default
-title: "Pôsteres"
-description: "Pôsteres científicos do GEMA — Raças e Ecótipos de Animais Domésticos do Brasil. Material didático de alta resolução para impressão e uso digital."
+lang: en
+permalink: /en/posters.html
+title: "Posters"
+description: "GEMA scientific posters — Native Breeds and Ecotypes of Brazil's Domestic Animals. High-resolution material for printing and digital use."
 og_image: /assets/img/posteres/equinos.jpg
-alt_url: /en/posters.html
+alt_url: /posteres.html
 ---
 
 <header class="page-hero">
   <div class="container">
-    <div class="section-label">Material Didático</div>
+    <div class="section-label">Educational Material</div>
     <div class="divider"></div>
-    <h1 class="page-hero-title">Pôsteres de <em>Raças Nativas</em></h1>
-    <p class="page-hero-sub">Pôsteres científicos de alta resolução com as raças e ecótipos de animais domésticos do Brasil, produzidos pelo GEMA·UFBA.</p>
-    <p class="page-hero-count">{{ site.data.posteres.items | size }} pôsteres disponíveis</p>
+    <h1 class="page-hero-title">Posters of <em>Native Breeds</em></h1>
+    <p class="page-hero-sub">High-resolution scientific posters featuring the native breeds and ecotypes of Brazil's domestic animals, produced by GEMA·UFBA.</p>
+    <p class="page-hero-count">{{ site.data.posteres.items | size }} posters available</p>
   </div>
 </header>
 
-<!-- ── Destaque informativo ─────────────────────────────────────────────── -->
 <div class="poster-infobar">
   <div class="container">
     <div class="poster-infobar-inner">
       <div class="poster-info-item">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <span>PDF de alta resolução</span>
+        <span>High-resolution PDF</span>
       </div>
       <div class="poster-info-sep" aria-hidden="true"></div>
       <div class="poster-info-item">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
-        <span>Formato A2 · ideal para impressão</span>
+        <span>A2 format · ideal for printing</span>
       </div>
       <div class="poster-info-sep" aria-hidden="true"></div>
       <div class="poster-info-item">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>Produzido pelo GEMA · UFBA</span>
+        <span>Produced by GEMA · UFBA</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ── Grade de pôsteres ───────────────────────────────────────────────── -->
-<section aria-label="Catálogo de pôsteres" style="background:var(--cinza-claro)">
+<section aria-label="Poster catalog" style="background:var(--cinza-claro)">
   <div class="container">
-    <div class="section-label">Catálogo</div>
+    <div class="section-label">Catalog</div>
     <div class="divider"></div>
-    <h2 class="section-title">Escolha o seu pôster</h2>
-    <p class="section-desc">Cada pôster apresenta fotografias das raças com identificação dos animais dispostos sobre o mapa do Brasil.</p>
+    <h2 class="section-title">Choose your poster</h2>
+    <p class="section-desc">Each poster shows photographs of the breeds with their identification, arranged over the map of Brazil.</p>
 
     <div class="poster-grid">
       {% for poster in site.data.posteres.items %}
       <div class="poster-card">
         <div class="poster-card-img-wrap">
-          <button type="button" class="poster-zoom" aria-label="Ampliar pôster: {{ poster.titulo }}">
+          <button type="button" class="poster-zoom" aria-label="Enlarge poster: {% if poster.titulo_en and poster.titulo_en != '' %}{{ poster.titulo_en }}{% else %}{{ poster.titulo }}{% endif %}">
             <img
               src="{{ '/assets/img/posteres/' | append: poster.id | append: '.jpg' | relative_url }}"
-              alt="Pôster: {{ poster.titulo }}"
+              alt="Poster: {% if poster.titulo_en and poster.titulo_en != '' %}{{ poster.titulo_en }}{% else %}{{ poster.titulo }}{% endif %}"
               class="poster-card-img"
               loading="lazy"
               decoding="async">
           </button>
-          <div class="poster-card-badge" aria-hidden="true">{{ poster.total_racas }} raças</div>
+          <div class="poster-card-badge" aria-hidden="true">{{ poster.total_racas }} breeds</div>
         </div>
         <div class="poster-card-body">
           <div class="poster-card-grupo">
             <span aria-hidden="true">{{ poster.icone }}</span>
-            {{ poster.grupo }}
+            {% if poster.grupo_en and poster.grupo_en != "" %}{{ poster.grupo_en }}{% else %}{{ poster.grupo }}{% endif %}
           </div>
-          <h3 class="poster-card-titulo">{{ poster.titulo }}</h3>
+          <h3 class="poster-card-titulo">{% if poster.titulo_en and poster.titulo_en != "" %}{{ poster.titulo_en }}{% else %}{{ poster.titulo }}{% endif %}</h3>
           <p class="poster-card-racas">{{ poster.racas }}</p>
           <div class="poster-card-footer">
             <div class="poster-card-preco">
               {% if poster.preco and poster.preco != "" %}
                 <span class="poster-preco-valor">R$ {{ poster.preco }}</span>
               {% else %}
-                <span class="poster-preco-placeholder">Consultar preço</span>
+                <span class="poster-preco-placeholder">Request price</span>
               {% endif %}
             </div>
             {% assign tem_link = false %}{% if poster.link and poster.link != "" %}{% assign tem_link = true %}{% endif %}
             <a
-              href="{% if tem_link %}{{ poster.link }}{% else %}mailto:gerencia.gemaufba@gmail.com?subject={{ 'Pedido de pôster: ' | append: poster.titulo | uri_escape }}{% endif %}"
+              href="{% if tem_link %}{{ poster.link }}{% else %}mailto:gerencia.gemaufba@gmail.com?subject={{ 'Poster request: ' | append: poster.titulo | uri_escape }}{% endif %}"
               class="poster-btn"
               {% if tem_link %}target="_blank" rel="noopener noreferrer"{% endif %}>
-              Solicitar →
+              Request →
             </a>
           </div>
         </div>
@@ -90,70 +90,60 @@ alt_url: /en/posters.html
   </div>
 </section>
 
-<!-- ── Como adquirir ───────────────────────────────────────────────────── -->
-<section aria-label="Como adquirir" style="background:var(--branco)">
+<section aria-label="How to order" style="background:var(--branco)">
   <div class="container">
-    <div class="section-label">Aquisição</div>
+    <div class="section-label">Ordering</div>
     <div class="divider"></div>
-    <h2 class="section-title">Como adquirir</h2>
+    <h2 class="section-title">How to order</h2>
     <div class="poster-como-grid">
-
       <div class="poster-como-card">
         <div class="poster-como-icon" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <h3 class="poster-como-titulo">1. Solicite</h3>
-        <p class="poster-como-desc">Clique em "Solicitar" no pôster desejado ou envie um e-mail para <strong>gerencia.gemaufba@gmail.com</strong> informando o título e a quantidade.</p>
+        <h3 class="poster-como-titulo">1. Request</h3>
+        <p class="poster-como-desc">Click "Request" on the poster you want, or email <strong>gerencia.gemaufba@gmail.com</strong> with the title and quantity.</p>
       </div>
-
       <div class="poster-como-card">
         <div class="poster-como-icon" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/></svg>
         </div>
-        <h3 class="poster-como-titulo">2. Pagamento</h3>
-        <p class="poster-como-desc">Aceitamos <strong>PIX</strong>. Após a confirmação do pagamento, o arquivo é enviado por e-mail.</p>
+        <h3 class="poster-como-titulo">2. Payment</h3>
+        <p class="poster-como-desc">We accept <strong>PIX</strong>. Once payment is confirmed, the file is sent to you.</p>
       </div>
-
       <div class="poster-como-card">
         <div class="poster-como-icon" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
         </div>
         <h3 class="poster-como-titulo">3. Download</h3>
-        <p class="poster-como-desc">Receba o PDF de alta resolução por e-mail, pronto para impressão em A2 ou uso em apresentações e materiais didáticos.</p>
+        <p class="poster-como-desc">Receive the high-resolution PDF by email, ready for printing or use in presentations and teaching material.</p>
       </div>
-
     </div>
 
-    <!-- Bloco de contato / PIX -->
     <div class="poster-contato-box">
       <div class="poster-contato-info">
-        <div class="poster-contato-label">Dúvidas ou pedidos</div>
+        <div class="poster-contato-label">Questions or orders</div>
         <a href="mailto:gerencia.gemaufba@gmail.com" class="poster-contato-email">gerencia.gemaufba@gmail.com</a>
       </div>
       <div class="poster-contato-pix">
-        <div class="poster-contato-label">Pagamento</div>
-        <span class="poster-pix-chave">Chave PIX informada na confirmação do pedido</span>
+        <div class="poster-contato-label">PIX key</div>
+        <span class="poster-pix-chave">Provided upon order confirmation</span>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ── Lightbox ────────────────────────────────────────────────────────── -->
-<dialog id="poster-dialog" class="poster-dialog" aria-label="Visualização ampliada do pôster">
-  <button type="button" id="poster-dialog-close" class="poster-dialog-close" aria-label="Fechar visualização">
+<dialog id="poster-dialog" class="poster-dialog" aria-label="Enlarged poster view">
+  <button type="button" id="poster-dialog-close" class="poster-dialog-close" aria-label="Close view">
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
   </button>
   <img id="poster-dialog-img" class="poster-dialog-img" src="" alt="">
 </dialog>
 
 <script>
-// Lightbox dos pôsteres — <dialog> nativo: Esc fecha e o foco volta sozinho
 (function () {
   var dlg = document.getElementById('poster-dialog');
   if (!dlg || typeof dlg.showModal !== 'function') return;
   var img = document.getElementById('poster-dialog-img');
-
   document.querySelectorAll('.poster-zoom').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var thumb = btn.querySelector('img');
@@ -163,7 +153,6 @@ alt_url: /en/posters.html
       dlg.showModal();
     });
   });
-
   document.getElementById('poster-dialog-close').addEventListener('click', function () { dlg.close(); });
   dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
   dlg.addEventListener('close', function () { img.removeAttribute('src'); });
@@ -171,25 +160,18 @@ alt_url: /en/posters.html
 </script>
 
 <style>
-/* ── Infobar ──────────────────────────────────────────────────────────── */
 .poster-infobar{background:var(--azul-claro);border-top:1px solid var(--borda);border-bottom:1px solid var(--borda);padding:.9rem 3rem}
 .poster-infobar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:0;flex-wrap:wrap}
 .poster-info-item{display:flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:500;color:var(--azul-escuro);padding:.3rem 2rem .3rem 0}
 .poster-info-item svg{flex-shrink:0;opacity:.7}
 .poster-info-sep{width:1px;height:1.25rem;background:var(--borda);margin-right:2rem;flex-shrink:0}
-
-/* ── Grade de pôsteres ─────────────────────────────────────────────────── */
 .poster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;margin-top:2rem}
 .poster-card{background:var(--branco);border:1px solid var(--borda);border-radius:20px;overflow:hidden;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
 .poster-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(28,78,221,.1)}
-
-/* imagem */
 .poster-card-img-wrap{position:relative;overflow:hidden;background:#f8f8f6;aspect-ratio:3/4}
 .poster-card-img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .35s ease;display:block}
 .poster-card:hover .poster-card-img{transform:scale(1.03)}
 .poster-card-badge{position:absolute;bottom:.75rem;right:.75rem;background:var(--azul);color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.04em;padding:.25rem .7rem;border-radius:100px}
-
-/* corpo do card */
 .poster-card-body{padding:1.25rem 1.25rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
 .poster-card-grupo{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);display:flex;align-items:center;gap:.35rem}
 .poster-card-titulo{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:600;color:var(--preto);line-height:1.35}
@@ -199,22 +181,29 @@ alt_url: /en/posters.html
 .poster-preco-placeholder{font-size:.78rem;color:var(--cinza);font-style:italic}
 .poster-btn{display:inline-flex;align-items:center;background:var(--azul);color:#fff;text-decoration:none;padding:.45rem 1rem;border-radius:100px;font-size:.78rem;font-weight:500;white-space:nowrap;transition:background .2s;border:none;cursor:pointer;font-family:inherit}
 .poster-btn:hover{background:var(--azul-escuro)}
-
-/* ── Como adquirir ──────────────────────────────────────────────────────── */
 .poster-como-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
 .poster-como-card{background:var(--cinza-claro);border-radius:16px;padding:2rem;border:1px solid var(--borda)}
 .poster-como-icon{width:48px;height:48px;background:var(--azul-claro);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--azul);margin-bottom:1rem}
 .poster-como-titulo{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:var(--preto);margin-bottom:.5rem}
 .poster-como-desc{font-size:.875rem;color:var(--cinza);line-height:1.65}
-
-/* ── Bloco de contato ───────────────────────────────────────────────────── */
 .poster-contato-box{margin-top:2.5rem;background:var(--azul-claro);border:1px solid var(--borda);border-radius:16px;padding:1.75rem 2rem;display:flex;flex-wrap:wrap;gap:2rem;align-items:center}
 .poster-contato-label{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);margin-bottom:.3rem}
 .poster-contato-email{font-size:.95rem;font-weight:500;color:var(--preto);text-decoration:none}
 .poster-contato-email:hover{color:var(--azul);text-decoration:underline}
 .poster-pix-chave{font-size:.95rem;font-weight:500;color:var(--preto);font-family:monospace}
-
-/* ── Responsivo ─────────────────────────────────────────────────────────── */
+.poster-zoom{display:block;width:100%;height:100%;padding:0;border:none;background:none;cursor:zoom-in;font:inherit}
+.poster-dialog{margin:auto;border:none;border-radius:16px;padding:0;background:var(--branco);max-width:min(92vw,620px);box-shadow:0 24px 80px rgba(0,0,0,.4);overflow:visible}
+.poster-dialog::backdrop{background:rgba(8,10,22,.78);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.poster-dialog-img{display:block;width:auto;height:auto;max-width:100%;max-height:85vh;border-radius:16px}
+.poster-dialog-close{position:absolute;top:.6rem;right:.6rem;width:38px;height:38px;border-radius:50%;border:none;background:rgba(13,13,24,.55);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.poster-dialog-close:hover{background:rgba(13,13,24,.85)}
+html.dark .poster-dialog{background:#14141f}
+html.dark .poster-card-img-wrap{background:#1a1a26}
+html.dark .poster-info-item{color:var(--azul-mid)}
+html.dark .poster-infobar,
+html.dark .poster-contato-box{background:rgba(85,120,232,.08)}
+html.dark .poster-contato-label,
+html.dark .poster-card-grupo{color:var(--azul-mid)}
 @media(max-width:900px){
   .poster-como-grid{grid-template-columns:1fr}
   .poster-infobar{padding:.75rem 1.5rem}
@@ -232,21 +221,4 @@ alt_url: /en/posters.html
 @media(max-width:380px){
   .poster-grid{grid-template-columns:1fr}
 }
-
-/* ── Lightbox ───────────────────────────────────────────────────────────── */
-.poster-zoom{display:block;width:100%;height:100%;padding:0;border:none;background:none;cursor:zoom-in;font:inherit}
-.poster-dialog{margin:auto;border:none;border-radius:16px;padding:0;background:var(--branco);max-width:min(92vw,620px);box-shadow:0 24px 80px rgba(0,0,0,.4);overflow:visible}
-.poster-dialog::backdrop{background:rgba(8,10,22,.78);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
-.poster-dialog-img{display:block;width:auto;height:auto;max-width:100%;max-height:85vh;border-radius:16px}
-.poster-dialog-close{position:absolute;top:.6rem;right:.6rem;width:38px;height:38px;border-radius:50%;border:none;background:rgba(13,13,24,.55);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.poster-dialog-close:hover{background:rgba(13,13,24,.85)}
-html.dark .poster-dialog{background:#14141f}
-
-/* ── Tema escuro ────────────────────────────────────────────────────────── */
-html.dark .poster-card-img-wrap{background:#1a1a26}
-html.dark .poster-info-item{color:var(--azul-mid)}
-html.dark .poster-infobar,
-html.dark .poster-contato-box{background:rgba(85,120,232,.08)}
-html.dark .poster-contato-label,
-html.dark .poster-card-grupo{color:var(--azul-mid)}
 </style>

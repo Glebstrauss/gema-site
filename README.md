@@ -2,7 +2,7 @@
 
 Site institucional do **GEMA** (Grupo de Estudos em Melhoramento Animal, Genética Quantitativa e Genômica Aplicada) — EMEVZ · UFBA · Salvador, Bahia.
 
-**🌐 Site:** https://glebstrauss.github.io/gema-site/
+**🌐 Site:** https://glebstrauss.github.io/gema-site/ · **🇬🇧 English:** https://glebstrauss.github.io/gema-site/en/
 
 ## Stack
 

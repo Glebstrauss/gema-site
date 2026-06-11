@@ -1,0 +1,50 @@
+# Strings de interface por idioma — usadas pelo _layouts/default.html
+# Conteúdo das páginas fica nas próprias páginas (PT na raiz, EN em /en/)
+
+pt:
+  nav:
+    - { url: "/professores.html", label: "Professores", match: "professores" }
+    - { url: "/publicacoes.html", label: "Publicações", match: "publicacoes" }
+    - { url: "/premios.html",     label: "Prêmios",     match: "premios" }
+    - { url: "/noticias.html",    label: "Notícias",    match: "noticias" }
+    - { url: "/posteres.html",    label: "Pôsteres",    match: "posteres" }
+  ui:
+    skip: "Pular para o conteúdo"
+    nav_aria: "Navegação principal"
+    logo_aria: "GEMA — página inicial"
+    menu_open: "Abrir menu de navegação"
+    menu_close: "Fechar menu"
+    theme_dark: "Ativar tema escuro"
+    theme_light: "Ativar tema claro"
+    back_top: "Voltar ao topo"
+    lang_code: "EN"
+    lang_switch: "Read this site in English"
+  footer:
+    nav_title: "Navegação"
+    nav_aria: "Páginas do site"
+    tagline1: "Grupo de Estudos em Melhoramento Animal,"
+    tagline2: "Genética Quantitativa e Genômica Aplicada."
+
+en:
+  nav:
+    - { url: "/en/team.html",         label: "Team",         match: "team" }
+    - { url: "/en/publications.html", label: "Publications", match: "publications" }
+    - { url: "/en/awards.html",       label: "Awards",       match: "awards" }
+    - { url: "/en/news.html",         label: "News",         match: "news" }
+    - { url: "/en/posters.html",      label: "Posters",      match: "posters" }
+  ui:
+    skip: "Skip to content"
+    nav_aria: "Main navigation"
+    logo_aria: "GEMA — homepage"
+    menu_open: "Open navigation menu"
+    menu_close: "Close menu"
+    theme_dark: "Switch to dark theme"
+    theme_light: "Switch to light theme"
+    back_top: "Back to top"
+    lang_code: "PT"
+    lang_switch: "Leia este site em português"
+  footer:
+    nav_title: "Navigation"
+    nav_aria: "Site pages"
+    tagline1: "Study Group on Animal Breeding,"
+    tagline2: "Quantitative Genetics and Applied Genomics."

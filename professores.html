@@ -2,6 +2,7 @@
 layout: default
 title: "Professores"
 description: "Conheça os professores e pesquisadores do GEMA, grupo de melhoramento animal da EMEVZ/UFBA"
+alt_url: /en/team.html
 ---
 
 <header class="page-hero">
@@ -24,7 +25,7 @@ description: "Conheça os professores e pesquisadores do GEMA, grupo de melhoram
     <div class="prof-grid">
       {% assign docentes = site.professores | where: "tipo", "docente" | sort: "ordem" %}
       {% for prof in docentes %}
-        {% include prof-card.html prof=prof %}
+        {% include prof-card.html prof=prof lang=page.lang %}
       {% endfor %}
     </div>
   </div>
@@ -39,7 +40,7 @@ description: "Conheça os professores e pesquisadores do GEMA, grupo de melhoram
     <h2 class="section-title">Estudantes</h2>
     <div class="prof-grid">
       {% for prof in estudantes %}
-        {% include prof-card.html prof=prof %}
+        {% include prof-card.html prof=prof lang=page.lang %}
       {% endfor %}
     </div>
   </div>

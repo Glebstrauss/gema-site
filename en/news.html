@@ -1,8 +1,10 @@
 ---
 layout: default
-title: "Notícias"
-description: "Últimas notícias e atualizações do GEMA — projetos, publicações e eventos"
-alt_url: /en/news.html
+lang: en
+permalink: /en/news.html
+title: "News"
+description: "Latest news and updates from GEMA — projects, publications and events"
+alt_url: /noticias.html
 ---
 
 {% assign ano_atual = site.time | date: "%Y" %}
@@ -11,21 +13,21 @@ alt_url: /en/news.html
 
 <header class="page-hero">
   <div class="container">
-    <div class="section-label">Últimas</div>
+    <div class="section-label">Latest</div>
     <div class="divider"></div>
-    <h1 class="page-hero-title">Notícias do <em>Grupo</em></h1>
-    <p class="page-hero-sub">Atualizações sobre projetos, publicações, apresentações e eventos do GEMA.</p>
-    <p class="page-hero-count">{{ total_noticias }} notícia{% if total_noticias != 1 %}s{% endif %} publicada{% if total_noticias != 1 %}s{% endif %}</p>
+    <h1 class="page-hero-title">Group <em>News</em></h1>
+    <p class="page-hero-sub">Updates on projects, publications, presentations and events from GEMA.</p>
+    <p class="page-hero-count">{{ total_noticias }} news item{% if total_noticias != 1 %}s{% endif %} published</p>
     <a class="noticia-rss" href="{{ '/feed.xml' | relative_url }}">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
-      Assinar via RSS
+      Subscribe via RSS
     </a>
   </div>
 </header>
 
-<section aria-label="Notícia em destaque" style="background:var(--branco)">
+<section aria-label="Featured news" style="background:var(--branco)">
   <div class="container">
-    <div class="section-label">Destaque</div>
+    <div class="section-label">Featured</div>
     <div class="divider"></div>
     {% if total_noticias > 0 %}
     {% assign destaque = noticias_todas | where: "destaque", true | first %}
@@ -36,66 +38,69 @@ alt_url: /en/news.html
       <div class="noticia-destaque">
         <div>
           <div class="noticia-data nd-data">{{ destaque.data }}</div>
-          <h2 class="noticia-titulo">{{ destaque.titulo }}</h2>
-          <p class="noticia-texto">{{ destaque.texto }}</p>
+          <h2 class="noticia-titulo">{% if destaque.titulo_en and destaque.titulo_en != "" %}{{ destaque.titulo_en }}{% else %}{{ destaque.titulo }}{% endif %}</h2>
+          <p class="noticia-texto">{% if destaque.texto_en and destaque.texto_en != "" %}{{ destaque.texto_en }}{% else %}{{ destaque.texto }}{% endif %}</p>
         </div>
-        {% if destaque.link and destaque.link != "" %}<a href="{{ destaque.link | escape }}" class="noticia-link-btn" target="_blank" rel="noopener noreferrer">Ler mais →</a>{% endif %}
+        {% if destaque.link and destaque.link != "" %}<a href="{{ destaque.link | escape }}" class="noticia-link-btn" target="_blank" rel="noopener noreferrer">Read more →</a>{% endif %}
       </div>
       <div class="noticias-lista">
         {% for noticia in secundarias limit: 3 %}
+        {% if noticia.titulo_en and noticia.titulo_en != "" %}{% assign n_tit = noticia.titulo_en %}{% else %}{% assign n_tit = noticia.titulo %}{% endif %}
+        {% if noticia.texto_en and noticia.texto_en != "" %}{% assign n_txt = noticia.texto_en %}{% else %}{% assign n_txt = noticia.texto %}{% endif %}
         <button class="noticia-mini noticia-abre-modal"
-          data-slug="{{ noticia.titulo | slugify: 'latin' }}"
-          data-titulo="{{ noticia.titulo | escape }}"
+          data-slug="{{ n_tit | slugify }}"
+          data-titulo="{{ n_tit | escape }}"
           data-data="{{ noticia.data }}"
-          data-texto="{{ noticia.texto | escape }}"
+          data-texto="{{ n_txt | escape }}"
           data-link="{{ noticia.link | escape }}"
-          aria-label="Ler notícia: {{ noticia.titulo | escape }}">
+          aria-label="Read news: {{ n_tit | escape }}">
           <div class="noticia-data nm-data">{{ noticia.data }}</div>
-          <h3 class="nm-titulo">{{ noticia.titulo }}</h3>
-          <p class="nm-texto">{{ noticia.texto | truncatewords: 16 }}</p>
+          <h3 class="nm-titulo">{{ n_tit }}</h3>
+          <p class="nm-texto">{{ n_txt | truncatewords: 16 }}</p>
         </button>
         {% endfor %}
       </div>
     </div>
     {% else %}
-    <p class="noticias-vazio">Nenhuma notícia publicada ainda — em breve, novidades do grupo por aqui.</p>
+    <p class="noticias-vazio">No news published yet — group updates coming soon.</p>
     {% endif %}
   </div>
 </section>
 
-<section aria-label="Arquivo de notícias" style="background:var(--cinza-claro)">
+<section aria-label="News archive" style="background:var(--cinza-claro)">
   <div class="container">
-    <div class="section-label">Arquivo</div>
+    <div class="section-label">Archive</div>
     <div class="divider"></div>
-    <h2 class="section-title">Todas as Notícias</h2>
+    <h2 class="section-title">All News</h2>
     {% if total_noticias > 0 %}
     <div class="noticias-all">
       {% for noticia in noticias_todas %}
+      {% if noticia.titulo_en and noticia.titulo_en != "" %}{% assign n_tit = noticia.titulo_en %}{% else %}{% assign n_tit = noticia.titulo %}{% endif %}
+      {% if noticia.texto_en and noticia.texto_en != "" %}{% assign n_txt = noticia.texto_en %}{% else %}{% assign n_txt = noticia.texto %}{% endif %}
       <button class="noticia-card noticia-abre-modal{% if noticia.destaque %} noticia-card--destaque{% endif %}"
-        data-slug="{{ noticia.titulo | slugify: 'latin' }}"
-        data-titulo="{{ noticia.titulo | escape }}"
+        data-slug="{{ n_tit | slugify }}"
+        data-titulo="{{ n_tit | escape }}"
         data-data="{{ noticia.data }}"
-        data-texto="{{ noticia.texto | escape }}"
+        data-texto="{{ n_txt | escape }}"
         data-link="{{ noticia.link | escape }}"
-        aria-label="Ler notícia: {{ noticia.titulo | escape }}">
-        {% if noticia.destaque %}<span class="noticia-badge">Destaque</span>{% endif %}
-        {% if noticia.data contains ano_atual %}<span class="noticia-badge noticia-badge--novo">Novo</span>{% endif %}
+        aria-label="Read news: {{ n_tit | escape }}">
+        {% if noticia.destaque %}<span class="noticia-badge">Featured</span>{% endif %}
+        {% if noticia.data contains ano_atual %}<span class="noticia-badge noticia-badge--novo">New</span>{% endif %}
         <span class="noticia-data">{{ noticia.data }}</span>
-        <h3 class="noticia-titulo">{{ noticia.titulo }}</h3>
-        <p>{{ noticia.texto | truncatewords: 30 }}</p>
-        {% if noticia.link and noticia.link != "" %}<span class="noticia-card-hint">Ler · reportagem completa disponível →</span>{% else %}<span class="noticia-card-hint">Clique para ler →</span>{% endif %}
+        <h3 class="noticia-titulo">{{ n_tit }}</h3>
+        <p>{{ n_txt | truncatewords: 30 }}</p>
+        {% if noticia.link and noticia.link != "" %}<span class="noticia-card-hint">Read · full report available →</span>{% else %}<span class="noticia-card-hint">Click to read →</span>{% endif %}
       </button>
       {% endfor %}
     </div>
     {% else %}
-    <p class="noticias-vazio">O arquivo está vazio por enquanto.</p>
+    <p class="noticias-vazio">The archive is empty for now.</p>
     {% endif %}
   </div>
 </section>
 
-<!-- Modal de notícia -->
 <dialog class="noticia-modal" id="noticia-modal" aria-labelledby="modal-titulo">
-  <button class="noticia-modal-fechar" id="modal-fechar" aria-label="Fechar notícia">
+  <button class="noticia-modal-fechar" id="modal-fechar" aria-label="Close news">
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
   </button>
   <div class="noticia-modal-data" id="modal-data"></div>
@@ -105,51 +110,31 @@ alt_url: /en/news.html
     <div id="modal-link-wrap"></div>
     <button type="button" class="noticia-modal-copiar" id="modal-copiar">
       <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      <span id="modal-copiar-label">Copiar link</span>
+      <span id="modal-copiar-label">Copy link</span>
     </button>
   </div>
 </dialog>
 
 <style>
-/* RSS na hero */
 .noticia-rss{display:inline-flex;align-items:center;gap:.45rem;margin-top:1rem;font-size:.8rem;font-weight:500;color:var(--azul);text-decoration:none;border:1px solid rgba(28,78,221,.3);padding:.35rem 1rem;border-radius:100px;transition:background .15s,border-color .2s}
 .noticia-rss:hover{background:var(--azul-claro);border-color:var(--azul)}
 html.dark .noticia-rss{color:var(--azul-mid);border-color:rgba(85,120,232,.45)}
 html.dark .noticia-rss:hover{background:rgba(85,120,232,.14);border-color:var(--azul-mid)}
-
-/* cards clicáveis */
 .noticia-mini.noticia-abre-modal,
-.noticia-card.noticia-abre-modal{
-  cursor:pointer;text-align:left;width:100%;background:none;font-family:inherit
-}
+.noticia-card.noticia-abre-modal{cursor:pointer;text-align:left;width:100%;background:none;font-family:inherit}
 .noticia-mini.noticia-abre-modal:focus-visible,
-.noticia-card.noticia-abre-modal:focus-visible{
-  outline:2px solid var(--azul);outline-offset:3px
-}
+.noticia-card.noticia-abre-modal:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
 html.dark .noticia-mini.noticia-abre-modal:focus-visible,
 html.dark .noticia-card.noticia-abre-modal:focus-visible{outline-color:var(--azul-mid)}
 .noticia-card-hint{font-size:.78rem;color:var(--azul);font-weight:500;margin-top:.25rem;display:block}
 html.dark .noticia-card-hint{color:var(--azul-mid)}
-
-/* estado vazio */
 .noticias-vazio{padding:2.5rem 0;color:var(--cinza);font-size:.95rem}
-
-/* Modal — <dialog> nativo: foco preso, Esc fecha, foco retorna ao card */
-.noticia-modal{
-  margin:auto;background:var(--branco);border:none;border-radius:20px;padding:2.5rem;
-  width:min(640px,calc(100vw - 3rem));max-height:85vh;overflow-y:auto;
-  box-shadow:0 24px 64px rgba(0,0,0,.18);color:var(--preto)
-}
+.noticia-modal{margin:auto;background:var(--branco);border:none;border-radius:20px;padding:2.5rem;width:min(640px,calc(100vw - 3rem));max-height:85vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.18);color:var(--preto)}
 .noticia-modal[open]{animation:slideModal .2s ease}
 .noticia-modal::backdrop{background:rgba(8,10,22,.5);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
 @keyframes slideModal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 html.dark .noticia-modal{box-shadow:0 24px 64px rgba(0,0,0,.6)}
-.noticia-modal-fechar{
-  position:absolute;top:1.25rem;right:1.25rem;
-  background:none;border:1px solid var(--borda);border-radius:50%;
-  width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  color:var(--cinza);transition:background .15s,color .15s
-}
+.noticia-modal-fechar{position:absolute;top:1.25rem;right:1.25rem;background:none;border:1px solid var(--borda);border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--cinza);transition:background .15s,color .15s}
 .noticia-modal-fechar:hover{background:var(--azul-claro);color:var(--azul);border-color:var(--azul)}
 html.dark .noticia-modal-fechar:hover{background:rgba(85,120,232,.14);color:var(--azul-mid);border-color:var(--azul-mid)}
 .noticia-modal-data{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);margin-bottom:.75rem}
@@ -165,35 +150,31 @@ html.dark .noticia-modal-link:hover{background:#3d63e3}
 html.dark .noticia-modal-copiar:hover{color:var(--azul-mid);border-color:var(--azul-mid)}
 .noticia-modal-copiar.copiado{color:#0a6b64;border-color:#0a6b64;background:rgba(0,140,130,.07)}
 html.dark .noticia-modal-copiar.copiado{color:#5fc9c0;border-color:#5fc9c0;background:rgba(0,140,130,.12)}
-@media(max-width:600px){
-  .noticia-modal{padding:1.5rem;width:calc(100vw - 2rem)}
-  .noticia-modal-titulo{font-size:1.2rem}
-}
+@media(max-width:600px){.noticia-modal{padding:1.5rem;width:calc(100vw - 2rem)}.noticia-modal-titulo{font-size:1.2rem}}
 </style>
 
 <script>
 (function () {
   var dlg = document.getElementById('noticia-modal');
   if (!dlg || typeof dlg.showModal !== 'function') return;
-
-  var elData      = document.getElementById('modal-data');
-  var elTitulo    = document.getElementById('modal-titulo');
-  var elTexto     = document.getElementById('modal-texto');
-  var elLinkWrap  = document.getElementById('modal-link-wrap');
-  var btnCopiar   = document.getElementById('modal-copiar');
-  var lblCopiar   = document.getElementById('modal-copiar-label');
+  var elData = document.getElementById('modal-data');
+  var elTitulo = document.getElementById('modal-titulo');
+  var elTexto = document.getElementById('modal-texto');
+  var elLinkWrap = document.getElementById('modal-link-wrap');
+  var btnCopiar = document.getElementById('modal-copiar');
+  var lblCopiar = document.getElementById('modal-copiar-label');
   var timerCopiar = null;
 
   function abrirModal(btn) {
-    elData.textContent   = btn.dataset.data;
+    elData.textContent = btn.dataset.data;
     elTitulo.textContent = btn.dataset.titulo;
-    elTexto.textContent  = btn.dataset.texto;
+    elTexto.textContent = btn.dataset.texto;
     elLinkWrap.innerHTML = '';
     if (btn.dataset.link) {
       var a = document.createElement('a');
       a.href = btn.dataset.link; a.target = '_blank'; a.rel = 'noopener noreferrer';
       a.className = 'noticia-modal-link';
-      a.textContent = 'Ler reportagem completa →';
+      a.textContent = 'Read full report →';
       elLinkWrap.appendChild(a);
     }
     history.replaceState(null, '', '#' + btn.dataset.slug);
@@ -211,39 +192,31 @@ html.dark .noticia-modal-copiar.copiado{color:#5fc9c0;border-color:#5fc9c0;backg
     document.body.style.overflow = '';
     history.replaceState(null, '', window.location.pathname + window.location.search);
     btnCopiar.classList.remove('copiado');
-    lblCopiar.textContent = 'Copiar link';
+    lblCopiar.textContent = 'Copy link';
   });
 
-  // Copiar link direto da notícia
   btnCopiar.addEventListener('click', function () {
     var url = window.location.origin + window.location.pathname + window.location.hash;
     function feito(ok) {
-      lblCopiar.textContent = ok ? 'Link copiado!' : 'Não foi possível copiar';
+      lblCopiar.textContent = ok ? 'Link copied!' : 'Could not copy';
       btnCopiar.classList.toggle('copiado', ok);
       clearTimeout(timerCopiar);
-      timerCopiar = setTimeout(function () {
-        lblCopiar.textContent = 'Copiar link';
-        btnCopiar.classList.remove('copiado');
-      }, 2200);
+      timerCopiar = setTimeout(function () { lblCopiar.textContent = 'Copy link'; btnCopiar.classList.remove('copiado'); }, 2200);
     }
     function copiarFallback() {
       var ta = document.createElement('textarea');
-      ta.value = url;
-      ta.setAttribute('readonly', '');
+      ta.value = url; ta.setAttribute('readonly', '');
       ta.style.position = 'fixed'; ta.style.opacity = '0';
-      dlg.appendChild(ta);
-      ta.select();
+      dlg.appendChild(ta); ta.select();
       var ok = false;
       try { ok = document.execCommand('copy'); } catch (e) {}
-      ta.remove();
-      feito(ok);
+      ta.remove(); feito(ok);
     }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(url).then(function () { feito(true); }, copiarFallback);
     } else { copiarFallback(); }
   });
 
-  // Deep link: /noticias.html#slug-da-noticia abre o modal direto
   if (window.location.hash.length > 1) {
     var slug = window.location.hash.slice(1);
     try { slug = decodeURIComponent(slug); } catch (e) {}

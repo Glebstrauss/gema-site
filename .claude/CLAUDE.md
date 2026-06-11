@@ -33,6 +33,8 @@ posteres.html                # Catálogo de pôsteres (CSS próprio no <style> d
 manual-edicao.html           # Guia de edição para a equipe (painel + token)
 editar.html                  # /editar → redireciona ao painel (endereço memorável da equipe)
 feed.xml                     # RSS das notícias (gerado de _data/noticias.yml)
+en/*.html                    # Versão em inglês (lang:en, slugs EN, permalink /en/...)
+_data/i18n.yml               # Strings de interface PT/EN usadas pelo default.html
 assets/fonts/                # 3 woff2 variáveis auto-hospedadas (DM Sans, Playfair)
 404.html                     # Página de erro personalizada
 README.md                    # Documentação do projeto

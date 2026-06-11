@@ -46,6 +46,12 @@ collections:
         widget: "string"
         hint: "Ex: Coordenador · EMEVZ/UFBA"
 
+      - label: "Cargo (inglês) — opcional"
+        name: "cargo_en"
+        widget: "string"
+        required: false
+        hint: "Versão em inglês exibida em /en/. Vazio = usa o português."
+
       - label: "Tipo"
         name: "tipo"
         widget: "select"
@@ -71,6 +77,12 @@ collections:
         name: "descricao"
         widget: "text"
         hint: "1 a 2 frases sobre a área de pesquisa"
+
+      - label: "Descrição (inglês) — opcional"
+        name: "descricao_en"
+        widget: "text"
+        required: false
+        hint: "Versão em inglês exibida em /en/. Vazio = usa o português."
 
       - label: "Áreas de pesquisa"
         name: "tags"
@@ -112,7 +124,7 @@ collections:
               - { label: "Título", name: "titulo", widget: "string" }
               - { label: "Autores", name: "autores", widget: "string", hint: "Ex: Silva, M.; Strauss, G. et al." }
               - { label: "Periódico", name: "periodico", widget: "string" }
-              - { label: "Qualis (ex: Q1)", name: "qualis", widget: "string", required: false }
+              - { label: "Qualis (ex: Q1)", name: "qualis", widget: "string", required: false, hint: "Q1, Q2, Q3, Q4 ou vazio. Aparece como badge e ativa o filtro." }
               - { label: "Link DOI (URL completa)", name: "doi", widget: "string", required: false }
 
   # ─── PRÊMIOS ───────────────────────────────────────────────────────────
@@ -129,10 +141,12 @@ collections:
             summary: "{{fields.ano}} — {{fields.nome}}"
             fields:
               - { label: "Nome do prêmio", name: "nome", widget: "string" }
+              - { label: "Nome (inglês) — opcional", name: "nome_en", widget: "string", required: false, hint: "Exibido em /en/. Vazio = usa o português." }
               - { label: "Entidade / Evento", name: "entidade", widget: "string" }
               - { label: "Ano", name: "ano", widget: "number", value_type: int }
               - { label: "Ícone (emoji)", name: "icone", widget: "string", default: "🏆", hint: "Cole um emoji. Ex: 🏆 🥇 🎖️ 📌" }
               - { label: "Descrição", name: "descricao", widget: "text" }
+              - { label: "Descrição (inglês) — opcional", name: "descricao_en", widget: "text", required: false, hint: "Exibida em /en/. Vazio = usa o português." }
 
   # ─── NOTÍCIAS ──────────────────────────────────────────────────────────
   - name: "noticias"
@@ -149,7 +163,9 @@ collections:
             fields:
               - { label: "Data", name: "data", widget: "string", hint: "Ex: Maio · 2025" }
               - { label: "Título", name: "titulo", widget: "string" }
+              - { label: "Título (inglês) — opcional", name: "titulo_en", widget: "string", required: false, hint: "Exibido em /en/. Vazio = usa o português." }
               - { label: "Texto", name: "texto", widget: "text" }
+              - { label: "Texto (inglês) — opcional", name: "texto_en", widget: "text", required: false, hint: "Exibido em /en/. Vazio = usa o português." }
               - { label: "Link (opcional)", name: "link", widget: "string", required: false }
               - { label: "Destaque na home?", name: "destaque", widget: "boolean", default: false, hint: "Apenas uma notícia deve ser destaque por vez" }
 
@@ -168,7 +184,9 @@ collections:
             fields:
               - { label: "ID (nome do arquivo da imagem, sem .jpg)", name: "id", widget: "string", hint: "A imagem deve existir em assets/img/posteres/<id>.jpg" }
               - { label: "Título", name: "titulo", widget: "string" }
+              - { label: "Título (inglês) — opcional", name: "titulo_en", widget: "string", required: false, hint: "Exibido em /en/. Vazio = usa o português." }
               - { label: "Grupo animal", name: "grupo", widget: "string", hint: "Ex: Equinos, Ovinos, Caprinos" }
+              - { label: "Grupo (inglês) — opcional", name: "grupo_en", widget: "string", required: false }
               - { label: "Ícone (emoji)", name: "icone", widget: "string", default: "🐴" }
               - { label: "Total de raças", name: "total_racas", widget: "number", value_type: int }
               - { label: "Raças (separadas por ·)", name: "racas", widget: "text" }
