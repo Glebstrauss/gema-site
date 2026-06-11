@@ -13,7 +13,7 @@ alt_url: /premios.html
     <div class="divider"></div>
     <h1 class="page-hero-title"><em>Awards</em></h1>
     <p class="page-hero-sub">Recognitions earned at national scientific events, animal science congresses and research funding agencies.</p>
-    <p class="page-hero-count">{{ site.data.premios.items | size }} awards</p>
+    <p class="page-hero-count">{{ site.data.premios.items | size }} award{% if site.data.premios.items.size != 1 %}s{% endif %}</p>
   </div>
 </header>
 
@@ -42,6 +42,37 @@ alt_url: /premios.html
     </div>
   </div>
 </div>
+
+<div class="container" style="padding-top:2.5rem">
+  <div class="pub-filter-bar" role="search">
+    <div class="pub-search-wrap">
+      <svg class="pub-search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="premio-search" class="pub-search"
+             placeholder="Search by award, organization or recipient…"
+             autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
+             aria-label="Search awards">
+      <span class="pub-search-kbd" aria-hidden="true"><kbd>/</kbd></span>
+      <button class="pub-search-clear" id="premio-search-clear" type="button" aria-label="Clear search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <button class="pub-print-btn" id="premio-print-btn" aria-label="Print award list">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print
+    </button>
+  </div>
+
+  <p class="pub-no-results" id="premio-no-results" aria-live="polite">
+    No awards found for this search.
+    <button class="pub-reset" id="premio-reset">Clear search</button>
+  </p>
+
+  <p class="pub-result-count" id="premio-count" aria-live="polite" aria-atomic="true"
+     data-label="awards" data-of="of">
+    {{ site.data.premios.items | size }} awards
+  </p>
+</div>
+
 <nav class="premio-year-nav" aria-label="Browse by award year" id="premio-year-nav">
   {% for ano in anos_premios %}
   {% assign n_ano = site.data.premios.items | where: "ano", ano | size %}
@@ -51,17 +82,20 @@ alt_url: /premios.html
 
 {% for ano in anos_premios %}
   {% assign premios_ano = site.data.premios.items | where: "ano", ano %}
-<section id="premio-{{ ano }}" aria-labelledby="heading-premio-{{ ano }}">
+<section id="premio-{{ ano }}" class="premio-ano-grupo" aria-labelledby="heading-premio-{{ ano }}">
   <div class="container">
     <h2 id="heading-premio-{{ ano }}" class="section-label"><time datetime="{{ ano }}">{{ ano }}</time></h2>
     <div class="divider"></div>
     <div class="premio-grid">
       {% for premio in premios_ano %}
-      <div class="premio-card">
+      {% if premio.nome_en and premio.nome_en != "" %}{% assign p_nome = premio.nome_en %}{% else %}{% assign p_nome = premio.nome %}{% endif %}
+      {% if premio.descricao_en and premio.descricao_en != "" %}{% assign p_desc = premio.descricao_en %}{% else %}{% assign p_desc = premio.descricao %}{% endif %}
+      <div class="premio-card"
+           data-busca="{{ p_nome | append: ' ' | append: premio.entidade | append: ' ' | append: p_desc | downcase | escape }}">
         <div class="premio-topo"><div class="premio-icon" aria-hidden="true">{{ premio.icone }}</div><time class="premio-ano" datetime="{{ premio.ano }}">{{ premio.ano }}</time></div>
-        <h3 class="premio-nome">{% if premio.nome_en and premio.nome_en != "" %}{{ premio.nome_en }}{% else %}{{ premio.nome }}{% endif %}</h3>
+        <h3 class="premio-nome">{{ p_nome }}</h3>
         <div class="premio-entidade">{{ premio.entidade }}</div>
-        <p class="premio-desc">{% if premio.descricao_en and premio.descricao_en != "" %}{{ premio.descricao_en }}{% else %}{{ premio.descricao }}{% endif %}</p>
+        <p class="premio-desc">{{ p_desc }}</p>
       </div>
       {% endfor %}
     </div>
@@ -69,10 +103,11 @@ alt_url: /premios.html
 </section>
 {% endfor %}
 
+<script src="{{ '/assets/js/premio-filtro.js' | relative_url }}" defer></script>
 <script>
 (function () {
   if (!('IntersectionObserver' in window)) return;
-  var sections = Array.from(document.querySelectorAll('[id^="premio-"]'));
+  var sections = Array.from(document.querySelectorAll('.premio-ano-grupo'));
   var btns     = Array.from(document.querySelectorAll('#premio-year-nav .pub-year-btn'));
   if (!sections.length || !btns.length) return;
   var obs = new IntersectionObserver(function (entries) {

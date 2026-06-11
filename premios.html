@@ -11,7 +11,7 @@ alt_url: /en/awards.html
     <div class="divider"></div>
     <h1 class="page-hero-title"><em>Prêmios</em></h1>
     <p class="page-hero-sub">Reconhecimentos obtidos em eventos científicos nacionais, congressos de zootecnia e instituições de fomento à pesquisa.</p>
-    <p class="page-hero-count">{{ site.data.premios.items | size }} prêmios</p>
+    <p class="page-hero-count">{{ site.data.premios.items | size }} prêmio{% if site.data.premios.items.size != 1 %}s{% endif %}</p>
   </div>
 </header>
 
@@ -40,6 +40,38 @@ alt_url: /en/awards.html
     </div>
   </div>
 </div>
+
+<div class="container" style="padding-top:2.5rem">
+  <!-- ── Barra de busca ──────────────────────────────────────────────────── -->
+  <div class="pub-filter-bar" role="search">
+    <div class="pub-search-wrap">
+      <svg class="pub-search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="premio-search" class="pub-search"
+             placeholder="Buscar por prêmio, entidade ou premiado…"
+             autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
+             aria-label="Buscar prêmios">
+      <span class="pub-search-kbd" aria-hidden="true"><kbd>/</kbd></span>
+      <button class="pub-search-clear" id="premio-search-clear" type="button" aria-label="Limpar busca">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <button class="pub-print-btn" id="premio-print-btn" aria-label="Imprimir lista de prêmios">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Imprimir
+    </button>
+  </div>
+
+  <p class="pub-no-results" id="premio-no-results" aria-live="polite">
+    Nenhum prêmio encontrado para essa busca.
+    <button class="pub-reset" id="premio-reset">Limpar busca</button>
+  </p>
+
+  <p class="pub-result-count" id="premio-count" aria-live="polite" aria-atomic="true"
+     data-label="prêmios" data-of="de">
+    {{ site.data.premios.items | size }} prêmios
+  </p>
+</div>
+
 <nav class="premio-year-nav" aria-label="Navegar por ano de prêmio" id="premio-year-nav">
   {% for ano in anos_premios %}
   {% assign n_ano = site.data.premios.items | where: "ano", ano | size %}
@@ -49,13 +81,14 @@ alt_url: /en/awards.html
 
 {% for ano in anos_premios %}
   {% assign premios_ano = site.data.premios.items | where: "ano", ano %}
-<section id="premio-{{ ano }}" aria-labelledby="heading-premio-{{ ano }}">
+<section id="premio-{{ ano }}" class="premio-ano-grupo" aria-labelledby="heading-premio-{{ ano }}">
   <div class="container">
     <h2 id="heading-premio-{{ ano }}" class="section-label"><time datetime="{{ ano }}">{{ ano }}</time></h2>
     <div class="divider"></div>
     <div class="premio-grid">
       {% for premio in premios_ano %}
-      <div class="premio-card">
+      <div class="premio-card"
+           data-busca="{{ premio.nome | append: ' ' | append: premio.entidade | append: ' ' | append: premio.descricao | downcase | escape }}">
         <div class="premio-topo"><div class="premio-icon" aria-hidden="true">{{ premio.icone }}</div><time class="premio-ano" datetime="{{ premio.ano }}">{{ premio.ano }}</time></div>
         <h3 class="premio-nome">{{ premio.nome }}</h3>
         <div class="premio-entidade">{{ premio.entidade }}</div>
@@ -67,13 +100,13 @@ alt_url: /en/awards.html
 </section>
 {% endfor %}
 
+<script src="{{ '/assets/js/premio-filtro.js' | relative_url }}" defer></script>
 <script>
 (function () {
   if (!('IntersectionObserver' in window)) return;
-  var sections = Array.from(document.querySelectorAll('[id^="premio-"]'));
+  var sections = Array.from(document.querySelectorAll('.premio-ano-grupo'));
   var btns     = Array.from(document.querySelectorAll('#premio-year-nav .pub-year-btn'));
   if (!sections.length || !btns.length) return;
-
   var obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) {
@@ -83,7 +116,6 @@ alt_url: /en/awards.html
       }
     });
   }, { rootMargin: '-8% 0px -82% 0px', threshold: 0 });
-
   sections.forEach(function (s) { obs.observe(s); });
 })();
 </script>
