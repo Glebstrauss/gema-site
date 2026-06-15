@@ -537,8 +537,10 @@ html.dark .poster-card:hover{box-shadow:0 16px 48px rgba(0,0,0,.5)}
 .poster-dialog{margin:auto;border:none;border-radius:16px;padding:0;background:var(--branco);max-width:min(92vw,620px);box-shadow:0 24px 80px rgba(0,0,0,.4);overflow:visible}
 .poster-dialog::backdrop{background:rgba(8,10,22,.78);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 .poster-dialog-img{display:block;width:auto;height:auto;max-width:100%;max-height:85vh;border-radius:16px}
-.poster-dialog-close{position:absolute;top:.6rem;right:.6rem;width:38px;height:38px;border-radius:50%;border:none;background:rgba(13,13,24,.55);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.poster-dialog-close:hover{background:rgba(13,13,24,.85)}
+/* botão fechar: flutua no canto da tela (sobre o backdrop), nunca sobre o pôster */
+.poster-dialog-close{position:fixed;top:calc(1.1rem + env(safe-area-inset-top));right:calc(1.1rem + env(safe-area-inset-right));width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,.94);color:var(--preto);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(0,0,0,.4);transition:background .2s,color .2s,transform .15s;z-index:1}
+.poster-dialog-close:hover{background:#fff;color:var(--azul);transform:scale(1.06)}
+.poster-dialog-close:focus-visible{outline:2px solid #fff;outline-offset:3px}
 html.dark .poster-dialog{background:#14141f}
 html.dark .poster-card-img-wrap{background:#1a1a26}
 html.dark .poster-info-item{color:var(--azul-mid)}
